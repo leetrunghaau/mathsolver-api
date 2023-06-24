@@ -8,9 +8,11 @@ const Address = db.define('Address', {
   province: DataTypes.STRING(50),
   status: DataTypes.STRING(10),
   detail: DataTypes.STRING(50),
-  address_id: {
+  addressId: {
     type: DataTypes.STRING(20),
-    primaryKey: true
+    primaryKey: true,
+    field: 'address_id'
+    
   }
 },{
   tableName: 'address',

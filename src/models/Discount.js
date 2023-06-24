@@ -2,19 +2,32 @@ const { DataTypes } = require('sequelize');
 const db = require('../config/Database');
 
 const Discount = db.define('Discount', {
-  discount_id: {
+  discountId: {
     type: DataTypes.STRING(20),
-    primaryKey: true
+    primaryKey: true,
+    field: 'discount_id'
   },
-  create_at: DataTypes.DATE,
-  midified_at: DataTypes.DATE,
-  enable_at: DataTypes.DATE,
-  disable_at: DataTypes.DATE,
+  createAt: {
+    type: DataTypes.DATE,
+    field: 'create_at'
+  },
+  modifiedAt: {
+    type: DataTypes.DOUBLE,
+    field: 'modified_at'
+  },
+  enableAt: {
+    type: DataTypes.DATE,
+    field: 'enable_at'
+  },
+  disableAt: {
+    type: DataTypes.DATE,
+    field: 'disable_at'
+  },
   type: DataTypes.STRING(10),
   value: DataTypes.INTEGER,
   quantity: DataTypes.INTEGER,
   code: DataTypes.STRING(20)
-},{
+}, {
   tableName: 'discount',
   timestamps: false
 });

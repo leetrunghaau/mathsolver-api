@@ -4,16 +4,22 @@ const db = require('../config/Database');
 const Categories = db.define('Categories', {
   name: DataTypes.TEXT,
   parent: DataTypes.STRING(20),
-  column_name: DataTypes.INTEGER,
   enable: DataTypes.BOOLEAN,
   image: DataTypes.TEXT,
-  created_at: DataTypes.DATE,
-  modified_at: DataTypes.DATE,
-  category_id: {
+  createdAt: {
+    type: DataTypes.DATE,
+    field: 'created_at'
+  },
+  modifiedAt: {
+    type: DataTypes.DATE,
+    field: 'modified_at'
+  },
+  categoryId: {
     type: DataTypes.STRING(20),
-    primaryKey: true
+    primaryKey: true,
+    field: 'category_id'
   }
-},{
+}, {
   tableName: 'categories',
   timestamps: false
 });

@@ -5,21 +5,31 @@ const Distributor = require('./Distributor');
 const User = require('./User');
 
 const ImportProduct = db.define('ImportProduct', {
-  import_product_id: {
+  importProductId: {
     type: DataTypes.STRING(20),
-    primaryKey: true
+    primaryKey: true,
+    field: "import_product_id"
   },
-  product_id: DataTypes.STRING(20),
-  distributor_id: DataTypes.STRING(20),
-  user_id: DataTypes.STRING(20),
+  productId: {
+    type: DataTypes.STRING(20),
+    field: 'product_id'
+  },
+  distributorId: {
+    type: DataTypes.STRING(20),
+    field: 'distributor_id'
+  },
+  userId: {
+    type: DataTypes.STRING(20),
+    field: 'user_id'
+  },
   quantity: DataTypes.INTEGER
-},{
+}, {
   tableName: 'import_product',
   timestamps: false
 });
 
-ImportProduct.belongsTo(Product, { foreignKey: 'product_id' });
-ImportProduct.belongsTo(Distributor, { foreignKey: 'distributor_id' });
-ImportProduct.belongsTo(User, { foreignKey: 'user_id' });
+ImportProduct.belongsTo(Product, { foreignKey: 'product_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+ImportProduct.belongsTo(Distributor, { foreignKey: 'distributor_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+ImportProduct.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 module.exports = ImportProduct;

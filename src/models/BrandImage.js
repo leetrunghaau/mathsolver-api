@@ -3,11 +3,15 @@ const db = require('../config/Database');
 const Brand = require('./Brand');
 
 const BrandImage = db.define('BrandImage', {
-  brand_image_id: {
+  brandImageId: {
     type: DataTypes.STRING(20),
-    primaryKey: true
+    primaryKey: true,
+    field: 'brand_image_id'
   },
-  brand_id: DataTypes.STRING(20),
+  brandId:{
+    type: DataTypes.STRING(20),
+    field:'brand_id'
+  } ,
   main: DataTypes.BOOLEAN,
   name: DataTypes.TEXT
 },{
@@ -15,6 +19,6 @@ const BrandImage = db.define('BrandImage', {
   timestamps: false
 });
 
-BrandImage.belongsTo(Brand, { foreignKey: 'brand_id' });
+BrandImage.belongsTo(Brand, { foreignKey: 'brand_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 module.exports = BrandImage;

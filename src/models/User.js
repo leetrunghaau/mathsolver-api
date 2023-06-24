@@ -3,22 +3,38 @@ const db = require('../config/Database');
 const Address = require('./Address');
 
 const User = db.define('User', {
-  user_id: {
+  userId: {
     type: DataTypes.STRING(20),
-    primaryKey: true
+    primaryKey: true,
+    field: 'user_id'
   },
-  address_id: DataTypes.STRING(20),
-  first_name: DataTypes.STRING(20),
-  last_name: DataTypes.STRING(20),
+  addressId: {
+    type: DataTypes.STRING(20),
+    field: 'address_id'
+  },
+  firstName: {
+    type: DataTypes.STRING(20),
+    field: 'first_name'
+  },
+  lastName: {
+    type: DataTypes.STRING(20),
+    field: 'last_name'
+  },
   email: DataTypes.STRING(50),
-  birth_date: DataTypes.DATEONLY,
+  birthDate: {
+    type: DataTypes.DATEONLY,
+    field: 'birth_date'
+  },
   gender: DataTypes.STRING(7),
-  created_at: DataTypes.DATE
-},{
+  createdAt: {
+    type: DataTypes.DATE,
+    field: 'created_at'
+  }
+}, {
   tableName: 'user',
   timestamps: false
 });
 
-User.belongsTo(Address, { foreignKey: 'address_id' });
+User.belongsTo(Address, { foreignKey: 'address_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 module.exports = User;

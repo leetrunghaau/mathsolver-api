@@ -4,26 +4,39 @@ const Brand = require('./Brand');
 const Categories = require('./Categories');
 
 const Product = db.define('Product', {
-  product_id: {
+  productId: {
     type: DataTypes.STRING(20),
-    primaryKey: true
+    primaryKey: true,
+    field: 'product_id'
   },
   name: DataTypes.INTEGER,
-  cartegory_id: DataTypes.STRING(20),
+  categoryId: {
+    type: DataTypes.STRING(20),
+    field: 'category_id'
+  },
   quantity: DataTypes.INTEGER,
   location: DataTypes.INTEGER,
-  brand_id: DataTypes.STRING(20),
+  brandId: {
+    type: DataTypes.STRING(20),
+    field: 'brand_id'
+  },
   description: DataTypes.TEXT,
   information: DataTypes.TEXT,
   price: DataTypes.FLOAT,
-  created_at: DataTypes.DATE,
-  modified_at: DataTypes.DATE
-},{
+  createdAt: {
+    type: DataTypes.DATE,
+    field: 'created_at'
+  },
+  modifiedAt: {
+    type: DataTypes.DATE,
+    field: 'modified_at'
+  }
+}, {
   tableName: 'product',
   timestamps: false
 });
 
-Product.belongsTo(Brand, { foreignKey: 'brand_id' });
-Product.belongsTo(Categories, { foreignKey: 'cartegory_id' });
+Product.belongsTo(Brand, { foreignKey: 'brand_id' , onDelete: 'CASCADE', onUpdate: 'CASCADE'});
+Product.belongsTo(Categories, { foreignKey: 'category_id' , onDelete: 'CASCADE', onUpdate: 'CASCADE'});
 
 module.exports = Product;

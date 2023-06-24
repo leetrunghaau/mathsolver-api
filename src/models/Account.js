@@ -3,11 +3,15 @@ const db = require('../config/Database');
 const User = require('./User');
 
 const Account = db.define('Account', {
-  account_id: {
+  accountId: {
     type: DataTypes.STRING(20),
-    primaryKey: true
+    primaryKey: true,
+    field: 'account_id'
   },
-  user_id: DataTypes.STRING(20),
+  userId:{
+    type: DataTypes.STRING(20),
+    field: 'user_id'
+  } ,
   password: DataTypes.TEXT,
   role: DataTypes.STRING(11),
   modified_at: DataTypes.DATE
@@ -16,6 +20,6 @@ const Account = db.define('Account', {
   timestamps: false
 });
 
-Account.belongsTo(User, { foreignKey: 'user_id' });
+Account.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 module.exports = Account;

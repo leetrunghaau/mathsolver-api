@@ -2,9 +2,10 @@ const { DataTypes } = require('sequelize');
 const db = require('../config/Database');
 
 const Distributor = db.define('Distributor', {
-  distributor_id: {
+  distributorId: {
     type: DataTypes.STRING(50),
-    primaryKey: true
+    primaryKey: true,
+    field:'distributor_id'
   },
   name: DataTypes.STRING(50),
   address: DataTypes.TEXT,

@@ -3,17 +3,24 @@ const db = require('../config/Database');
 const User = require('./User');
 
 const Cart = db.define('Cart', {
-  cart_id: {
+  cartId: {
     type: DataTypes.STRING(20),
-    primaryKey: true
+    primaryKey: true,
+    field: 'cart_id'
   },
-  user_id: DataTypes.STRING(20),
-  created_at: DataTypes.DATE
-},{
+  userId: {
+    type: DataTypes.STRING(20),
+    field: 'user_id'
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    field: 'created_at'
+  }
+}, {
   tableName: 'cart',
   timestamps: false
 });
 
-Cart.belongsTo(User, { foreignKey: 'user_id' });
+Cart.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 module.exports = Cart;

@@ -4,11 +4,15 @@ const User = require('./User');
 const Discount = require('./Discount');
 
 const Order = db.define('Order', {
-  order_id: {
+  orderId: {
     type: DataTypes.STRING(20),
-    primaryKey: true
+    primaryKey: true,
+    field: 'order_id'
   },
-  user_id: DataTypes.STRING(20),
+  userId:{
+    type: DataTypes.STRING(20),
+    field: 'user_id'
+  },
   progress: DataTypes.STRING(20),
   discount_id: DataTypes.STRING(20)
 },{
@@ -16,7 +20,7 @@ const Order = db.define('Order', {
   timestamps: false
 });
 
-Order.belongsTo(User, { foreignKey: 'user_id' });
-Order.belongsTo(Discount, { foreignKey: 'discount_id' });
+Order.belongsTo(User, { foreignKey: 'user_id' , onDelete: 'CASCADE', onUpdate: 'CASCADE'});
+Order.belongsTo(Discount, { foreignKey: 'discount_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 module.exports = Order;

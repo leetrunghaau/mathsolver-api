@@ -3,20 +3,27 @@ const db = require('../config/Database');
 const Product = require('./Product');
 
 const ProductImage = db.define('ProductImage', {
-  product_image_id: {
+  productImageId: {
     type: DataTypes.INTEGER,
-    primaryKey: true
+    primaryKey: true,
+    field: 'product_image_id'
   },
-  product_id: DataTypes.STRING(20),
+  productId: {
+    type: DataTypes.STRING(20),
+    field: 'product_id'
+  },
   name: DataTypes.TEXT,
   main: DataTypes.BOOLEAN,
   image: DataTypes.TEXT,
-  image_id: DataTypes.STRING(20)
-},{
+  imageId: {
+    type: DataTypes.STRING(20),
+    field: 'image_id'
+  }
+}, {
   tableName: 'product_image',
   timestamps: false
 });
 
-ProductImage.belongsTo(Product, { foreignKey: 'product_id' });
+ProductImage.belongsTo(Product, { foreignKey: 'product_id' , onDelete: 'CASCADE', onUpdate: 'CASCADE'});
 
 module.exports = ProductImage;
