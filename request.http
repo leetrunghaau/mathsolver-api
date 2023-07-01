@@ -1,0 +1,24 @@
+GET http://localhost:8080/api/address/hhh
+
+###
+GET  http://localhost:8080/api/test/abc
+
+###
+POST http://localhost:8080/api/login/email-password
+Content-Type: application/json
+
+{
+    "email":"leetrunghaau@gmail.com",
+    "password":"admin@123"
+}
+
+###
+POST  http://localhost:8080/api/access/login
+Content-Type: application/json
+# Authorization: jh,jh
+
+
+{
+    "email":"leetrunghaau@gmail.com",
+    "password":"admin@123"
+}
