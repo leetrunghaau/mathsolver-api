@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const db = require('../../config/Database');
-const brand = require('./Brand');
-const categories = require('./categories-model');
+const Brand = require('./brand-model');
+const Categories = require('./categories-model');
 
 const Product = db.define('Product', {
   productId: {
@@ -34,7 +34,7 @@ const Product = db.define('Product', {
   timestamps: false
 });
 
-Product.belongsTo(brand, { foreignKey: 'brand_id' , onDelete: 'CASCADE', onUpdate: 'CASCADE'});
-Product.belongsTo(categories, { foreignKey: 'category_id' , onDelete: 'CASCADE', onUpdate: 'CASCADE'});
+Product.belongsTo(Brand, { foreignKey: 'brand_id' , onDelete: 'CASCADE', onUpdate: 'CASCADE'});
+Product.belongsTo(Categories, { foreignKey: 'category_id' , onDelete: 'CASCADE', onUpdate: 'CASCADE'});
 
 module.exports = Product;

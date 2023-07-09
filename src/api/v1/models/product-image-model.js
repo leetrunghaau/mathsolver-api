@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const db = require('../../config/Database');
-const product = require('./Product');
+const Product = require('./product-model');
 
 const ProductImage = db.define('ProductImage', {
   productImageId: {
@@ -21,6 +21,6 @@ const ProductImage = db.define('ProductImage', {
   timestamps: false
 });
 
-ProductImage.belongsTo(product, { foreignKey: 'product_id' , onDelete: 'CASCADE', onUpdate: 'CASCADE'});
+ProductImage.belongsTo(Product, { foreignKey: 'product_id' , onDelete: 'CASCADE', onUpdate: 'CASCADE'});
 
 module.exports = ProductImage;

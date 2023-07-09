@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const db = require('../../config/Database');
-const order = require('./order-model');
+const Order = require('./order-model');
 
 const Bill = db.define('Bill', {
   billId: {
@@ -32,6 +32,6 @@ const Bill = db.define('Bill', {
   timestamps: false
 });
 
-Bill.belongsTo(order, { foreignKey: 'order_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+Bill.belongsTo(Order, { foreignKey: 'order_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 module.exports = Bill;

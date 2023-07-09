@@ -1,8 +1,8 @@
 const { DataTypes } = require('sequelize');
 const db = require('../../config/Database');
-const product = require('./product-model');
-const distributor = require('./Distributor');
-const user = require('./user-model');
+const Product = require('./product-model');
+const Distributor = require('./distributor-model');
+const User = require('./user-model');
 
 const ImportProduct = db.define('ImportProduct', {
   importProductId: {
@@ -22,14 +22,24 @@ const ImportProduct = db.define('ImportProduct', {
     type: DataTypes.STRING(20),
     field: 'user_id'
   },
-  quantity: DataTypes.INTEGER
+
+  quantity: DataTypes.INTEGER,
+  description: DataTypes.TEXT,
+  createdAt: {
+    type: DataTypes.DATE,
+    field: 'created_at'
+  },
+  modifiedAt: {
+    type: DataTypes.DATE,
+    field: 'modified_at'
+  }
 }, {
   tableName: 'import_product',
   timestamps: false
 });
 
-ImportProduct.belongsTo(product, { foreignKey: 'product_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
-ImportProduct.belongsTo(distributor, { foreignKey: 'distributor_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
-ImportProduct.belongsTo(user, { foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+ImportProduct.belongsTo(Product, { foreignKey: 'product_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+ImportProduct.belongsTo(Distributor, { foreignKey: 'distributor_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+ImportProduct.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 module.exports = ImportProduct;

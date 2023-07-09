@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const db = require('../../config/Database');
-const product = require('./Product');
+const Product = require('./product-model');
 
 const ProductDetail = db.define('ProductDetail',{
     productDetailId:{
@@ -21,6 +21,6 @@ const ProductDetail = db.define('ProductDetail',{
     timestamps:false
 });
 
-ProductDetail.belongsTo(product,{foreignKey:'product_id',  onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+ProductDetail.belongsTo(Product,{foreignKey:'product_id',  onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 module.exports = ProductDetail;

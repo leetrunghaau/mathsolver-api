@@ -1,4 +1,4 @@
-const ProductRepository = require("../repositories/ProductRepository");
+const ProductRepository = require("../repositories/product-repository");
 
 class ProductService{
     static async getAllProductService (){
@@ -6,19 +6,7 @@ class ProductService{
         if (!products){
             return null;
         }
-        const productDTOs = products.map((product) =>{
-            return new productDTO(
-                product.productId, 
-                product.name, 
-                product.categoryId, 
-                product.brandId, 
-                product.information, 
-                product.quantity, 
-                product.price, 
-                product.createdAt, 
-                product.modifiedAt );
-        })
-        return productDTOs;
+        return products;
     }
 
 }

@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const db = require('../../config/Database');
-const user = require('./user-model');
+const User = require('./user-model');
 
 const Notification = db.define('Notification',{
     notificationId:{
@@ -27,6 +27,6 @@ const Notification = db.define('Notification',{
     timestamps:false
 });
 
-Notification.belongsTo(user,{foreignKey:'user_id',onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+Notification.belongsTo(User,{foreignKey:'user_id',onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 module.exports = Notification;

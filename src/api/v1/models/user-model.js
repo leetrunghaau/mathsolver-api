@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const db = require('../../config/Database');
-const address = require('./address-model');
+
 
 const User = db.define('User', {
   userId: {
@@ -25,7 +25,8 @@ const User = db.define('User', {
   createdAt: {
     type: DataTypes.DATE,
     field: 'created_at'
-  }
+  },
+  verified: DataTypes.DATE
 }, {
   tableName: 'user',
   timestamps: false

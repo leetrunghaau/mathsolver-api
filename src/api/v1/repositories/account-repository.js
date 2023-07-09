@@ -3,14 +3,9 @@ const Account = require('../models/account-model')
 class AccountRepository {
     static async getAccountById(accountId){
         const accountData = account.findByPk(accountId);
-        return new accountDTO(
-            accountData.accountId,
-            accountData.userID,
-            accountData.password,
-            accountData.role,
-            accountData.modifiedAt
-        )
+        return accountData;
     }
+    
     static async createAccount(AccountData){
         return Account.create(AccountData);
     }
@@ -18,6 +13,17 @@ class AccountRepository {
         return Account.findOne({where:{userId: userId}})
 
     }
-
+    static async updateAccount(accountId, accountData){
+        await Account.update(accountData, {
+            where: accountId = accountId
+        });
+        return this.getAccountById(accountId);
+    }
+    static async updateAccountByUserId(userId, accountData){
+        await Account.update(accountData,{
+            where: userId = userId
+        })
+        return this.getAccountByUserId(userId);
+    }
 }
 module.exports = AccountRepository;

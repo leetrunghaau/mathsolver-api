@@ -1,41 +1,33 @@
-const { sigAccessToken } = require("../helpers/jwt");
 const AccountService = require("../services/account-service");
-const UserService = require("../services/user-service");
-const { loginEmailPasswordValidate } = require("../validations/access-validate");
+const {  changePasswordValidate } = require("../validations/account-validate");
 const createError = require('http-errors')
 
 class AccountControllers {
-    static async loginEmailPassword(req, res, next) {
+    
+    static async changePassword(req, res, next) {
         try {
-            //validate handle
-            const { error ,value } = loginEmailPasswordValidate(req.body);
-            console.log(' validate '+value);
+            // Kiểm tra validate
+            const { error, value } = changePasswordValidate(req.body);
             if (error) {
-                next(createError.BadRequest(error.details[0].message));
+               return next(createError.BadRequest(error.details[0].message));
             }
-            //get user by login data
-            const userData =  await UserService.getUserByEmail(value.email);
-            if(!userData){
-               return next(createError.NotFound('user not found'));
+            //kiểm tra old password
+            const results = await AccountService.checkPasswordByUserId(req.userId, value.oldPassword);
+            if (results === null){
+                return next(createError.InternalServerError('internal server error !'));
             }
-            console.log('user:   ' + userData)
-            // get account
-            const accountData = await AccountService.getAccountByUserId(userData.userId);
-            if(!accountData){
-                console.log(accountData);
-                return next(createError.BadRequest('account not found'));
+            if(results === false){
+                return next(createError[400]('sai mật khẩu cũ'));
             }
-            
-            if(accountData.password != value.password){
-                return next(createError.BadRequest('password not mach'));
+            //update password
+            const accUpdated = await AccountService.updatePasswordByUserId(req.userId, value.newPassword);
+            if(!accUpdated){
+                return next(createError.InternalServerError('internal server error !'));
             }
-            const token = sigAccessToken(userData.userId, accountData.role);
+            //trả kết quả
             return res.status(200).json({
-                userId: userData.userId,
-                role: accountData.role,
-                token: token
-            })
-            
+                message: 'update done'
+            })            
         } catch (error) {
             console.log(error)
         }

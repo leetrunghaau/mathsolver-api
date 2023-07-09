@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const db = require('../../config/Database');
-const blogCategories = require('./blog-categories-model');
-const user = require('./User');
+const BlogCategories = require('./blog-categories-model');
+const User = require('./user-model');
 
 
 const Blog = db.define('Blog', {
@@ -36,7 +36,7 @@ const Blog = db.define('Blog', {
     tableName: 'blog',
   timestamps: false
 });
-Blog.belongsTo(user,{foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
-Blog.belongsTo(blogCategories,{foreignKey:'blog_category_id',onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+Blog.belongsTo(User,{foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
+Blog.belongsTo(BlogCategories,{foreignKey:'blog_category_id',onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 module.exports = Blog;

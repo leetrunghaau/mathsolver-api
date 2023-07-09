@@ -1,14 +1,17 @@
 // addressRepository.js
 
+const { where } = require('sequelize');
 const Address = require('../models/address-model');
 
 class AddressRepository {
   static async getAddressById(addressId) {
-
     return Address.findByPk(addressId);
-
   }
-
+ static async getAddressByUserId(userId){
+  return Address.findOne({
+    where: userId = userId,
+  });
+ }
   static async createAddress(addressData) {
     return Address.create(addressData);
   }

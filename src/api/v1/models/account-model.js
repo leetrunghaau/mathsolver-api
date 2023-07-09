@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const db = require('../../config/Database');
-const user = require('./User');
+const User = require('./user-model');
 
 const Account = db.define('Account', {
   accountId: {
@@ -23,6 +23,6 @@ const Account = db.define('Account', {
   timestamps: false
 });
 
-Account.belongsTo(user, { foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+Account.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 module.exports = Account;
