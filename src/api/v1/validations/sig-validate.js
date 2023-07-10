@@ -11,7 +11,8 @@ const registerValidate = data => {
     const registerData = joi.object({
         firstName: joi.string().max(20).required(),
         lastName: joi.string().max(20).required(),
-        email: joi.string().email().lowercase().required()
+        email: joi.string().email().lowercase().required(),
+        password: joi.string().min(4).max(32).required()
     });
     return registerData.validate(data);
 }

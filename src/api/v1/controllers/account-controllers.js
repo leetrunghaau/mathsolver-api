@@ -1,3 +1,4 @@
+const { hashPassword, comparePasswords } = require("../helpers/password-crypt");
 const AccountService = require("../services/account-service");
 const {  changePasswordValidate } = require("../validations/account-validate");
 const createError = require('http-errors')
@@ -12,16 +13,20 @@ class AccountControllers {
                return next(createError.BadRequest(error.details[0].message));
             }
             //kiểm tra old password
-            const results = await AccountService.checkPasswordByUserId(req.userId, value.oldPassword);
-            if (results === null){
-                return next(createError.InternalServerError('internal server error !'));
+            const acc = await AccountService.getAccountByUserId(req.userId);
+            if(!acc){
+                return next(createError.InternalServerError);
             }
-            if(results === false){
-                return next(createError[400]('sai mật khẩu cũ'));
+            const checkValue = await comparePasswords(value.oldPassword, acc.password);
+            if(!checkValue){
+                return next(createError.InternalServerError('sai mật khẩu cũ'));
             }
+            
             //update password
-            const accUpdated = await AccountService.updatePasswordByUserId(req.userId, value.newPassword);
-            if(!accUpdated){
+
+            const passwordEncode = await hashPassword(value.newPassword)
+            const newAcc = await AccountService.updateAccountByUserId(req.userId, {password: passwordEncode});
+            if(!newAcc){
                 return next(createError.InternalServerError('internal server error !'));
             }
             //trả kết quả

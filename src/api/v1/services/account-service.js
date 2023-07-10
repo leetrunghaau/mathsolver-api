@@ -1,3 +1,5 @@
+const moment = require('moment');
+const { generateId } = require("../helpers/generate-key");
 const AccountRepository = require("../repositories/account-repository");
 
 class AccountService{
@@ -15,7 +17,9 @@ class AccountService{
         }
         return acc
     }
-    static async updateAccountByUser(userId, accountData){
+    static async updateAccountByUserId(userId, accountData){
+        accountData.modifiedAt = new Date();
+        console.log(accountData);
         const acc = await AccountRepository.updateAccountByUserId(userId, accountData);
         if(!acc){
             return null;
@@ -32,16 +36,12 @@ class AccountService{
         }
         return true;
     }
-    static async updatePasswordByUserId(userId, password){
-        const acc = await AccountRepository.getAccountByUserId(userId);
-        acc.password = password;
-        acc.modifiedAt = new Date();
-        const newAcc = await AccountRepository.updateAccountByUserId(userId, acc);
-        if(!newAcc){
-            return null;
-        }
-        return newAcc;
 
+    static async createAccount(accountData){
+        accountData.accountId = await generateId();
+        accountData.modifiedAt = new Date();
+        return await AccountRepository.createAccount(accountData);
+        
     }
 }
 module.exports = AccountService;

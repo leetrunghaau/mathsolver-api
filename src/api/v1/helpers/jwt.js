@@ -9,7 +9,7 @@ const sigAccessToken = async (userId, role) => {
         }
         const secret = process.env.ACCESS_TOKEN_SECRET;
         const option = {
-            expiresIn: '1h'
+            expiresIn: '30d'
         }
         jwt.sign(payload, secret, option, (err, token) => {
             if (err) reject(err)
@@ -18,14 +18,14 @@ const sigAccessToken = async (userId, role) => {
 
     })
 }
-const sigRefreshToken = async (userId) => {
+const sigAuthToken = async(userId) =>{
     return new Promise((resolve, reject) => {
         const payload = {
             userId
         }
-        const secret = process.env.REFRESH_TOKEN_SECRET;
+        const secret = process.env.ACCESS_TOKEN_SECRET;
         const option = {
-            expiresIn: '1y'
+            expiresIn: '1h'
         }
         jwt.sign(payload, secret, option, (err, token) => {
             if (err) reject(err)
@@ -37,5 +37,5 @@ const sigRefreshToken = async (userId) => {
 
 module.exports = {
     sigAccessToken,
-    sigRefreshToken
+    sigAuthToken
 }

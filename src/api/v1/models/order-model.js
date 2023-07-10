@@ -19,6 +19,7 @@ const Order = db.define('Order', {
   },
   progress: DataTypes.STRING(20),
   discount_id: DataTypes.STRING(20)
+
 },{
   tableName: 'order',
   timestamps: false

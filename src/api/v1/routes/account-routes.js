@@ -1,11 +1,12 @@
 const express = require('express');
 const AccountControllers = require('../controllers/account-controllers');
-const { noAuthMiddleware } = require('../middlewares/auth-middleware');
+const {  authorization } = require('../middlewares/auth-middleware');
 const router = express.Router();
 
 
 // Define routes
-router.post("/login", noAuthMiddleware, AccountControllers.loginEmailPassword);
+
+router.post("/change-password", authorization(['user']), AccountControllers.changePassword);
 
 
 module.exports = router;

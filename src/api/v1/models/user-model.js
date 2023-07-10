@@ -26,7 +26,11 @@ const User = db.define('User', {
     type: DataTypes.DATE,
     field: 'created_at'
   },
-  verified: DataTypes.DATE
+  modifiedAt:{
+    type: DataTypes.DATE,
+    field:'modified_at'
+  },
+  verified: DataTypes.DATE,
 }, {
   tableName: 'user',
   timestamps: false

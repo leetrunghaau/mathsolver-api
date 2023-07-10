@@ -1,61 +1,140 @@
-GET http://localhost:8080/api/address/hhh
 
-###
-GET  http://localhost:8080/api/test/abc
-
-###
-POST http://localhost:8080/api/login/email-password
-Content-Type: application/json
-
-{
-    "email":"leetrunghaau@gmail.com",
-    "password":"admin@123"
-}
-
-###
-POST  http://localhost:8080/api/access/login
-Content-Type: application/json
-
-
-{
-    "email":"leetrunghaau@gmail.com",
-    "password":"admin@123"
-}
-
-###
-POST http://localhost:8080/api/user/register
-Content-Type: application/json
-
-{
-    "email":"leetrunghzaau@gmail.com",
-    "firstName": "hau",
-    "lastName": "le trung"
-}
-
-### account
+### sig
 ###     login
+POST  http://localhost:8080/api/sig/login
+Content-Type: application/json
 
-### address
-### bill
-### blog
-### Blog Categories
-### brand
-### cart
-### cart Item
-### categories
-### discount
-### distributor
-### importduct
-### notification
-### order
-### order item
-### product
-### product detail
-### product image
-### user
+
+{
+    "email":"leetrunghaau@gmail.com",
+    "password":"gggg"
+}
 ###     register
-###     email verification
+POST http://localhost:8080/api/sig/register
+Content-Type: application/json
 
+{
+    "firstName":"hau",
+    "lastName":"leung",
+    "email": "leetrunghaau@gmail.com",
+    "password":"gggg"
+}
+
+###     email verification
+###     logout
+### account
+###     change Password
+POST http://localhost:8080/api/account/change-password
+Content-Type: application/json
+Authorization: myss eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YWM5NWNjNjgxOTk5ZWQ1NWEiLCJyb2xlIjoidXNlciIsImlhdCI6MTY4OTAyMDQwNiwiZXhwIjoxNjkxNjEyNDA2fQ.VnPyBNl5q6S9hQMXucrZv_mcNaab4g4bY2myHr3-KTU
+
+{
+    "oldPassword":"jjuyt",
+    "newPassword":"admin@123"
+}
+### address
+###     getAddress | get address main in user id
+GET http://localhost:8080/api/address/get-one
+Authorization: myss eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YWM5NWNjNjgxOTk5ZWQ1NWEiLCJyb2xlIjoidXNlciIsImlhdCI6MTY4OTAyMDQwNiwiZXhwIjoxNjkxNjEyNDA2fQ.VnPyBNl5q6S9hQMXucrZv_mcNaab4g4bY2myHr3-KTU
+
+###     getListAddress | get list address in user id
+GET http://localhost:8080/api/address/get-list
+Authorization: myss eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YWM5NWNjNjgxOTk5ZWQ1NWEiLCJyb2xlIjoidXNlciIsImlhdCI6MTY4OTAyMDQwNiwiZXhwIjoxNjkxNjEyNDA2fQ.VnPyBNl5q6S9hQMXucrZv_mcNaab4g4bY2myHr3-KTU
+
+###     addAddress
+POST  http://localhost:8080/api/address/add
+Content-Type: application/json
+
+{
+    "province":"hhh",
+    "district": "nnnn",
+    "commune":"hnhjhh",
+    "detail":"jjjj",
+    "phone": "gbghhh"
+}
+###     editAddress
+###     deleteAddress
+### bill
+###     getListBill
+###     getListBillByUserId
+###     getBillByOrderId
+### blog
+###     getBlog
+###     getAllBlog
+###     getListBlogBycategoryId
+###     addBlog
+###     editBlog
+###     deleteBlog
+### Blog Categories
+###     getAll
+###     add
+###     edit
+###     delete
+### brand
+###     getAll
+###     add
+###     edit
+###     delete   
+### cart
+###     getListByuserId
+###     add
+###     edit
+###     delete
+### categories
+###     getAll
+###     add
+###     edit
+###     delete
+### discount
+###     getAll
+###     add
+###     edit
+###     delete  
+### distributor
+###     getAll
+###     add
+###     edit
+###     delete  
+### importduct
+###     getAll
+###     add
+###     edit
+###     delete 
+### notification
+###     getAll
+###     add
+###     edit
+###     delete 
+### order
+###     getAllByStatus
+###     getListByUserId
+###     add
+###     edit
+###     delete 
+### order item
+###     add all
+###     edit
+###     delete 
+### product
+###     getAll
+###     add
+###     edit
+###     delete
+### product detail
+###     get
+###     add
+###     edit
+###     delete
+### product image
+###     get
+###     add
+###     edit
+###     delete
+### user
+###     get
+###     add
+###     edit
+###     delete
 
 
 

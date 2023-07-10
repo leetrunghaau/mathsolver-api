@@ -1,7 +1,9 @@
-const { sigAccessToken } = require("../helpers/jwt");
+const { generateId, accessTokenSecret } = require("../helpers/generate-key");
+const { sigAccessToken, sigAuthToken } = require("../helpers/jwt");
+const { hashPassword, comparePasswords } = require("../helpers/password-crypt");
 const AccountService = require("../services/account-service");
 const UserService = require("../services/user-service");
-const { loginEmailPasswordValidate } = require("../validations/sig-validate");
+const { loginEmailPasswordValidate, registerValidate } = require("../validations/sig-validate");
 const createError = require('http-errors')
 
 class Sig {
@@ -18,45 +20,82 @@ class Sig {
             if (!userData) {
                 return next(createError.NotFound('user not found'));
             }
-            console.log('user:   ' + userData)
             // get account
             const accountData = await AccountService.getAccountByUserId(userData.userId);
             if (!accountData) {
-                console.log(accountData);
                 return next(createError.BadRequest('account not found'));
             }
-
-            if (accountData.password != value.password) {
+            const checkValue = await comparePasswords(value.password, accountData.password);
+            if (checkValue == false) {
                 return next(createError.BadRequest('password not mach'));
             }
-            const token = sigAccessToken(userData.userId, accountData.role);
+            const token = await sigAccessToken(userData.userId, accountData.role);
             return res.status(200).json({
-                userId: userData.userId,
-                role: accountData.role,
-                token: token
-            })
+                status: 200,
+                message: 'login done',
+                data: {
+                    role: accountData.role,
+                    token: ' ' + token
+                }
+            });
 
         } catch (error) {
             console.log(error)
         }
     };
-    static async register (req, res, next){
+    static async register(req, res, next) {
         //check validate
-        const {error, value} = RegisterValidate(req.body);
+        const { error, value } = registerValidate(req.body);
         if (error) {
             return next(createError.BadRequest(error.details[0].message));
         }
-        //check user
-        if(await UserService.getUserByEmail(value.email) ){
-            return next(createError.InternalServerError('mail đã tồn tại'));
+
+        const userData = await UserService.getUserByEmail(value.email)
+
+        if (userData) {
+            return next(createError.InternalServerError('đã có tải khoảng'));
+            if (userData.verified) {
+                // email đã tồn tại
+                return next(createError.InternalServerError('đã có tải khoảng'));
+            } else {
+                //để sau
+                //email đã đồ tại nhưng chhwua xác thực 
+                // khống cho sửa gì hết gửi token để đi xác thực
+                // sinh ra token
+                // trả dử liệu
+            }
         }
+
         //create user
-        const user = await UserService.registerUser(value);
-        //
+        const passwordEncode = await hashPassword(value.password);
+        delete value.password;
+
+        const user = await UserService.createUser(value);
+        console.log(user);
+        if (!user) {
+            return next(createError.InternalServerError("khghghfggffhgghdfsxfdgsxffdrfgdfgxfgx"));
+        }
+        console.log(user);
+        //create account
+        const accountData = {
+            userId: user.userId,
+            password: passwordEncode,
+            role: 'user'
+        }
+        const account = await AccountService.createAccount(accountData);
+        if (!account) {
+            return next(createError.InternalServerError("hgfvythgfvhg"));
+        }
+        // sinh ra token
+        const token = await sigAuthToken(user.useId)
         //res
-        console.log('pass');
-        console.log(value.password);
-        return res.status(500).json({mess: "case test",value: value});
+        return res.status(200).json({
+            status: 200,
+            message: "done",
+            data: {
+                token: token
+            }
+        });
     }
 }
 module.exports = Sig;

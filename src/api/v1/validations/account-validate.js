@@ -9,6 +9,6 @@ const changePasswordValidate = data =>{
     return changePasswordData.validate(data);
 }
 module.exports = {
-    loginEmailPasswordValidate,
+
     changePasswordValidate
 }

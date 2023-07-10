@@ -11,7 +11,7 @@ app.use(express.json());
 
 // Routes
 const apiRoutes = require('./v1/routes/index');
-const { errorMiddleware } = require('./v1/middlewares/errorMiddleweara');
+const { errorMiddleware } = require('./v1/middlewares/error-middleweara');
 
 app.use('/api', apiRoutes);
 // Error handling middleware

@@ -6,5 +6,5 @@ const UserController = require('../controllers/user-controller');
 const { noAuthMiddleware } = require('../middlewares/auth-middleware');
 
 // Define routes
-router.post('/register', noAuthMiddleware, UserController.register)
+// router.post('/register', noAuthMiddleware, UserController.)
 module.exports = router;

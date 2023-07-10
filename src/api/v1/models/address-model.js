@@ -3,9 +3,9 @@ const db = require('../../config/Database');
 const User = require('./user-model');
 
 const Address = db.define('Address', {
-  userId:{
-    type:DataTypes.STRING(20),
-    field:'user_id'
+  userId: {
+    type: DataTypes.STRING(20),
+    field: 'user_id'
   },
   district: DataTypes.STRING(50),
   commune: DataTypes.STRING(50),
@@ -17,12 +17,12 @@ const Address = db.define('Address', {
     type: DataTypes.STRING(20),
     primaryKey: true,
     field: 'address_id'
-    
+
   }
-},{
-  
+}, {
+
   tableName: 'address',
   timestamps: false
 });
-Address.belongsTo(User, {foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE'})
+Address.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' })
 module.exports = Address;

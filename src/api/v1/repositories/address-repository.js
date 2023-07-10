@@ -7,11 +7,19 @@ class AddressRepository {
   static async getAddressById(addressId) {
     return Address.findByPk(addressId);
   }
- static async getAddressByUserId(userId){
-  return Address.findOne({
-    where: userId = userId,
-  });
- }
+  static async getAddressByUserId(userId) {
+    return Address.findOne({
+      where: {
+        userId: userId,
+        status: 'main'
+      }
+    });
+  }
+  static async getListAddressByUserId(userId) {
+    return Address.findAll({
+      where: {userId : userId}
+    });
+  }
   static async createAddress(addressData) {
     return Address.create(addressData);
   }

@@ -1,5 +1,6 @@
-const UserRepository = require("../repositories/userRepository");
-const UserDTO = require('../dtos/user/UserDTO')
+const { generateId } = require("../helpers/generate-key");
+const UserRepository = require("../repositories/user-repository");
+const moment = require('moment');
 
 class UserService {
     static async getUserByEmail(email) {
@@ -9,11 +10,21 @@ class UserService {
         }
         return user;
     }
-    static async registerUser(data){
-        //lưu data vào 2 bản user và database
-        //data gồm có first name, last name, email, password
-        //b1: lưu user gồm các thông tin user id, 
 
+    static async createUser(userData){
+        userData.userId =  generateId();
+        userData.verified = null;
+        userData.createdAt = new Date();
+        userData.modifiedAt = new Date();
+        return await UserRepository.createUser(userData);
+    }
+    static async updateUserByUserId(userId, userData){
+        userData.modifiedAt = moment().format('YYYY-MM-DD HH:mm:ss');
+        await UserRepository.updateUser(userId, userData).then(user =>{
+            return user;
+        }).catch(error => {
+            return null;
+        })
 
     }
 
