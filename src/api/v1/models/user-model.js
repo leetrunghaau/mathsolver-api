@@ -16,6 +16,7 @@ const User = db.define('User', {
     type: DataTypes.STRING(20),
     field: 'last_name'
   },
+  role: DataTypes.STRING(11),
   email: DataTypes.STRING(50),
   birthDate: {
     type: DataTypes.DATEONLY,

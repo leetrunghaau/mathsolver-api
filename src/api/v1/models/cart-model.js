@@ -17,11 +17,8 @@ const Cart = db.define('Cart', {
     type: DataTypes.STRING(20),
     field: 'product_id'
   },
-  quantity: DataTypes.INTEGER,
-  createdAt: {
-    type: DataTypes.DATE,
-    field: 'created_at'
-  }
+  quantity: DataTypes.INTEGER
+  
 }, {
   tableName: 'cart',
   timestamps: false

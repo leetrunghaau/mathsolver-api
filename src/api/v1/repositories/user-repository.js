@@ -10,7 +10,9 @@ class UserRepository {
   static async createUser(userData) {
     return User.create(userData);
   }
-
+  static async getListUser(){
+    return User.findAll();
+  }
   static async updateUser(userId, userData) {
     await User.update(userData, {
       where: { user_id: userId },

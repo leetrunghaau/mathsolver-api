@@ -6,14 +6,6 @@ const Categories = db.define('Categories', {
   parent: DataTypes.STRING(20),
   enable: DataTypes.BOOLEAN,
   image: DataTypes.TEXT,
-  createdAt: {
-    type: DataTypes.DATE,
-    field: 'created_at'
-  },
-  modifiedAt: {
-    type: DataTypes.DATE,
-    field: 'modified_at'
-  },
   categoryId: {
     type: DataTypes.STRING(20),
     primaryKey: true,

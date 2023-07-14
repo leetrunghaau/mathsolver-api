@@ -3,7 +3,7 @@
 const Product = require('../models/product-model');
 
 class ProductRepository {
-  static async getProducts(){
+  static async getAllProduct(){
     return Product.findAll();
   }
   static async getProductById(productId) {

@@ -8,13 +8,10 @@ const Brand = db.define('Brand', {
     field: 'brand_id'
   },
   name: DataTypes.TEXT,
+  description:DataTypes.TEXT,
   blogLink: {
     type: DataTypes.TEXT,
     field: 'blog_link'
-  },
-  createdAt: {
-    type: DataTypes.DATE,
-    field: 'created_at'
   }
 }, {
   tableName: 'brand',

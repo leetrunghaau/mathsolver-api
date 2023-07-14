@@ -12,6 +12,13 @@ router.use('/user', userRoutes);
 router.use('/sig', sigRouters);
 router.use('/account', accountRouter);
 router.use('/address', addressRouter)
+router.get("/test-value/:myvalue", (req, res, next)=>{
+    console.log(req);
+    console.log(req.myvalue);
+    console.log(req.body);
+    console.log(req.params);
+    console.log('jjjjjjjjjjjjjjj')
+})
 
 
 module.exports = router;

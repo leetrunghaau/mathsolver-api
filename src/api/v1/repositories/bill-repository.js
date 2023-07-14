@@ -6,7 +6,18 @@ class BillRepository {
   static async getBillById(billId) {
     return Bill.findByPk(billId);
   }
-
+  static async getAllBill() {
+    return Bill.findAll();
+  }
+  static async getAllBillByListOrderId(ordersId) {
+    return Bill.findAll({
+      where: {
+        ordersId: {
+          [Op.in]: ordersId
+        }
+      }
+    })
+  }
   static async createBill(billData) {
     return Bill.create(billData);
   }

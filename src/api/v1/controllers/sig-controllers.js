@@ -73,7 +73,7 @@ class Sig {
         const user = await UserService.createUser(value);
         console.log(user);
         if (!user) {
-            return next(createError.InternalServerError("khghghfggffhgghdfsxfdgsxffdrfgdfgxfgx"));
+            return next(createError.InternalServerError("test"));
         }
         console.log(user);
         //create account
@@ -84,7 +84,7 @@ class Sig {
         }
         const account = await AccountService.createAccount(accountData);
         if (!account) {
-            return next(createError.InternalServerError("hgfvythgfvhg"));
+            return next(createError.InternalServerError("test1"));
         }
         // sinh ra token
         const token = await sigAuthToken(user.useId)

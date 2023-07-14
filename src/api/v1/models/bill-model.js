@@ -19,6 +19,11 @@ const Bill = db.define('Bill', {
     type: DataTypes.INTEGER,
     field: 'discount_value'
   },
+  district: DataTypes.STRING(50),
+  commune: DataTypes.STRING(50),
+  phone: DataTypes.STRING(12),
+  province: DataTypes.STRING(50),
+  detail: DataTypes.STRING(50),
   createdAt: {
     type: DataTypes.DATE,
     field: 'created_at'

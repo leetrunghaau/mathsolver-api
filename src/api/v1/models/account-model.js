@@ -13,7 +13,7 @@ const Account = db.define('Account', {
     field: 'user_id'
   } ,
   password: DataTypes.TEXT,
-  role: DataTypes.STRING(11),
+  
   modifiedAt:{
     type:DataTypes.DATE,
     field:'modified_at'

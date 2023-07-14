@@ -16,7 +16,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 //     console.error('Unable to connect to the database:', error);
 //   });
 
-// // Đồng bộ hóa model với cơ sở dữ liệu
+// Đồng bộ hóa model với cơ sở dữ liệu
 sequelize.sync()
   .then(() => {
     console.log('Cơ sở dữ liệu đã được đồng bộ hóa');

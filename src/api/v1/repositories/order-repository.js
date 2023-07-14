@@ -6,7 +6,9 @@ class OrderRepository {
   static async getOrderById(orderId) {
     return Order.findByPk(orderId);
   }
-
+  static async getListOrderByUserId(userId) {
+    return Order.findAll({ where: { userId: userId } })
+  }
   static async createOrder(orderData) {
     return Order.create(orderData);
   }

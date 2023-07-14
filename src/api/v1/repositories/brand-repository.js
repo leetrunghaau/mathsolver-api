@@ -6,7 +6,9 @@ class BrandRepository {
   static async getBrandById(brandId) {
     return Brand.findByPk(brandId);
   }
-
+  static async getAllBrand() {
+    return Brand.findAll();
+  }
   static async createBrand(brandData) {
     return Brand.create(brandData);
   }
@@ -25,4 +27,4 @@ class BrandRepository {
   }
 }
 
-module.exports =  BrandRepository;
+module.exports = BrandRepository;

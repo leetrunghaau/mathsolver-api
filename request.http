@@ -52,6 +52,7 @@ Content-Type: application/json
     "detail":"jjjj",
     "phone": "gbghhh"
 }
+
 ###     editAddress
 ###     deleteAddress
 ### bill
@@ -135,12 +136,6 @@ Content-Type: application/json
 ###     add
 ###     edit
 ###     delete
-
-
-
-
-
-
 
 
 

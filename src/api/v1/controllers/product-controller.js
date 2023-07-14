@@ -1,18 +1,30 @@
 // productController.js
 
-const ProductRepository = require('../repositories/product-repository');
+const { getProductById } = require('../repositories/product-repository');
+const ProductService = require('../services/product-service');
+const createError = require('http-errors');
+
 
 class ProductController {
     static async getAllProduct(req, res, next) {
         try {
-            //liểm tra validate
-            //gọi service tương ứng
-            //kiểm tra lỗi
-            //trả kết quả
+            const products = await ProductService.getAllProduct();
+            if (!products) {
+                return next(createError.InternalServerError())
+            }
+            return res.status(200).json({
+                status: 200,
+                message: "done",
+                data: products
+            })
         } catch (error) {
             console.log(error)
         }
     }
+    static async getProductById(req, res, next) {
+
+    }
+
     static async getAllProductByName(req, res, next) {
         try {
             //liểm tra validate

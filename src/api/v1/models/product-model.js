@@ -21,6 +21,7 @@ const Product = db.define('Product', {
   },
   information: DataTypes.TEXT,
   price: DataTypes.DOUBLE,
+  status: DataTypes.STRING(20),
   createdAt: {
     type: DataTypes.DATE,
     field: 'created_at'

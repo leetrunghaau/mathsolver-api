@@ -13,9 +13,17 @@ const Order = db.define('Order', {
     type: DataTypes.STRING(20),
     field: 'user_id'
   },
+  addressId:{
+    type: DataTypes.STRING(20),
+    field:'address_id'
+  },
   createAt:{
     type: DataTypes.DATE,
     field:'create_at'
+  },
+  modifiedAt:{
+    type: DataTypes.DATE,
+    field:'modified_at'
   },
   progress: DataTypes.STRING(20),
   discount_id: DataTypes.STRING(20)
