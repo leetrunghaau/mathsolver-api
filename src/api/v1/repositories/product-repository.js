@@ -11,19 +11,24 @@ class ProductRepository {
   }
 
   static async createProduct(productData) {
-    return Product.create(productData);
+    try{
+      return Product.create(productData);
+    }catch (error){
+      console.log(error)
+    }
+    
   }
 
-  static async updateProduct(productId, productData) {
+  static async updateProductById(productId, productData) {
     await Product.update(productData, {
       where: { product_id: productId },
     });
     return this.getProductById(productId);
   }
 
-  static async deleteProduct(productId) {
+  static async deleteProductById(productId) {
     return Product.destroy({
-      where: { product_id: productId },
+      where: { productId: productId },
     });
   }
 }

@@ -5,7 +5,55 @@ const getLimitValidate = data =>{
     });
     return getallData.validate(data);
 }
+const getProductValidate = data =>{
+    const productData = joi.object({
+        productId: joi.string().max(20).required(),
+    })
+    return productData.validate(data);
+}
+const createProductValidate = data =>{
+    const productData = joi.object({
+        name: joi.string().required(),
+        categoryId: joi.string().max(20).required(),
+        quantity: joi.number().min(0).required(),
+        brandId: joi.string().max(20).allow(null).required(),
+        information: joi.string().required(),
+        price: joi.number().required(),
+        status: joi.string().max(20).required()
+
+    })
+    return productData.validate(data);
+
+}
+const updateProductValidate = data =>{
+    const productData = joi.object({
+        productId: joi.string().max(20).required(),
+        name: joi.string().required(),
+        categoryId: joi.string().max(20).required(),
+        quantity: joi.number().min(0).required(),
+        brandId: joi.string().max(20).required(),
+        information: joi.string().required(),
+        price: joi.number().required(),
+        status: joi.string().max(20).required(),
+
+    })
+    return productData.validate(data);
+
+}
+const deleteProductValidate = data =>{
+    const productData = joi.object({
+        productId: joi.string().max(20).required(),
+    })
+    return productData.validate(data);
+
+}
+
+
 
 module.exports = {
-    getLimitValidate
+    getLimitValidate,
+    getProductValidate,
+    createProductValidate,
+    updateProductValidate,
+    deleteProductValidate
 }

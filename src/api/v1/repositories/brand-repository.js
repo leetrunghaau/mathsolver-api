@@ -13,16 +13,16 @@ class BrandRepository {
     return Brand.create(brandData);
   }
 
-  static async updateBrand(brandId, brandData) {
+  static async updateBrandById(brandId, brandData) {
     await Brand.update(brandData, {
-      where: { brand_id: brandId },
+      where: { brandId: brandId },
     });
     return this.getBrandById(brandId);
   }
 
-  static async deleteBrand(brandId) {
+  static async deleteBrandById(brandId) {
     return Brand.destroy({
-      where: { brand_id: brandId },
+      where: { brandId: brandId },
     });
   }
 }

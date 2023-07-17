@@ -10,13 +10,13 @@ class BrandService {
     }
     static async getAllBrand(){
         const brands = await BrandRepository.getAllBrand();
-        if(!brands){
+        if(brands.length === 0){
             return null;
         }
         return brands;
     }
     static async createBrand(brandData){
-        brandData.brandId = await generateId();
+        brandData.brandId =  generateId();
         const brand = await BrandRepository.createBrand(brandData);
         if(!brand){
             return null;
@@ -26,6 +26,13 @@ class BrandService {
     static async updateBrandById(brandId, brandData){
         const brand = await BrandRepository.updateBrandById(brandId, brandData);
         if(!brand){
+            return null;
+        }
+        return brand;
+    }
+    static async deleteBrandById(brandId){
+        const brand = await BrandRepository.deleteBrandById(brandId);
+        if(brand <=0){
             return null;
         }
         return brand;

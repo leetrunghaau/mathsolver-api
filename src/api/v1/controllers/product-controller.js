@@ -1,16 +1,38 @@
 // productController.js
 
-const { getProductById } = require('../repositories/product-repository');
+const BrandService = require('../services/brand-service');
+const CategoryService = require('../services/category-service');
 const ProductService = require('../services/product-service');
+const { getProductValidate, createProductValidate, deleteProductValidate, updateProductValidate } = require('../validations/product-validate');
 const createError = require('http-errors');
 
 
+
 class ProductController {
+    static async getProductById(req, res, next) {
+        try {
+            const { error, value } = getProductValidate(req.params);
+            if (error) {
+                return next(createError.BadRequest(error.details[0].message));
+            }
+            const product = await ProductService.getProductById(value.productId);
+            if (!product) {
+                return next(createError.NotFound('product not found'));
+            }
+            return res.status(200).json({
+                status: 200,
+                message: 'done',
+                data: product
+            })
+        } catch {
+
+        }
+    }
     static async getAllProduct(req, res, next) {
         try {
             const products = await ProductService.getAllProduct();
             if (!products) {
-                return next(createError.InternalServerError())
+                return next(createError.NotFound('product not found'))
             }
             return res.status(200).json({
                 status: 200,
@@ -21,7 +43,66 @@ class ProductController {
             console.log(error)
         }
     }
-    static async getProductById(req, res, next) {
+    static async createProduct(req, res, next) {
+        try {
+            const { error, value } = createProductValidate(req.body);
+            if (error) {
+                return next(createError.BadRequest(error.details[0].message));
+            }
+
+            if (value.brandId != null) {
+                if (!await BrandService.getBrandById(value.brandId)) {
+                    return next(createError.BadRequest('brandId value not match'));
+                }
+            }
+            if (value.categoryId != null) {
+                if (!await CategoryService.getCategoryById(value.categoryId)) {
+                    return next(createError.BadRequest('categoryId value not match'));
+                }
+            }
+            const product = await ProductService.createProduct(value);
+            if (!product) {
+                return next(createError.InternalServerError());
+            }
+            return res.status(200).json({
+                status: 200,
+                message: 'done',
+                data: product
+            })
+        } catch {
+
+        }
+    }
+    static async updateProductById(req, res, next) {
+        const { error, value } = updateProductValidate(req.body);
+        if (error) {
+            return next(createError.BadRequest(error.details[0].message));
+        }
+        const { productId, ...productData } = value;
+        const product = await ProductService.updateProductById(productId, productData);
+        if (!product) {
+            return next(createError.InternalServerError());
+        }
+        return res.status(200).json({
+            status: 200,
+            message: 'done',
+            data: product
+        })
+    }
+    static async deleteProductById(req, res, next) {
+        const { error, value } = deleteProductValidate(req.params);
+        if (error) {
+            return next(createError.BadRequest(error.details[0].message));
+        }
+        const product = await ProductService.deleteProductById(value.productId);
+        if (!product) {
+            return next(createError.InternalServerError());
+        }
+        return res.status(200).json({
+            status: 200,
+            message: 'done',
+            data: product
+        })
 
     }
 

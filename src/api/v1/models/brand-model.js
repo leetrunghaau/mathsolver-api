@@ -1,11 +1,12 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes ,Deferrable} = require('sequelize');
 const db = require('../../config/Database');
 
 const Brand = db.define('Brand', {
-  brand_id: {
+  brandId: {
     type: DataTypes.STRING(20),
     primaryKey: true,
-    field: 'brand_id'
+    field: 'brand_id',
+    deferrable: Deferrable.INITIALLY_IMMEDIATE
   },
   name: DataTypes.TEXT,
   description:DataTypes.TEXT,

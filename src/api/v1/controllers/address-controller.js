@@ -1,17 +1,14 @@
 
-const AddressRepository = require('../repositories/address-repository');
-const AccountService = require('../services/account-service');
 const AddressService = require('../services/address-service');
-const { changePasswordValidate } = require('../validations/account-validate');
 const createError = require('http-errors');
 const { createAddressValidate } = require('../validations/address-validate');
 
 class AddressController {
-  static async getAddress(req, res, next) {
+  static async getAddressByUserId(req, res, next) {
     try {
       const addressData = await AddressService.getAddressByUserId(req.userId);
       if (!addressData) {
-        return next(createError.InternalServerError('find not found !'));
+        return next(createError.NotFound('Address not found !'));
       }
       return res.status(200).json({
         status: 200,
@@ -23,12 +20,11 @@ class AddressController {
       return res.status(500).json({ message: 'Internal server error' });
     }
   }
-  static async getListAddress(req, res, next) {
+  static async getAllAddressByUserId(req, res, next) {
     try {
-      //kiểm tra xác thực, do middler do
-      const listAddress = await AddressService.getListAddressByUserId(req.userId);
+      const listAddress = await AddressService.getAllAddressByUserId(req.userId);
       if (!listAddress) {
-        return next(createError.InternalServerError('find not found !'));
+        return next(createError.NotFound('addresses not found !'));
       }
       return res.status(200).json({
         status: 200,
@@ -40,25 +36,28 @@ class AddressController {
       return res.status(500).json({ message: 'Internal server error' });
     }
   }
-  static async createAddress(req, res) {
+  static async createAddressByUserId(req, res, next) {
     try {
-      //kiểm tra xác thực
-      //kiểm tả validate
       const { error, value } = createAddressValidate(req.body);
       if (error) {
         return next(createError.BadRequest(error.details[0].message));
       }
-      //tạo
-
-
-      return res.status(201).json(createdAddress);
+      const address = await AddressService.createAddressByUserId(req.userId, value);
+      if (!address) {
+        return next(createError.InternalServerError());
+      }
+      return res.status(200).json({
+        status: 200,
+        message: 'done',
+        data: address
+      });
     } catch (error) {
       console.error('Error creating address:', error);
       return res.status(500).json({ message: 'Internal server error' });
     }
   }
 
-  static async updateAddress(req, res) {
+  static async updateAddressByUserId(req, res) {
     try {
 
     } catch (error) {

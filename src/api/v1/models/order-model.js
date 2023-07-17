@@ -2,6 +2,7 @@ const { DataTypes } = require('sequelize');
 const db = require('../../config/Database');
 const User = require('./user-model');
 const Discount = require('./discount-model');
+const Address = require('./address-model');
 
 const Order = db.define('Order', {
   orderId: {
@@ -35,5 +36,6 @@ const Order = db.define('Order', {
 
 Order.belongsTo(User, { foreignKey: 'user_id' , onDelete: 'CASCADE', onUpdate: 'CASCADE'});
 Order.belongsTo(Discount, { foreignKey: 'discount_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+Order.belongsTo(Address, { foreignKey: 'address_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 module.exports = Order;

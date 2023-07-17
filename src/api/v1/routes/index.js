@@ -3,16 +3,22 @@
 const express = require('express');
 const router = express.Router();
 const userRoutes = require('./user-routes');
-const sigRouters= require('./sig-routers')
+const sigRouters = require('./sig-routers')
 const accountRouter = require('./account-routes')
 const addressRouter = require('./address-routes')
+const brandRouter = require('./brand-routes')
+const categoryRouter = require('./category-routes')
+const productRouter = require('./product-routes')
 
 
 router.use('/user', userRoutes);
 router.use('/sig', sigRouters);
 router.use('/account', accountRouter);
-router.use('/address', addressRouter)
-router.get("/test-value/:myvalue", (req, res, next)=>{
+router.use('/address', addressRouter);
+router.use(brandRouter);
+router.use(categoryRouter);
+router.use(productRouter)
+router.get("/test-value/:myvalue", (req, res, next) => {
     console.log(req);
     console.log(req.myvalue);
     console.log(req.body);

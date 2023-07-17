@@ -4,7 +4,6 @@ const db = require('../../config/Database');
 const Categories = db.define('Categories', {
   name: DataTypes.TEXT,
   parent: DataTypes.STRING(20),
-  enable: DataTypes.BOOLEAN,
   image: DataTypes.TEXT,
   categoryId: {
     type: DataTypes.STRING(20),

@@ -80,7 +80,6 @@ class Sig {
         const accountData = {
             userId: user.userId,
             password: passwordEncode,
-            role: 'user'
         }
         const account = await AccountService.createAccount(accountData);
         if (!account) {

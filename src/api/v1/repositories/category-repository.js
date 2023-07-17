@@ -6,19 +6,21 @@ class CategoryRepository {
   static async getCategoryById(categoryId) {
     return Categories.findByPk(categoryId);
   }
-
+static async getAllCategory(){
+  return Categories.findAll();
+}
   static async createCategory(categoryData) {
     return Categories.create(categoryData);
   }
 
-  static async updateCategory(categoryId, categoryData) {
+  static async updateCategoryById(categoryId, categoryData) {
     await Categories.update(categoryData, {
       where: { category_id: categoryId },
     });
     return this.getCategoryById(categoryId);
   }
 
-  static async deleteCategory(categoryId) {
+  static async deleteCategoryById(categoryId) {
     return Categories.destroy({
       where: { category_id: categoryId },
     });

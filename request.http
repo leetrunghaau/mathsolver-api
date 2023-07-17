@@ -1,5 +1,6 @@
 
 ### sig
+GET http://localhost:8080/api
 ###     login
 POST  http://localhost:8080/api/sig/login
 Content-Type: application/json
@@ -32,7 +33,7 @@ Authorization: myss eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YWM5NWN
     "oldPassword":"jjuyt",
     "newPassword":"admin@123"
 }
-### address
+### address ------------------------------------------------------------------------------------------
 ###     getAddress | get address main in user id
 GET http://localhost:8080/api/address/get-one
 Authorization: myss eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YWM5NWNjNjgxOTk5ZWQ1NWEiLCJyb2xlIjoidXNlciIsImlhdCI6MTY4OTAyMDQwNiwiZXhwIjoxNjkxNjEyNDA2fQ.VnPyBNl5q6S9hQMXucrZv_mcNaab4g4bY2myHr3-KTU
@@ -55,83 +56,167 @@ Content-Type: application/json
 
 ###     editAddress
 ###     deleteAddress
-### bill
+### bill ------------------------------------------------------------------------------------------
 ###     getListBill
 ###     getListBillByUserId
 ###     getBillByOrderId
-### blog
+### blog ------------------------------------------------------------------------------------------
 ###     getBlog
 ###     getAllBlog
 ###     getListBlogBycategoryId
 ###     addBlog
 ###     editBlog
 ###     deleteBlog
-### Blog Categories
+### Blog Categories ------------------------------------------------------------------------------------------
 ###     getAll
 ###     add
 ###     edit
 ###     delete
-### brand
+### brand ------------------------------------------------------------------------------------------
+###     get one
+GET http://localhost:8080/api/brand/54
 ###     getAll
+GET http://localhost:8080/api/brands
 ###     add
+POST http://localhost:8080/api/brand
+Content-Type: application/json
+
+{
+      "name": "dddd",
+      "description": "sdfsdzf",
+      "blogLink": "dsfxcvzfd"
+}
 ###     edit
-###     delete   
-### cart
-###     getListByuserId
-###     add
-###     edit
-###     delete
-### categories
+PUT  http://localhost:8080/api/brand
+Content-Type: application/json
+
+{
+    "brandId": "c0f56594fa0a87a3c8",
+      "name": "dien tu mobi",
+      "description": "sdfsdzf",
+      "blogLink": "dsfxcvzfd"
+}
+###     delete 
+DELETE  http://localhost:8080/api/brand/54
+### cart ------------------------------------------------------------------------------------------
+###     get cart
+###     add product to cart
+###     edit value product in cart 
+###     delete product in cart 
+### categories ------------------------------------------------------------------------------------------
+###     get
+GET  http://localhost:8080/api/category/1335921e1ce62b7d65
 ###     getAll
+GET  http://localhost:8080/api/categories
 ###     add
+POST   http://localhost:8080/api/category
+Content-Type: application/json  
+
+{
+    "name": "máy hàn",
+    "parent": "null",
+    "image":"jhgjhghghjgjhg"
+
+}
 ###     edit
+PUT http://localhost:8080/api/category
+Content-Type: application/json
+
+{
+    "categoryId": "b860cdae43a7fa35f5",
+    "name": "máy hàn1",
+    "parent": "null",
+    "image":"jhgjhghghjgjhg"
+}
 ###     delete
-### discount
+DELETE http://localhost:8080/api/category/b860cdae43a7fa
+### discount ------------------------------------------------------------------------------------------
+###     get
+GET http://localhost:8080/api/discount/id
+###     getAll
+GET http://localhost:8080/api/discounts
+###     add
+GET http://localhost:8080/api/discount
+
+###     edit
+GET http://localhost:8080/api/discount/id
+
+###     delete  
+GET http://localhost:8080/api/discount/id
+
+### distributor ------------------------------------------------------------------------------------------
 ###     getAll
 ###     add
 ###     edit
 ###     delete  
-### distributor
-###     getAll
-###     add
-###     edit
-###     delete  
-### importduct
+### importduct ------------------------------------------------------------------------------------------
 ###     getAll
 ###     add
 ###     edit
 ###     delete 
-### notification
+### notification ------------------------------------------------------------------------------------------
 ###     getAll
 ###     add
 ###     edit
 ###     delete 
-### order
+### order ------------------------------------------------------------------------------------------
 ###     getAllByStatus
 ###     getListByUserId
 ###     add
 ###     edit
 ###     delete 
-### order item
+### order item ------------------------------------------------------------------------------------------
 ###     add all
 ###     edit
 ###     delete 
-### product
+### product ------------------------------------------------------------------------------------------
+###     get
+GET http://localhost:8080/api/product/1e48622b6f61216f82
 ###     getAll
+GET http://localhost:8080/api/products
 ###     add
+POST  http://localhost:8080/api/product
+Content-Type: application/json
+
+{
+    "name": "dasas",
+    "categoryId": "1335921e1ce62b7d65",
+    "quantity": 9,
+    "brandId": null,
+    "information": "hjgfhj",
+    "price": 79843,
+    "status": "disable"
+}
+
 ###     edit
+PUT  http://localhost:8080/api/product
+Content-Type: application/json 
+
+{
+    "productId": "d5ebdefa5242e132e7",
+      "name": "jhg",
+      "categoryId": "1335921e1ce62b7d65",
+      "quantity": 9,
+      "brandId": "c0f56594fa0a87a3c8",
+      "information": "hjgfhj",
+      "price": 79843,
+      "status": "enable",
+      "brandId": "c0f56594fa0a87a3c8",
+      "categoryId": "1335921e1ce62b7d65"
+}
 ###     delete
-### product detail
+DELETE http://localhost:8080/api/product/d5ebdefa5242e132e7
+### product detail ------------------------------------------------------------------------------------------
 ###     get
 ###     add
 ###     edit
 ###     delete
-### product image
+### product image ------------------------------------------------------------------------------------------
 ###     get
 ###     add
 ###     edit
 ###     delete
-### user
+### user ------------------------------------------------------------------------------------------
 ###     get
 ###     add
 ###     edit

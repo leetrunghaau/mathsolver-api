@@ -1,7 +1,7 @@
 const joi = require('joi')
 const getCategoryValidate = data =>{
     const categoryData = joi.object({
-        categoryId: joi.string().length(18).required(),
+        categoryId: joi.string().max(20).required(),
     })
     return categoryData.validate(data);
 }
@@ -9,7 +9,6 @@ const createCategoryValidate = data =>{
     const categoryData = joi.object({
         name: joi.string().required(),
         parent: joi.string().required(),
-        enable: joi.boolean().required(),
         image: joi.string().required()
 
     })
@@ -17,10 +16,9 @@ const createCategoryValidate = data =>{
 }
 const updateCategoryValidate =  data =>{
     const categoryData = joi.object({
-        categoryId: joi.string().required(),
+        categoryId: joi.string().max(20).required(),
         name: joi.string().required(),
         parent: joi.string().required(),
-        enable: joi.boolean().required(),
         image: joi.string().required()
     })
     return categoryData.validate(data);

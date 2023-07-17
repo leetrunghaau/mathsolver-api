@@ -6,11 +6,13 @@ class CartRepository {
   static async getCartById(cartId) {
     return Cart.findByPk(cartId);
   }
-
-  static async createCart(cartData) {
-    return Cart.create(cartData);
+  static async getAllCartByUserId(userId){
+    return Cart.findAll({where:{userId: userId}})
   }
 
+  static async createCart(cartData) { 
+    return Cart.create(cartData);
+  }
   static async updateCart(cartId, cartData) {
     await Cart.update(cartData, {
       where: { cart_id: cartId },

@@ -6,8 +6,8 @@ const AddressController = require('../controllers/address-controller');
 const { authorization } = require('../middlewares/auth-middleware');
 
 // Define routes
-router.get("/get-one", authorization(['user']), AddressController.getAddress);
-router.get("/get-list", authorization(['user']), AddressController.getListAddress);
+router.get("/get-one", authorization(['user']), AddressController.getAddressByUserId);
+router.get("/get-list", authorization(['user']), AddressController.getAllAddressByUserId);
 
 
 module.exports = router;
