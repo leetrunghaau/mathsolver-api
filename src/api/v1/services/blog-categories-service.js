@@ -1,3 +1,4 @@
+const { generateId } = require("../helpers/generate-key");
 const BlogCategoriesRepository = require("../repositories/blog-categories-repository");
 
 class BlogCategoriesService{
@@ -17,6 +18,7 @@ class BlogCategoriesService{
        return blogCategories;
     }
     static async createBlogCategory(blogCategoryData) {
+        blogCategoryData.blogCategoryId = generateId();
         const blogCategory = await BlogCategoriesRepository.createBlogCategory(blogCategoryData);
         if(!blogCategory){
             return null;
@@ -25,7 +27,7 @@ class BlogCategoriesService{
 
     }
     static async updateBlogCategoryById(blogCategoryId, blogCategoryData) {
-        const blogCategory = await BlogCategoriesRepository.updateBlogCategoryById(blogCategoryData, blogCategoryData);
+        const blogCategory = await BlogCategoriesRepository.updateBlogCategoryById(blogCategoryId, blogCategoryData);
         if(!blogCategory){
             return null;
         }
@@ -41,3 +43,4 @@ class BlogCategoriesService{
     }
 
 }
+module.exports = BlogCategoriesService;

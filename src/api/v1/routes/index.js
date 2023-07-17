@@ -9,6 +9,8 @@ const addressRouter = require('./address-routes')
 const brandRouter = require('./brand-routes')
 const categoryRouter = require('./category-routes')
 const productRouter = require('./product-routes')
+const blogCategoriesRouter = require('./blog-categories-router')
+const blogRouter = require('./blog-router')
 
 
 router.use('/user', userRoutes);
@@ -18,6 +20,8 @@ router.use('/address', addressRouter);
 router.use(brandRouter);
 router.use(categoryRouter);
 router.use(productRouter)
+router.use(blogCategoriesRouter);
+router.use(blogRouter);
 router.get("/test-value/:myvalue", (req, res, next) => {
     console.log(req);
     console.log(req.myvalue);

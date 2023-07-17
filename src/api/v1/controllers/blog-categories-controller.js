@@ -3,7 +3,6 @@ const {
     getBlogCategoryValidate,
     createBlogCategoryValidate,
     updateBlogCategoryValidate,
-    deleteCategory,
     deleteBlogCategoryValidate
 } = require('../validations/blog-category-validate')
 const createError = require('http-errors')
