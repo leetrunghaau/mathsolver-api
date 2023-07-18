@@ -89,7 +89,7 @@ class BlogCategoriesController {
             }
             const blogCategory = await BlogCategoriesService.deleteBlogCategoryById(value.blogCategoryId);
             if(!blogCategory){
-                return null;
+                return next(createError.NotFound('blog category not found'));
             }
             return res.status(200).json({
                 status:200,

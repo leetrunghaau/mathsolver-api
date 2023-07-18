@@ -11,6 +11,8 @@ const categoryRouter = require('./category-routes')
 const productRouter = require('./product-routes')
 const blogCategoriesRouter = require('./blog-categories-router')
 const blogRouter = require('./blog-router')
+const discountRouter = require('./discount-routes')
+const notificationRouter = require('./notification-routes')
 
 
 router.use('/user', userRoutes);
@@ -22,6 +24,9 @@ router.use(categoryRouter);
 router.use(productRouter)
 router.use(blogCategoriesRouter);
 router.use(blogRouter);
+router.use(discountRouter);
+router.use(notificationRouter);
+
 router.get("/test-value/:myvalue", (req, res, next) => {
     console.log(req);
     console.log(req.myvalue);

@@ -21,7 +21,7 @@ class BlogController {
 
         }
     }
-    static async getAllBog(req, res, next) {
+    static async getAllBlog(req, res, next) {
         try {
             const blogs = await BlogService.getAllBlog();
             if (!blogs) {
@@ -81,7 +81,7 @@ class BlogController {
             if (error) {
                 return next(createError.BadRequest(error.details[0].message));
             }
-            const blog = await BlogService.getBlogById(value.blogId);
+            const blog = await BlogService.deleteBlogById(value.blogId);
             if (!blog) {
                 return next(createError.InternalServerError());
             }

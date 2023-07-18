@@ -12,7 +12,7 @@ class BlogCategoriesService{
     }
     static async getAllBlogCategory() {
        const blogCategories = await BlogCategoriesRepository.getAllBlogCategory();
-       if(blogCategories === 0){
+       if(blogCategories.length === 0){
         return null;
        }
        return blogCategories;
@@ -36,9 +36,10 @@ class BlogCategoriesService{
     }
     static async deleteBlogCategoryById(blogCategoryId) {
         const blogCategory = await BlogCategoriesRepository.deleteBlogCategoryById(blogCategoryId);
-        if(!blogCategory <=0){
+        if(blogCategory <=0){
             return null;
         }
+
         return blogCategory;
     }
 

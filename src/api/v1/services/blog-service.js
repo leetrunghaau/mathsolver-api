@@ -15,14 +15,14 @@ class BlogService {
     }
     static async getAllBlog() {
         const blog = await BlogRepository.getAllBlog();
-        if (blog === 0) {
+        if (blog.length === 0) {
             return null;
         }
         return blog;
     }
     static async createBlog(blogData) {
         blogData.blogId = generateId();
-        blogData.modifiedAt = new Date();
+        blogData.createdAt = new Date();
         blogData.modifiedAt = new Date();
         blogData.views = 0;
         const blog = await BlogRepository.createBlog(blogData);
@@ -43,7 +43,7 @@ class BlogService {
     }
     static async deleteBlogById(blogId) {
         const blog = await BlogRepository.deleteBlogById(blogId);
-        if (!blog <= 0) {
+        if (blog <= 0) {
             return null;
         }
         return blog;

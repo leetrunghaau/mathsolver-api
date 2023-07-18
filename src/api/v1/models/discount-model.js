@@ -7,9 +7,9 @@ const Discount = db.define('Discount', {
     primaryKey: true,
     field: 'discount_id'
   },
-  createAt: {
+  createdAt: {
     type: DataTypes.DATE,
-    field: 'create_at'
+    field: 'created_at'
   },
   modifiedAt: {
     type: DataTypes.DOUBLE,

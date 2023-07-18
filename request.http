@@ -62,16 +62,59 @@ Content-Type: application/json
 ###     getBillByOrderId
 ### blog ------------------------------------------------------------------------------------------
 ###     getBlog
+GET http://localhost:8080/api/blog/66966a48b1b7aba63f
 ###     getAllBlog
+GET http://localhost:8080/api/blogs
 ###     getListBlogBycategoryId
 ###     addBlog
+POST  http://localhost:8080/api/blog
+Content-Type: application/json
+
+{
+    "blogCategoryId":"af20a79d5cf8dec0ed",
+    "title":"bài viết của đấng",
+    "thumbnail":"éo có thumb",
+    "introduction":"hello các bạn trẻ",
+    "content":"clmm"
+}
 ###     editBlog
+PUT  http://localhost:8080/api/blog
+Content-Type: application/json
+
+{
+    "blogId": "66966a48b1b7aba63f",
+    "blogCategoryId":"af20a79d5cf8dec0ed",
+    "title":"bài viết của đấng 2",
+    "thumbnail":"éo có thumb",
+    "introduction":"hello các bạn trẻ",
+    "content":"clmm"
+}
 ###     deleteBlog
+DELETE  http://localhost:8080/api/blog/66966a48b1b7aba63f
 ### Blog Categories ------------------------------------------------------------------------------------------
+###     get
+GET http://localhost:8080/api/blog-category/54
 ###     getAll
+GET http://localhost:8080/api/blog-categories
 ###     add
+POST  http://localhost:8080/api/blog-category
+Content-Type: application/json
+
+{
+    "name":"blog tâm trạng",
+    "parent":"kgggjhghjgjhg"
+}
 ###     edit
+PUT   http://localhost:8080/api/blog-category
+Content-Type: application/json
+
+{
+    "blogCategoryId": "b934911dbdab3543c0",
+    "name":"blog tâm trạng 1",  
+    "parent":"kgggjhghjgjhg"
+}
 ###     delete
+DELETE    http://localhost:8080/api/blog-category/b1bb94d2e1e9293b75
 ### brand ------------------------------------------------------------------------------------------
 ###     get one
 GET http://localhost:8080/api/brand/54
@@ -136,13 +179,34 @@ GET http://localhost:8080/api/discount/id
 ###     getAll
 GET http://localhost:8080/api/discounts
 ###     add
-GET http://localhost:8080/api/discount
+POST  http://localhost:8080/api/discount
+Content-Type: application/json
+
+{
+    "enableAt":"2023-07-17T21:09:59.000Z",
+    "disableAt":"2024-07-17T21:09:59.000Z",
+    "type":"cc",
+    "value":50.000,
+    "quantity":15,
+    "code":"nhap code"
+}
 
 ###     edit
-GET http://localhost:8080/api/discount/id
+PUT  http://localhost:8080/api/discount
+Content-Type: application/json
+
+{
+    "discountId": "8ef0c57e2305c805ea",
+    "enableAt":"2023-07-17T21:09:59.000Z",
+    "disableAt":"2026-07-17T21:09:59.000Z",
+    "type":"cc",
+    "value":176.8645,
+    "quantity":15,
+    "code":"nhap code"
+}
 
 ###     delete  
-GET http://localhost:8080/api/discount/id
+DELETE http://localhost:8080/api/discount/3cf69d60fb01b9c337
 
 ### distributor ------------------------------------------------------------------------------------------
 ###     getAll

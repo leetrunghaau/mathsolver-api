@@ -22,9 +22,9 @@ const Blog = db.define('Blog', {
     thumbnail: DataTypes.TEXT,
     introduction:DataTypes.TEXT,
     content:DataTypes.TEXT,
-    createAt:{
+    createdAt:{
         type: DataTypes.DATE,
-        field:'create_at'
+        field:'created_at'
     },
     modifiedAt:{
         type: DataTypes.DATE,

@@ -87,7 +87,6 @@ class BrandController {
     }
     static async deleteBrandById(req, res, next) {
         try {
-            console.log('gdhfghujgklblkjbkljbkj')
             const {error, value} = deleteBrandValidate(req.params);
             if (error) {
                 return next(createError.BadRequest(error.details[0].message));
