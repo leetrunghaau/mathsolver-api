@@ -26,5 +26,12 @@ class AccountRepository {
         })
         return this.getAccountByUserId(userId);
     }
+
+
+    // systemtest
+    static async getAllAccountByUserId(userId){
+        return Account.findAll({where:{userId:userId}})
+    }
+    
 }
 module.exports = AccountRepository;

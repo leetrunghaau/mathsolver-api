@@ -13,12 +13,13 @@ const blogCategoriesRouter = require('./blog-categories-router')
 const blogRouter = require('./blog-router')
 const discountRouter = require('./discount-routes')
 const notificationRouter = require('./notification-routes')
+const productDetailRouter = require('./product-detail-router')
 
 
 router.use('/user', userRoutes);
 router.use('/sig', sigRouters);
 router.use('/account', accountRouter);
-router.use('/address', addressRouter);
+router.use( addressRouter);
 router.use(brandRouter);
 router.use(categoryRouter);
 router.use(productRouter)
@@ -26,6 +27,7 @@ router.use(blogCategoriesRouter);
 router.use(blogRouter);
 router.use(discountRouter);
 router.use(notificationRouter);
+router.use(productDetailRouter);
 
 router.get("/test-value/:myvalue", (req, res, next) => {
     console.log(req);

@@ -1,7 +1,7 @@
 
 const AddressService = require('../services/address-service');
 const createError = require('http-errors');
-const { createAddressValidate } = require('../validations/address-validate');
+const { createAddressValidate, updateAddressValidate, deleteAddressValidate } = require('../validations/address-validate');
 
 class AddressController {
   static async getAddressByUserId(req, res, next) {
@@ -22,14 +22,14 @@ class AddressController {
   }
   static async getAllAddressByUserId(req, res, next) {
     try {
-      const listAddress = await AddressService.getAllAddressByUserId(req.userId);
-      if (!listAddress) {
+      const addresses = await AddressService.getAllAddressByUserId(req.userId);
+      if (!addresses) {
         return next(createError.NotFound('addresses not found !'));
       }
       return res.status(200).json({
         status: 200,
         message: 'done',
-        data: listAddress
+        data: addresses
       })
     } catch (error) {
       console.error('Error fetching address:', error);
@@ -57,18 +57,42 @@ class AddressController {
     }
   }
 
-  static async updateAddressByUserId(req, res) {
+  static async updateAddressById(req, res, next) {
     try {
+      const { error, value } = updateAddressValidate(req.body);
+      if (error) {
+        return next(createError.BadRequest(error.details[0].message));
+      }
+      const { addressId, ...updateData } = value;
+      const address = await AddressService.updateAddressById(addressId, updateData);
+      if (!address) {
+        return next(createError.NotFound('address not found'));
+      }
+      return res.status(200).json({
+        status: 200,
+        message: 'done',
+        data: address
+      })
 
     } catch (error) {
       console.error('Error updating address:', error);
       return res.status(500).json({ message: 'Internal server error' });
     }
   }
-
-  static async deleteAddress(req, res) {
+  static async deleteAddressById(req, res, next) {
     try {
-
+      const { error, value } = deleteAddressValidate(req.body);
+      if (error) {
+        return next(createError.BadRequest(error.details[0].message));
+      }
+      const address = await AddressService.deleteAddressById(value.addressId);
+      if (!address) {
+        return next(createError.NotFound('address not found'))
+      }
+      return res.status(200).json({
+        status: 200,
+        message: 'done',
+      })
     } catch (error) {
       console.error('Error deleting address:', error);
       return res.status(500).json({ message: 'Internal server error' });

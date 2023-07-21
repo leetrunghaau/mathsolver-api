@@ -2,16 +2,15 @@
 ### sig
 GET http://localhost:8080/api
 ###     login
-POST  http://localhost:8080/api/sig/login
+POST  http://localhost:8080/api/v1/sig/login
 Content-Type: application/json
-
 
 {
     "email":"leetrunghaau@gmail.com",
     "password":"gggg"
 }
 ###     register
-POST http://localhost:8080/api/sig/register
+POST http://localhost:8080/api/v1/sig/register
 Content-Type: application/json
 
 {
@@ -24,8 +23,13 @@ Content-Type: application/json
 ###     email verification
 ###     logout
 ### account
-###     change Password
-POST http://localhost:8080/api/account/change-password
+###     get list by user     system role use for test
+###     add     system role use for test
+###     edit    system role use for test
+###     get modifid at by user id
+GET http://localhost:8080/api/v1/password-modified-at
+###     change Password by user id
+POST http://localhost:8080/api/v1/change-password
 Content-Type: application/json
 Authorization: myss eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YWM5NWNjNjgxOTk5ZWQ1NWEiLCJyb2xlIjoidXNlciIsImlhdCI6MTY4OTAyMDQwNiwiZXhwIjoxNjkxNjEyNDA2fQ.VnPyBNl5q6S9hQMXucrZv_mcNaab4g4bY2myHr3-KTU
 
@@ -35,15 +39,15 @@ Authorization: myss eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YWM5NWN
 }
 ### address ------------------------------------------------------------------------------------------
 ###     getAddress | get address main in user id
-GET http://localhost:8080/api/address/get-one
+GET http://localhost:8080/api/v1/address/get-one
 Authorization: myss eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YWM5NWNjNjgxOTk5ZWQ1NWEiLCJyb2xlIjoidXNlciIsImlhdCI6MTY4OTAyMDQwNiwiZXhwIjoxNjkxNjEyNDA2fQ.VnPyBNl5q6S9hQMXucrZv_mcNaab4g4bY2myHr3-KTU
 
 ###     getListAddress | get list address in user id
-GET http://localhost:8080/api/address/get-list
+GET http://localhost:8080/api/v1/address/get-list
 Authorization: myss eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YWM5NWNjNjgxOTk5ZWQ1NWEiLCJyb2xlIjoidXNlciIsImlhdCI6MTY4OTAyMDQwNiwiZXhwIjoxNjkxNjEyNDA2fQ.VnPyBNl5q6S9hQMXucrZv_mcNaab4g4bY2myHr3-KTU
 
 ###     addAddress
-POST  http://localhost:8080/api/address/add
+POST  http://localhost:8080/api/v1/address/add
 Content-Type: application/json
 
 {
@@ -62,12 +66,12 @@ Content-Type: application/json
 ###     getBillByOrderId
 ### blog ------------------------------------------------------------------------------------------
 ###     getBlog
-GET http://localhost:8080/api/blog/66966a48b1b7aba63f
+GET http://localhost:8080/api/v1/blog/66966a48b1b7aba63f
 ###     getAllBlog
-GET http://localhost:8080/api/blogs
+GET http://localhost:8080/api/v1/blogs
 ###     getListBlogBycategoryId
 ###     addBlog
-POST  http://localhost:8080/api/blog
+POST  http://localhost:8080/api/v1/blog
 Content-Type: application/json
 
 {
@@ -78,7 +82,7 @@ Content-Type: application/json
     "content":"clmm"
 }
 ###     editBlog
-PUT  http://localhost:8080/api/blog
+PUT  http://localhost:8080/api/v1/blog
 Content-Type: application/json
 
 {
@@ -90,14 +94,14 @@ Content-Type: application/json
     "content":"clmm"
 }
 ###     deleteBlog
-DELETE  http://localhost:8080/api/blog/66966a48b1b7aba63f
+DELETE  http://localhost:8080/api/v1/blog/66966a48b1b7aba63f
 ### Blog Categories ------------------------------------------------------------------------------------------
 ###     get
-GET http://localhost:8080/api/blog-category/54
+GET http://localhost:8080/api/v1/blog-category/54
 ###     getAll
-GET http://localhost:8080/api/blog-categories
+GET http://localhost:8080/api/v1/blog-categories
 ###     add
-POST  http://localhost:8080/api/blog-category
+POST  http://localhost:8080/api/v1/blog-category
 Content-Type: application/json
 
 {
@@ -105,7 +109,7 @@ Content-Type: application/json
     "parent":"kgggjhghjgjhg"
 }
 ###     edit
-PUT   http://localhost:8080/api/blog-category
+PUT   http://localhost:8080/api/v1/blog-category
 Content-Type: application/json
 
 {
@@ -114,14 +118,14 @@ Content-Type: application/json
     "parent":"kgggjhghjgjhg"
 }
 ###     delete
-DELETE    http://localhost:8080/api/blog-category/b1bb94d2e1e9293b75
+DELETE    http://localhost:8080/api/v1/blog-category/b1bb94d2e1e9293b75
 ### brand ------------------------------------------------------------------------------------------
 ###     get one
-GET http://localhost:8080/api/brand/54
+GET http://localhost:8080/api/v1/brand/54
 ###     getAll
-GET http://localhost:8080/api/brands
+GET http://localhost:8080/api/v1/brands
 ###     add
-POST http://localhost:8080/api/brand
+POST http://localhost:8080/api/v1/brand
 Content-Type: application/json
 
 {
@@ -130,7 +134,7 @@ Content-Type: application/json
       "blogLink": "dsfxcvzfd"
 }
 ###     edit
-PUT  http://localhost:8080/api/brand
+PUT  http://localhost:8080/api/v1/brand
 Content-Type: application/json
 
 {
@@ -140,7 +144,7 @@ Content-Type: application/json
       "blogLink": "dsfxcvzfd"
 }
 ###     delete 
-DELETE  http://localhost:8080/api/brand/54
+DELETE  http://localhost:8080/api/v1/brand/54
 ### cart ------------------------------------------------------------------------------------------
 ###     get cart
 ###     add product to cart
@@ -148,11 +152,11 @@ DELETE  http://localhost:8080/api/brand/54
 ###     delete product in cart 
 ### categories ------------------------------------------------------------------------------------------
 ###     get
-GET  http://localhost:8080/api/category/1335921e1ce62b7d65
+GET  http://localhost:8080/api/v1/category/1335921e1ce62b7d65
 ###     getAll
-GET  http://localhost:8080/api/categories
+GET  http://localhost:8080/api/v1/categories
 ###     add
-POST   http://localhost:8080/api/category
+POST   http://localhost:8080/api/v1/category
 Content-Type: application/json  
 
 {
@@ -162,7 +166,7 @@ Content-Type: application/json
 
 }
 ###     edit
-PUT http://localhost:8080/api/category
+PUT http://localhost:8080/api/v1/category
 Content-Type: application/json
 
 {
@@ -172,14 +176,14 @@ Content-Type: application/json
     "image":"jhgjhghghjgjhg"
 }
 ###     delete
-DELETE http://localhost:8080/api/category/b860cdae43a7fa
+DELETE http://localhost:8080/api/v1/category/b860cdae43a7fa
 ### discount ------------------------------------------------------------------------------------------
 ###     get
-GET http://localhost:8080/api/discount/id
+GET http://localhost:8080/api/v1/discount/id
 ###     getAll
-GET http://localhost:8080/api/discounts
+GET http://localhost:8080/api/v1/discounts
 ###     add
-POST  http://localhost:8080/api/discount
+POST  http://localhost:8080/api/v1/discount
 Content-Type: application/json
 
 {
@@ -192,7 +196,7 @@ Content-Type: application/json
 }
 
 ###     edit
-PUT  http://localhost:8080/api/discount
+PUT  http://localhost:8080/api/v1/discount
 Content-Type: application/json
 
 {
@@ -206,7 +210,7 @@ Content-Type: application/json
 }
 
 ###     delete  
-DELETE http://localhost:8080/api/discount/3cf69d60fb01b9c337
+DELETE http://localhost:8080/api/v1/discount/3cf69d60fb01b9c337
 
 ### distributor ------------------------------------------------------------------------------------------
 ###     getAll
@@ -219,10 +223,34 @@ DELETE http://localhost:8080/api/discount/3cf69d60fb01b9c337
 ###     edit
 ###     delete 
 ### notification ------------------------------------------------------------------------------------------
+###     get
+GET  http://localhost:8080/api/v1/notification/7aba53c611627dbf27
 ###     getAll
+GET  http://localhost:8080/api/v1/notifications
+
 ###     add
+POST  http://localhost:8080/api/v1/notification
+Content-Type: application/json
+
+{
+    "name":"hello",
+    "enableAt":"2023-07-17T09:30:54.000Z",
+    "disableAt":"2023-08-17T09:30:54.000Z",
+    "content":"motoj hangf daif lee thee"
+}
 ###     edit
-###     delete 
+PUT   http://localhost:8080/api/v1/notification
+Content-Type: application/json
+
+{
+    "notificationId": "7aba53c611627dbf27",
+    "name":"hhhh",
+    "enableAt":"2023-07-17T09:30:54.000Z",
+    "disableAt":"2023-08-17T09:30:54.000Z",
+    "content":"một ngày dài lê thê"
+}
+###     delete
+DELETE    http://localhost:8080/api/v1/notification/6471e91f90e55ba531
 ### order ------------------------------------------------------------------------------------------
 ###     getAllByStatus
 ###     getListByUserId
@@ -235,11 +263,11 @@ DELETE http://localhost:8080/api/discount/3cf69d60fb01b9c337
 ###     delete 
 ### product ------------------------------------------------------------------------------------------
 ###     get
-GET http://localhost:8080/api/product/1e48622b6f61216f82
+GET http://localhost:8080/api/v1/product/1e48622b6f61216f82
 ###     getAll
-GET http://localhost:8080/api/products
+GET http://localhost:8080/api/v1/products
 ###     add
-POST  http://localhost:8080/api/product
+POST  http://localhost:8080/api/v1/product
 Content-Type: application/json
 
 {
@@ -253,7 +281,7 @@ Content-Type: application/json
 }
 
 ###     edit
-PUT  http://localhost:8080/api/product
+PUT  http://localhost:8080/api/v1/product
 Content-Type: application/json 
 
 {
@@ -269,12 +297,42 @@ Content-Type: application/json
       "categoryId": "1335921e1ce62b7d65"
 }
 ###     delete
-DELETE http://localhost:8080/api/product/d5ebdefa5242e132e7
+DELETE http://localhost:8080/api/v1/product/d5ebdefa5242e132e7
 ### product detail ------------------------------------------------------------------------------------------
 ###     get
+GET http://localhost:8080/api/v1/product-detail/5de015082f5d7d5ff7
+###     get all
+GET http://localhost:8080/api/v1/products-detail
+###     get by product id
+GET http://localhost:8080/api/v1/product-detail-product-id/hhhh
+
 ###     add
+POST  http://localhost:8080/api/v1/product-detail
+Content-Type: application/json
+
+{
+    "specifications":"hello",
+    "productId":null,
+    "description":"đây là sản phẩm không bán",
+    "content":"my content",
+    "location":"my location"
+}
 ###     edit
+PUT  http://localhost:8080/api/v1/product-detail
+Content-Type: application/json
+
+{
+    "productDetailId":"5de015082f5d7d5ff7",
+    "specifications":"1111",
+    "productId":"10e32bc189f5959a39",
+    "description":"đây là sản phẩm không bán",
+    "content":"my content",
+    "location":"my location"
+}
+
 ###     delete
+DELETE  http://localhost:8080/api/v1/product-detail/5de015082f5d7d5ff7
+
 ### product image ------------------------------------------------------------------------------------------
 ###     get
 ###     add
@@ -282,9 +340,33 @@ DELETE http://localhost:8080/api/product/d5ebdefa5242e132e7
 ###     delete
 ### user ------------------------------------------------------------------------------------------
 ###     get
-###     add
-###     edit
-###     delete
+GET http://localhost:8080/user/userId
+###     get add
+GET http://localhost:8080/users
+###     add     system role use
+POST http://localhost:8080/user
+Content-Type: application/json
+
+{
+
+}
+###     edit    user and admin role update info
+PUT http://localhost:8080/user
+Content-Type: application/json
+
+{
+
+}
+###     edit    admin role update
+PUT http://localhost:8080/update-role
+Content-Type: application/json
+
+{
+
+}
+###     delete  system role use
+DELETE  http://localhost:8080/user/userId
+
 
 
 

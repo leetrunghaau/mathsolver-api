@@ -4,7 +4,7 @@ const Product = require('./product-model');
 
 const ProductImage = db.define('ProductImage', {
   productImageId: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING(20),
     primaryKey: true,
     field: 'product_image_id'
   },
