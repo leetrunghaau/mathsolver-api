@@ -24,7 +24,7 @@ const getAllProductImageByProductIdValidate = data => {
 
 const createProductImageValidate = data => {
     const productImageData = joi.object({
-        productId: joi.string().max(20).required(),
+        productId: joi.string().max(20).allow(null).required(),
         name: joi.string().max(20).required(),
         main: joi.bool().required(),
         image: joi.string().max(20).required()

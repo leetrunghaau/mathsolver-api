@@ -33,8 +33,22 @@ class AddressService {
         }
         return address;
     }
+    static async updateMyAddressById(userId, addressId, addressData) {
+        const address = await AddressRepository.updateMyAddressById(userId,addressId, addressData);
+        if (!address) {
+            return null;
+        }
+        return address;
+    }
     static async deleteAddressById(addressId) {
         const address = await AddressRepository.deleteAddressById(addressId);
+        if (address <= 0) {
+            return null;
+        }
+        return address;
+    }
+    static async deleteMyAddressById(userId, addressId) {
+        const address = await AddressRepository.deleteMyAddressById(userId, addressId);
         if (address <= 0) {
             return null;
         }

@@ -1,4 +1,5 @@
 const ProductImageRepository = require('../repositories/product-image-repository');
+const ProductImageService = require('../services/product-image-service');
 const { getProductImageValidate, getProductImageMainByProductIdValidate, getAllProductImageByProductIdValidate, updateProductImageByIdValidate, createProductImageValidate, deleteProductImageByIdValidate }
     = require('../validations/product-image-validate');
 const createError = require('http-errors')
@@ -9,7 +10,7 @@ class ProductImageController {
             if (error) {
                 return next(createError.BadRequest(error.details[0].message));
             }
-            const productImage = await ProductImageRepository.getProductImageById(value.productImageId);
+            const productImage = await ProductImageService.getProductImageById(value.productImageId);
             
             if (!productImage) {
                 return next(createError.NotFound('ProductImage not found'));
@@ -29,7 +30,7 @@ class ProductImageController {
             if (error) {
                 return next(createError.BadRequest(error.details[0].message));
             }
-            const productImage = await ProductImageRepository.getProductImageMainByProductId(value.productId);
+            const productImage = await ProductImageService.getProductImageMainByProductId(value.productId);
             if (!productImage) {
                 return next(createError.NotFound('ProductImage not found'));
             }
@@ -45,7 +46,7 @@ class ProductImageController {
     static async getAllProductImage(req, res, next) {
         try {
       
-            const productImages = await ProductImageRepository.getAllProductImage();
+            const productImages = await ProductImageService.getAllProductImage();
             if (!productImages) {
                 return next(createError.NotFound('Product Images not found'));
             }
@@ -64,7 +65,7 @@ class ProductImageController {
             if (error) {
                 return next(createError.BadRequest(error.details[0].message));
             }
-            const productImages = await ProductImageRepository.getAllProductImageByProductId(value.productId);
+            const productImages = await ProductImageService.getAllProductImageByProductId(value.productId);
             if (!productImages) {
                 return next(createError.NotFound('Product Images not found'));
             }
@@ -84,7 +85,8 @@ class ProductImageController {
             if (error) {
                 return next(createError.BadRequest(error.details[0].message));
             }
-            const productImage = await ProductImageRepository.createProductImage(value);
+            console.log(value);
+            const productImage = await ProductImageService.createProductImage(value);
             if (!productImage) {
                 return next(createError.InternalServerError());
             };
@@ -104,7 +106,7 @@ class ProductImageController {
                 return next(createError.BadRequest(error.details[0].message));
             }
             const { productImageId, ...updatedValue } = value;
-            const productImage = await ProductImageRepository.updateProductImageById(productImageId, updatedValue);
+            const productImage = await ProductImageService.updateProductImageById(productImageId, updatedValue);
             if(!productImage){
                 return next(createError.InternalServerError());
             }
@@ -123,7 +125,7 @@ class ProductImageController {
             if (error) {
                 return next(createError.BadRequest(error.details[0].message));
             }
-            const productImage = await ProductImageRepository.deleteProductImageById(value.productImageId);
+            const productImage = await ProductImageService.deleteProductImageById(value.productImageId);
             if(!productImage){
                 return next(createError.InternalServerError())
             }

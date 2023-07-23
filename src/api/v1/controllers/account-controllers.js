@@ -1,34 +1,58 @@
 const { hashPassword, comparePasswords } = require("../helpers/password-crypt");
 const AccountService = require("../services/account-service");
-const { changePasswordValidate, getAllAccountByUserIdValidate, updateAccountValidate, createAccountValidate, deleteAccountByIdValidate } = require("../validations/account-validate");
+const UserService = require("../services/user-service");
+const { changePasswordValidate, getPasswordStatusByEmailValidate } = require("../validations/account-validate");
 const createError = require('http-errors');
 
 class AccountControllers {
 
     static async getPasswordStatusByUserId(req, res, next) {
         try {
-
-            const account = await AccountService.getPasswordStatus(req.userId);
+            const account = await AccountService.getAccountByUserId(req.userId);
             if (!account) {
                 return next(createError.NotFound('password not found'));
             }
+            
             return res.status(200).json({
                 status: 200,
                 message: 'done',
-                data: account
+                data:{
+                    modifiedAt: account.modifiedAt
+                } 
             })
         } catch {
 
         }
     }
-    static async resetPassword(req, res, next) {
+    static async getPasswordStatusByEmail(req, res, next) {
         try {
+            const { error, value } = getPasswordStatusByEmailValidate(req.params);
+            if (error) {
+                return next(createError.BadRequest(error.details[0].message));
+            }
+            const user = await UserService.getUserByEmail(value.email);
+            console.log(user);
 
+            if(!user){
+                return next(createError.BadRequest('email chưa được đăng ký'));
+            }
+            const account = await AccountService.getAccountByUserId(user.userId);
+            if (!account) {
+                return next(createError.NotFound('password not found'));
+            }
+            
+            return res.status(200).json({
+                status: 200,
+                message: 'done',
+                data:{
+                    modifiedAt: account.modifiedAt
+                } 
+            })
         } catch {
 
         }
-
     }
+
     static async changePassword(req, res, next) {
         try {
             const { error, value } = changePasswordValidate(req.body);
@@ -56,87 +80,7 @@ class AccountControllers {
         }
     }
 
-    // sys tesst
-    static async getAllAccountByUserId(req, res, next) {
-        try {
-            const { error, value } = getAllAccountByUserIdValidate(req.params);
-            if (error) {
-                return next(createError.BadRequest(error.details[0].message));
-            }
-            const accounts = await AccountService.getAllAccountByUserId(value.userId);
-            if (!accounts) {
-                return next(createError.NotFound('acc not found'));
-            }
-            return res.status(200).json({
-                status: 200,
-                message: 'done',
-                data: accounts
-            })
-        } catch {
-
-        }
-    }
-    static async createAccount(req, res, next) {
-        try {
-            const { error, value } = createAccountValidate(req.body);
-            if (error) {
-                return next(createError.BadRequest(error.details[0].message));
-            }
-            const passwordEncode = await hashPassword(value.password);
-            value.password = passwordEncode;
-            const account = await AccountService.createAccount(value);
-            if (!account) {
-                return next(createError.InternalServerError('system error'));
-            }
-            return res.status(200).json({
-                status: 200,
-                message: 'done',
-                data: account
-            })
-        } catch {
-
-        }
-    }
-    static async updateAccountById(req, res, next) {
-        try {
-            const { error, value } = updateAccountValidate(req.body);
-            if (error) {
-                return next(createError.BadRequest(error.details[0].message));
-            }
-            const passwordEncode = await hashPassword(value.password);
-            value.password = passwordEncode;
-            const account = await AccountService.updateAccountByUserId(value.userId, value);
-            if (!account) {
-                return next(createError.InternalServerError());
-            }
-            return res.status(200).json({
-                status: 200,
-                message: 'done',
-                data: account
-            })
-        } catch {
-
-        }
-    }
-    static async deleteAccountById(req, res, next) {
-        try {
-            const { error, value } = deleteAccountByIdValidate(req.params);
-            if (error) {
-                return next(createError.BadRequest(error.details[0].message));
-            }
-            const account = await AccountService.getAllAccountByUserId(value.userId);
-            if (!account) {
-                return next(createError.InternalServerError());
-            }
-            return res.status(200).json({
-                status: 200,
-                message: 'done',
-                data: account
-            })
-        } catch {
-
-        }
-    }
+    
 
 }
 module.exports = AccountControllers;

@@ -82,10 +82,8 @@ class ProductDetailController {
     }
     static async updateProductDetailById(req, res, next) {
         try {
-            console.log('checkpid');
 
             const { error, value } = updateProductDetailValidate(req.body);
-            console.log('checkpidddddddddddddddd');
 
             if (error) {
                 return next(createError.BadRequest(error.details[0].message));

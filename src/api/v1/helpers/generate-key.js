@@ -6,8 +6,14 @@ const generateId = () => {
     const shortenedId = randomBytes.substring(0, 18);
     return shortenedId;
   };
-
+  function generateCode() {
+    const codeLength = 6; 
+    const randomBytes = crypto.randomBytes(codeLength); 
+    const code = parseInt(randomBytes.toString('hex'), 16); 
+    return String(code).padStart(codeLength, '0'); 
+  }
 module.exports = {
     accessTokenSecret, 
-    generateId
+    generateId,
+    generateCode,
 }

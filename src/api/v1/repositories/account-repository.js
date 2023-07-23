@@ -13,25 +13,30 @@ class AccountRepository {
         return Account.findOne({ where: { userId: userId } })
 
     }
+    
     static async updateAccount(accountId, accountData) {
         await Account.update(accountData, {
-
             where: { accountId: accountId }
         });
         return this.getAccountById(accountId);
     }
     static async updateAccountByUserId(userId, accountData) {
-        await Account.update(accountData, {
-            where: { userId: userId }
-        })
+        await Account.update(accountData, { where: { userId: userId } });
         return this.getAccountByUserId(userId);
     }
 
-
-    // systemtest
-    static async getAllAccountByUserId(userId){
-        return Account.findAll({where:{userId:userId}})
+    static async getAllAccountByUserId(userId) {
+        return Account.findAll({ where: { userId: userId } })
     }
-    
+    static async getAllAccount() {
+        return Account.findAll()
+    }
+    static async deleteAccountById(accountId) {
+        return Account.destroy({ where: { accountId: accountId } })
+    }
+    static async deleteAccountByUserId(userId){
+        return Account.destroy({ where: { userId: userId } })
+    }
+
 }
 module.exports = AccountRepository;

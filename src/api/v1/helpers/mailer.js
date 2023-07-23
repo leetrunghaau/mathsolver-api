@@ -1,0 +1,27 @@
+const nodeMailer = require('nodemailer')
+const mailConfig = require('../../config/mail-config')
+
+module.exports.sendMail = (to, subject, htmlContent) => {
+    const transport = nodeMailer.createTransport({
+        host: mailConfig.HOST,
+        port: mailConfig.HOST,
+        secure: false,
+        auth:{
+            user: mailConfig.USERNAME,
+            pass: mailConfig.PASSWORD
+        }
+    })
+
+    const option = {
+        from: mailConfig.FROM_ADDRESS,
+        to:to,
+        subject:subject,
+        html: htmlContent
+
+    }
+    
+    console.log("hosst")
+    console.log(mailConfig.HOST)
+    
+    return transport.sendMail(option);
+}

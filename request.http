@@ -1,65 +1,103 @@
+### cơ chế  reset pasword
+### b1 điền vào ô mail để lấy lại mật khẩu hoặc vào chế độ quên mật khẩu của hệ thống
+### b2 vào đường link confim code niếu thành công api này sẻ gửi về một mã token (mã tokent có hiệu lực trong một tiếng)
+### b3 vào đường link nhập mật khẩu mới sau khi nhập mật khẩu mới thì đồng thười trả về một token đăng nhập
+
+### cơ chế  đăng ký
+### b1 khi đăng ký kể cả form điền mật khẩu mới api sẽ trả một token
+### b2 vào đường link confim code
+
 
 ### sig
-GET http://localhost:8080/api
-###     login
-POST  http://localhost:8080/api/v1/sig/login
+###     login       bắt buộc không có Authorization trong header
+POST  http://localhost:8080/api/v1/login
 Content-Type: application/json
 
 {
-    "email":"leetrunghaau@gmail.com",
-    "password":"gggg"
+    "email":"leehaau@gmail.com",
+    "password":"123456"
 }
-###     register
-POST http://localhost:8080/api/v1/sig/register
+###     register    bắt buộc không có Authorization trong header
+POST http://localhost:8080/api/v1/register
 Content-Type: application/json
 
 {
     "firstName":"hau",
     "lastName":"leung",
     "email": "leetrunghaau@gmail.com",
-    "password":"gggg"
+    "password":"gggg",
+    "gender":"nam"
+    
+
 }
 
-###     email verification
-###     logout
-### account
-###     get list by user     system role use for test
-###     add     system role use for test
-###     edit    system role use for test
-###     get modifid at by user id
-GET http://localhost:8080/api/v1/password-modified-at
-###     change Password by user id
-POST http://localhost:8080/api/v1/change-password
+###     email verification  Authorization teken riêng dùng để xác thực mà register trả về trước đó
+POST http://localhost:8080/api/v1/register-verification
 Content-Type: application/json
-Authorization: myss eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YWM5NWNjNjgxOTk5ZWQ1NWEiLCJyb2xlIjoidXNlciIsImlhdCI6MTY4OTAyMDQwNiwiZXhwIjoxNjkxNjEyNDA2fQ.VnPyBNl5q6S9hQMXucrZv_mcNaab4g4bY2myHr3-KTU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
-    "oldPassword":"jjuyt",
-    "newPassword":"admin@123"
+    "verificationCode":"4587125"
+} 
+
+### account
+###     change Password                                             tùy thuộc vào user nào mà đổi mật khẩu của user đó
+PUT  http://localhost:8080/api/v1/change-password
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+
+{
+    "oldPassword":"gggg",
+    "newPassword":"123456"
 }
+###     password status                                             tùy thuộc vào user nào mà đổi mật khẩu của user đó
+GET http://localhost:8080/api/v1/password-status
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+###     password status By email
+GET http://localhost:8080/api/v1/password-status/leehaau@gmail.com
+
 ### address ------------------------------------------------------------------------------------------
 ###     getAddress | get address main in user id
-GET http://localhost:8080/api/v1/address/get-one
-Authorization: myss eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YWM5NWNjNjgxOTk5ZWQ1NWEiLCJyb2xlIjoidXNlciIsImlhdCI6MTY4OTAyMDQwNiwiZXhwIjoxNjkxNjEyNDA2fQ.VnPyBNl5q6S9hQMXucrZv_mcNaab4g4bY2myHr3-KTU
+GET http://localhost:8080/api/v1/address
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 ###     getListAddress | get list address in user id
-GET http://localhost:8080/api/v1/address/get-list
-Authorization: myss eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YWM5NWNjNjgxOTk5ZWQ1NWEiLCJyb2xlIjoidXNlciIsImlhdCI6MTY4OTAyMDQwNiwiZXhwIjoxNjkxNjEyNDA2fQ.VnPyBNl5q6S9hQMXucrZv_mcNaab4g4bY2myHr3-KTU
+GET http://localhost:8080/api/v1/addresses
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
-###     addAddress
-POST  http://localhost:8080/api/v1/address/add
+###     addAddress      
+POST  http://localhost:8080/api/v1/address
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
+    "province":"Đồng Tháp",
+    "district": "Cao Lãnh",
+    "commune":"Mỹ Xương",
+    "detail":"số nhà 100",
+    "phone": "0367016872",
+    "status":"main"
+}
+
+###     editAddress
+PUT  http://localhost:8080/api/v1/address
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+
+{
+    "addressId":"dca6efce3181da8742",
     "province":"hhh",
     "district": "nnnn",
     "commune":"hnhjhh",
     "detail":"jjjj",
-    "phone": "gbghhh"
+    "phone": "0123456789",
+    "status":"main"
 }
-
-###     editAddress
 ###     deleteAddress
+DELETE  http://localhost:8080/api/v1/address/dca6efce3181da8742
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+
+
 ### bill ------------------------------------------------------------------------------------------
 ###     getListBill
 ###     getListBillByUserId
@@ -185,6 +223,7 @@ GET http://localhost:8080/api/v1/discounts
 ###     add
 POST  http://localhost:8080/api/v1/discount
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YWM5NWNjNjgxOTk5ZWQ1NWEiLCJyb2xlIjoidXNlciIsImlhdCI6MTY4OTAyMDQwNiwiZXhwIjoxNjkxNjEyNDA2fQ.VnPyBNl5q6S9hQMXucrZv_mcNaab4g4bY2myHr3-KTU
 
 {
     "enableAt":"2023-07-17T21:09:59.000Z",
@@ -198,6 +237,7 @@ Content-Type: application/json
 ###     edit
 PUT  http://localhost:8080/api/v1/discount
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YWM5NWNjNjgxOTk5ZWQ1NWEiLCJyb2xlIjoidXNlciIsImlhdCI6MTY4OTAyMDQwNiwiZXhwIjoxNjkxNjEyNDA2fQ.VnPyBNl5q6S9hQMXucrZv_mcNaab4g4bY2myHr3-KTU
 
 {
     "discountId": "8ef0c57e2305c805ea",
@@ -335,39 +375,96 @@ DELETE  http://localhost:8080/api/v1/product-detail/5de015082f5d7d5ff7
 
 ### product image ------------------------------------------------------------------------------------------
 ###     get
+GET http://localhost:8080/api/v1/product-image/9820a227e5b3b95a96
+
+###     get
+GET http://localhost:8080/api/v1/product-image-main-product-id/id
+
+###     get
+GET http://localhost:8080/api/v1/product-images-product-id/5687
+
+###     get
+GET http://localhost:8080/api/v1/product-images
+
 ###     add
+POST  http://localhost:8080/api/v1/product-image
+Content-Type: application/json
+
+{
+    "productId":"10e32bc189f5959a39",
+    "name":"value test",
+    "main":true,
+    "image":"f88"
+}
+
 ###     edit
+PUT  http://localhost:8080/api/v1/product-image
+Content-Type: application/json
+
+{
+    "productId": "10e32bc189f5959a39",
+    "name": "value test 456",
+    "main": true,
+    "image": "f88",
+    "productImageId": "9a2de5307920108882"
+}
 ###     delete
+DELETE  http://localhost:8080/api/v1/product-image/9820a227e5b3b95a96
+
 ### user ------------------------------------------------------------------------------------------
 ###     get
-GET http://localhost:8080/user/userId
-###     get add
-GET http://localhost:8080/users
-###     add     system role use
-POST http://localhost:8080/user
+GET http://localhost:8080/api/v1/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+
+###     update
+PUT http://localhost:8080/api/v1/user
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
-
+    "firstName": "Hậu",
+    "lastName": "Lê Trung",
+    "email": "leehaau@gmail.com",
+    "gender": "nam"
 }
-###     edit    user and admin role update info
-PUT http://localhost:8080/user
+
+###     get         role admin
+GET http://localhost:8080/api/v1/user/43fec0ef558c1ad0bb
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+
+###     get all     role admin
+GET http://localhost:8080/api/v1/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+###     create         role admin
+POST http://localhost:8080/api/v1/user
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
-
+    "firstName": "cv",
+    "lastName": "cd",
+    "role": "admin",
+    "email": "leehaau@gmail.com",
+    "gender": "nam"
 }
-###     edit    admin role update
-PUT http://localhost:8080/update-role
+###     edit        role admin
+PUT http://localhost:8080/api/v1/admin/user
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
+    "userId":"a9f09ac1e8f94968b7",
+    "firstName": "c4447v",
+    "lastName": "cd",
+    "email": "leehaau@gmail.com",
+    "gender": "nam",
+    "role":null,
+    "birthDate":"2023-07-23T17:26:12.000Z"
 
 }
 ###     delete  system role use
-DELETE  http://localhost:8080/user/userId
-
-
+DELETE  http://localhost:8080/api/v1/user/a9f09ac1e8f94968b7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 
 

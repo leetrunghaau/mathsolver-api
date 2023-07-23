@@ -30,7 +30,7 @@ class ProductImageService {
         }
         return productImages;
     }
-    static async createProductImageById(productImageData) {
+    static async createProductImage(productImageData) {
         productImageData.productImageId = generateId();
         const productImage = await ProductImageRepository.createProductImage(productImageData);
         if (!productImage) {

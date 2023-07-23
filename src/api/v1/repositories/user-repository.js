@@ -6,31 +6,34 @@ class UserRepository {
   static async getUserById(userId) {
     return User.findByPk(userId);
   }
-
+  static async getAllUser() {
+    return User.findAll();
+  }
   static async createUser(userData) {
     return User.create(userData);
   }
-  static async getListUser(){
+  static async getListUser() {
     return User.findAll();
   }
   static async updateUser(userId, userData) {
     await User.update(userData, {
-      where: { user_id: userId },
+      where: { userId: userId },
     });
     return this.getUserById(userId);
   }
 
-  static async deleteUser(userId) {
+  static async deleteUserById(userId) {
     return User.destroy({
-      where: { user_id: userId },
+      where: { userId: userId },
     });
   }
 
   static async getUserByEmail(email) {
-    return User.findOne({ 
-      where: { email: email } 
+    return User.findOne({
+      where: { email: email }
     });
   }
+  
 }
 
 module.exports = UserRepository;

@@ -64,7 +64,7 @@ class AddressController {
         return next(createError.BadRequest(error.details[0].message));
       }
       const { addressId, ...updateData } = value;
-      const address = await AddressService.updateAddressById(addressId, updateData);
+      const address = await AddressService.updateMyAddressById(req.userId, addressId, updateData);
       if (!address) {
         return next(createError.NotFound('address not found'));
       }
@@ -81,11 +81,11 @@ class AddressController {
   }
   static async deleteAddressById(req, res, next) {
     try {
-      const { error, value } = deleteAddressValidate(req.body);
+      const { error, value } = deleteAddressValidate(req.params);
       if (error) {
         return next(createError.BadRequest(error.details[0].message));
       }
-      const address = await AddressService.deleteAddressById(value.addressId);
+      const address = await AddressService.deleteMyAddressById(req.userId, value.addressId);
       if (!address) {
         return next(createError.NotFound('address not found'))
       }

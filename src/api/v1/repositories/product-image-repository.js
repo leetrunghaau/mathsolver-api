@@ -18,7 +18,7 @@ class ProductImageRepository {
         return ProductImage.findAll();
     }
     static async createProductImage(productImageData) {
-        return ProductImage.create(productImageData);
+        return  ProductImage.create(productImageData);
     }
     static async updateProductImageById(productImageId, productImageData) {
         await ProductImage.update(productImageData, {

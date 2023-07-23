@@ -10,21 +10,26 @@ class AccountService {
         }
         return acc;
     }
-    static async updateAccountById(accountId, AccountData) {
-        const acc = await AccountRepository.updateAccount(accountId, AccountData)
-        if (!acc) {
+    
+    static async updateAccountByUserId(userId, accountData){
+        const account = await AccountRepository.updateAccountByUserId(userId, accountData);
+        if(!account){
             return null;
         }
-        return acc
+        return account;
     }
-    static async updateAccountByUserId(userId, accountData) {
+    static async updateAccountById(accountId, accountData) {
         accountData.modifiedAt = new Date();
-        const acc = await AccountRepository.updateAccountByUserId(userId, accountData);
+        console.log(accountData);
+        console.log(accountId);
+
+        const acc = await AccountRepository.updateAccount(accountId, accountData)
         if (!acc) {
             return null;
         }
         return acc
     }
+    
     static async checkPasswordByUserId(userId, password) {
         const acc = await AccountRepository.getAccountByUserId(userId);
         if (!acc) {
@@ -49,6 +54,27 @@ class AccountService {
     static async getAllAccountByUserId(userId) {
         const accounts = await AccountRepository.getAllAccountByUserId(userId);
         if (accounts.length == 0) {
+            return null;
+        }
+        return accounts
+    }
+    static async getAllAccount() {
+        const accounts = await AccountRepository.getAllAccount();
+        if (accounts.length == 0) {
+            return null;
+        }
+        return accounts
+    }
+    static async deleteAccountById(accountId){
+        const accounts = await AccountRepository.deleteAccountById(accountId);
+        if (accounts <= 0) {
+            return null;
+        }
+        return accounts
+    }
+    static async deleteAccountByUserId(userId){
+        const accounts = await AccountRepository.deleteAccountByUserId(userId);
+        if (accounts <= 0) {
             return null;
         }
         return accounts
