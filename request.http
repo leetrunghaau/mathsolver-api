@@ -298,90 +298,333 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlY
 
 ### blog ------------------------------------------------------------------------------------------
 ###     getBlog
-GET http://localhost:8080/api/v1/blog/518882e6ac49621e0d
+GET http://localhost:8080/api/v1/blog/1251d74f5b5bf1485e
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "blogId": "1251d74f5b5bf1485e",
+    "blogCategoryId": "af20a79d5cf8dec0ed",
+    "userId": null,
+    "title": "Tiêu đề cua bài viết a",
+    "thumbnail": "this is data",
+    "introduction": "hello các bạn trẻ",
+    "content": "txt",
+    "createdAt": "2023-07-17T21:09:59.000Z",
+    "modifiedAt": "2023-07-26T19:58:02.000Z",
+    "views": 5,
+    "user_id": null,
+    "blog_category_id": "af20a79d5cf8dec0ed"
+  }
+}
 ###     getAllBlog
 GET http://localhost:8080/api/v1/blogs
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": [
+    {
+      "blogId": "1251d74f5b5bf1485e",
+      "blogCategoryId": "af20a79d5cf8dec0ed",
+      "userId": null,
+      "title": "Tiêu đề cua bài viết a",
+      "thumbnail": "this is data",
+      "introduction": "hello các bạn trẻ",
+      "content": "txt",
+      "createdAt": "2023-07-17T21:09:59.000Z",
+      "modifiedAt": "2023-07-26T19:58:02.000Z",
+      "views": 6,
+      "user_id": null,
+      "blog_category_id": "af20a79d5cf8dec0ed"
+    },
+    {
+      "blogId": "7e65a3cd5dca21c8db",
+      "blogCategoryId": "af20a79d5cf8dec0ed",
+      "userId": null,
+      "title": "Tiêu đề cua bài viết b",
+      "thumbnail": "data txt abcc",
+      "introduction": "hello các bạn trẻ",
+      "content": "txt",
+      "createdAt": "2023-07-23T06:25:08.000Z",
+      "modifiedAt": "2023-07-23T06:25:08.000Z",
+      "views": 0,
+      "user_id": null,
+      "blog_category_id": "af20a79d5cf8dec0ed"
+    }
+  ]
+}
 ###     getListBlogBycategoryId
-###     addBlog
+###     addBlog admin role
 POST  http://localhost:8080/api/v1/blog
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
     "blogCategoryId":"af20a79d5cf8dec0ed",
-    "title":"bài viết của đấng",
-    "thumbnail":"éo có thumb",
+    "title":"bài viết của ai đó",
+    "thumbnail":"dozzzzz",
     "introduction":"hello các bạn trẻ",
-    "content":"clmm"
+    "content":"sssssabc"
 }
-###     editBlog
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "blogCategoryId": "af20a79d5cf8dec0ed",
+    "title": "bài viết của ai đó",
+    "thumbnail": "dozzzzz",
+    "introduction": "hello các bạn trẻ",
+    "content": "sssssabc",
+    "userId": "43fec0ef558c1ad0bb",
+    "blogId": "860bdf7be56e2f313a",
+    "createdAt": "2023-07-26T20:03:21.159Z",
+    "modifiedAt": "2023-07-26T20:03:21.159Z",
+    "views": 0
+  }
+}
+###     editBlog admin role
 PUT  http://localhost:8080/api/v1/blog
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
-    "blogId": "66966a48b1b7aba63f",
+    "blogId": "860bdf7be56e2f313a",
     "blogCategoryId":"af20a79d5cf8dec0ed",
-    "title":"bài viết của đấng 2",
-    "thumbnail":"éo có thumb",
+    "title":"hola ha lo ",
+    "thumbnail":"ví fuj thumbneil",
     "introduction":"hello các bạn trẻ",
-    "content":"clmm"
+    "content":"ggggg"
 }
-###     deleteBlog
-DELETE  http://localhost:8080/api/v1/blog/66966a48b1b7aba63f
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "blogId": "860bdf7be56e2f313a",
+    "blogCategoryId": "af20a79d5cf8dec0ed",
+    "userId": "43fec0ef558c1ad0bb",
+    "title": "hola ha lo ",
+    "thumbnail": "ví fuj thumbneil",
+    "introduction": "hello các bạn trẻ",
+    "content": "ggggg",
+    "createdAt": "2023-07-26T20:03:21.000Z",
+    "modifiedAt": "2023-07-26T20:07:17.000Z",
+    "views": 0,
+    "user_id": "43fec0ef558c1ad0bb",
+    "blog_category_id": "af20a79d5cf8dec0ed"
+  }
+}
+###     deleteBlog admin role
+DELETE  http://localhost:8080/api/v1/blog/860bdf7be56e2f313a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+
+###OUTPUT
+{
+  "status": 200,
+  "message": "done"
+}
+
+
+
+
+
+
+
+
 ### Blog Categories ------------------------------------------------------------------------------------------
 ###     get
-GET http://localhost:8080/api/v1/blog-category/54
+GET http://localhost:8080/api/v1/blog-category/3dfbbbd9cfa514442d
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "blogCategoryId": "3dfbbbd9cfa514442d",
+    "name": "blog vui chơi",
+    "parent": "abcgf"
+  }
+}
 ###     getAll
 GET http://localhost:8080/api/v1/blog-categories
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": [
+    {
+      "blogCategoryId": "3dfbbbd9cfa514442d",
+      "name": "blog vui chơi",
+      "parent": "abcgf"
+    },
+    {
+      "blogCategoryId": "af20a79d5cf8dec0ed",
+      "name": "blog giả thuật",
+      "parent": "kgggjhghjgjhg"
+    }
+  ]
+}
 ###     add
 POST  http://localhost:8080/api/v1/blog-category
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
-    "name":"blog tâm trạng",
-    "parent":"kgggjhghjgjhg"
+    "name":"blog giải trí",
+    "parent":"abcgf"
+}
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "name": "blog giải trí",
+    "parent": "abcgf",
+    "blogCategoryId": "c423c5399c2f371576"
+  }
 }
 ###     edit
 PUT   http://localhost:8080/api/v1/blog-category
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
-    "blogCategoryId": "b934911dbdab3543c0",
-    "name":"blog tâm trạng 1",  
+    "blogCategoryId": "af20a79d5cf8dec0ed",
+    "name":"blog giả thuật",  
     "parent":"kgggjhghjgjhg"
 }
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "blogCategoryId": "af20a79d5cf8dec0ed",
+    "name": "blog giả thuật",
+    "parent": "kgggjhghjgjhg"
+  }
+}
 ###     delete
-DELETE    http://localhost:8080/api/v1/blog-category/b1bb94d2e1e9293b75
+DELETE    http://localhost:8080/api/v1/blog-category/af20a79d5cf8dec0ed
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+
+###OUTPUT
+{
+  "status": 200,
+  "message": "done"
+}
+
+
+
+
+
 ### brand ------------------------------------------------------------------------------------------
 ###     get one
-GET http://localhost:8080/api/v1/brand/54
+GET http://localhost:8080/api/v1/brand/c0f56594fa0a87a3c8
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "brandId": "c0f56594fa0a87a3c8",
+    "name": "dien tu mobi",
+    "description": "sdfsdzf",
+    "blogLink": "dsfxcvzfd"
+  }
+}
+
 ###     getAll
 GET http://localhost:8080/api/v1/brands
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": [
+    {
+      "brandId": "c0f56594fa0a87a3c8",
+      "name": "dien tu mobi",
+      "description": "sdfsdzf",
+      "blogLink": "dsfxcvzfd"
+    },
+    {
+      "brandId": "d454e763e9aacb559f",
+      "name": "nhãn hàng a",
+      "description": "chuyên cũng cấp mặt hàng b",
+      "blogLink": "dsfxcvzfd"
+    }
+  ]
+}
+
 ###     add
 POST http://localhost:8080/api/v1/brand
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
-      "name": "dddd",
-      "description": "sdfsdzf",
+      "name": "nhãn hàng a",
+      "description": "chuyên cũng cấp mặt hàng b",
       "blogLink": "dsfxcvzfd"
 }
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "name": "nhãn hàng a",
+    "description": "chuyên cũng cấp mặt hàng b",
+    "blogLink": "dsfxcvzfd",
+    "brandId": "d454e763e9aacb559f"
+  }
+}
+
 ###     edit
 PUT  http://localhost:8080/api/v1/brand
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
     "brandId": "c0f56594fa0a87a3c8",
       "name": "dien tu mobi",
-      "description": "sdfsdzf",
+      "description": "linh kiện giá tốt",
       "blogLink": "dsfxcvzfd"
 }
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "brandId": "c0f56594fa0a87a3c8",
+    "name": "dien tu mobi",
+    "description": "linh kiện giá tốt",
+    "blogLink": "dsfxcvzfd"
+  }
+}
 ###     delete 
-DELETE  http://localhost:8080/api/v1/brand/54
+DELETE  http://localhost:8080/api/v1/brand/c0f56594fa0a87a3c8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+
+###OUTPUT
+{
+  "status": 200,
+  "message": "done"
+}
+
+
+
+
+
 ### cart ------------------------------------------------------------------------------------------
 ###     get cart
 ###     add product to cart
 ###     edit value product in cart 
 ###     delete product in cart 
+
+
+
+
+
+
 ### categories ------------------------------------------------------------------------------------------
 ###     get
 GET  http://localhost:8080/api/v1/category/1335921e1ce62b7d65

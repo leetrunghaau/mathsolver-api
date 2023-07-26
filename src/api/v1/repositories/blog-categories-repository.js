@@ -18,9 +18,14 @@ class BlogCategoriesRepository {
 
     }
     static async deleteBlogCategoryById(blogCategoryId) {
-        return BlogCategories.destroy({
-            where: { blogCategoryId: blogCategoryId }
-        })
+        try{
+            return BlogCategories.destroy({
+                where: { blogCategoryId: blogCategoryId }
+            })
+        }catch (error){
+            console.log(error)
+        }
+        
     }
 
 

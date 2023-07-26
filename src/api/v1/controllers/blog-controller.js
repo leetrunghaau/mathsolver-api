@@ -38,10 +38,11 @@ class BlogController {
     }
     static async createBlog(req, res, next) {
         try {
-            const { error, value } = createBlogValidate(req.body);
+            let { error, value } = createBlogValidate(req.body);
             if (error) {
                 return next(createError.BadRequest(error.details[0].message));
             }
+            value.userId = req.userId;
             const blog = await BlogService.createBlog(value);
             if (!blog) {
                 return next(createError.NotFound('blog not found'));
@@ -87,8 +88,7 @@ class BlogController {
             }
             return res.status(200).json({
                 status: 200,
-                message: 'done',
-                data: blog
+                message: 'done'
             })
         } catch {
 
