@@ -77,7 +77,7 @@ const authorization = permission => {
         }
     };
 };
-const  registerVerificationAuthorization = () =>{
+const  verificationAuthorization = () =>{
     return (req, res, next)=>{
         if (!req.headers['authorization']) {
             return next(createError.Unauthorized())
@@ -88,6 +88,7 @@ const  registerVerificationAuthorization = () =>{
         console.log(token);
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
             if (err) {
+                
                 return next(createError.Unauthorized(err.message));
             }
             console.log(payload);
@@ -105,5 +106,5 @@ const  registerVerificationAuthorization = () =>{
 module.exports = {
     noAuthMiddleware,
     authorization,
-    registerVerificationAuthorization
+    verificationAuthorization
 }

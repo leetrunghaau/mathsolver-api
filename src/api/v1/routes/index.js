@@ -15,6 +15,7 @@ const discountRouter = require('./discount-routes')
 const notificationRouter = require('./notification-routes')
 const productDetailRouter = require('./product-detail-router')
 const productImageRouter = require('./product-image-router')
+const cartRouter = require('./cart-routes')
 
 
 router.use(userRoutes);
@@ -30,6 +31,7 @@ router.use(discountRouter);
 router.use(notificationRouter);
 router.use(productDetailRouter);
 router.use(productImageRouter);
+router.use(cartRouter)
 
 router.get("/test-value/:myvalue", (req, res, next) => {
     console.log(req);

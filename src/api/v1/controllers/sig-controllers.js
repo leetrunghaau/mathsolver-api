@@ -1,3 +1,4 @@
+const { date } = require("joi");
 const { generateId, accessTokenSecret, generateCode } = require("../helpers/generate-key");
 const { generateAccessToken, generateVerificationToken } = require("../helpers/jwt");
 const { hashPassword, comparePasswords } = require("../helpers/password-crypt");
@@ -102,7 +103,7 @@ class Sig {
             const verificationCode = generateCode();
             console.log("verificationCode:  ");
             console.log(verificationCode);
-            const token = await generateVerificationToken(newUser.userId, await hashPassword(verificationCode));
+            const token = await generateVerificationToken(user.userId, await hashPassword(verificationCode));
             return res.status(200).json({
                 status: 200,
                 message: "done",
@@ -130,9 +131,11 @@ class Sig {
             if (!user) {
                 return next(createError.InternalServerError());
             }
+            const token = await generateAccessToken(req.userId);
             return res.status(200).json({
                 status: 200,
-                message: 'done'
+                message: 'done',
+                data:token
             })
 
         } catch {
@@ -159,7 +162,7 @@ class Sig {
     }
     static async resetPasswordByEmail(req, res, next) {
         try {
-            const { error, value } = resetPasswordByEmail(req.body);
+            const { error, value } = resetPasswordByEmailValidate(req.body);
             if (error) {
                 return next(createError.BadRequest(error.details[0].message));
             }

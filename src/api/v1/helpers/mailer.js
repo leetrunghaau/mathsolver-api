@@ -1,6 +1,7 @@
 const nodeMailer = require('nodemailer')
 const mailConfig = require('../../config/mail-config')
 
+
 module.exports.sendMail = (to, subject, htmlContent) => {
     const transport = nodeMailer.createTransport({
         host: mailConfig.HOST,
@@ -16,12 +17,9 @@ module.exports.sendMail = (to, subject, htmlContent) => {
         from: mailConfig.FROM_ADDRESS,
         to:to,
         subject:subject,
-        html: htmlContent
+        html: "Mã code xác nhận là" + htmlContent
 
     }
-    
-    console.log("hosst")
-    console.log(mailConfig.HOST)
-    
+   
     return transport.sendMail(option);
 }

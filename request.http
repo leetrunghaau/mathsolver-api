@@ -17,6 +17,15 @@ Content-Type: application/json
     "email":"leehaau@gmail.com",
     "password":"123456"
 }
+### OUPUT
+{
+  "status": 200,
+  "message": "login done",
+  "data": {
+    "role": "admin",
+    "token": " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAzOTk5MTgsImV4cCI6MTY5Mjk5MTkxOH0.2sA_tczYKgqKcXA4RPU2Ttdo1nIz2yvp1EviOKiw8Cc"
+  }
+}
 ###     register    bắt buộc không có Authorization trong header
 POST http://localhost:8080/api/v1/register
 Content-Type: application/json
@@ -24,21 +33,87 @@ Content-Type: application/json
 {
     "firstName":"hau",
     "lastName":"leung",
-    "email": "leetrunghaau@gmail.com",
+    "email": "letrunghu@gmail.com",
     "password":"gggg",
     "gender":"nam"
-    
-
 }
-
+### OUPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwMzFhNzk4OGIwYzUzYmQ5ZmYiLCJkVHlwZSI6IiQyYiQxMCRlOUdqYVJpNlBZdU9XcEtEbnVzR0plQWZlMXZzVTBaVzhyUWxoaVlQR3hycG9mWVJ6dzdrQyIsImlhdCI6MTY5MDQwMDA3MCwiZXhwIjoxNjkwNDAzNjcwfQ.Ov8wJTXEjekZePi94Fe7Y55wS2fh4-IzLpxeFrzUHnM"
+  }
+}
 ###     email verification  Authorization teken riêng dùng để xác thực mà register trả về trước đó
 POST http://localhost:8080/api/v1/register-verification
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZDZiZGRmNDAyZjgyOThjMGUiLCJkVHlwZSI6IiQyYiQxMCQwQVdldTczYWZHVktmS2NySi8xeHJ1SlZVL0VWQ0NTN0g5RUpMdFdwQlJWbENleVptVVM1cSIsImlhdCI6MTY5MDM5ODg0MCwiZXhwIjoxNjkwNDAyNDQwfQ.Pn7h8IfkmZ6SK7UhYokQsGqyCLjXq2zn6WdCjEkkwxg
 
 {
-    "verificationCode":"4587125"
+    "verificationCode":"590649"
 } 
+### OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZDZiZGRmNDAyZjgyOThjMGUiLCJpYXQiOjE2OTA0MDAxMDMsImV4cCI6MTY5Mjk5MjEwM30.XSNbIcnIeQeVScKgcZJ8tAgaAcW6yfytVzp6UmvjEUg"
+}
+###     reset-password trong trường người dùng còn đăng nhập nên lấy luôn token
+GET http://localhost:8080/api/v1/reset-password
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZDZiZGRmNDAyZjgyOThjMGUiLCJkVHlwZSI6IiQyYiQxMCQwQVdldTczYWZHVktmS2NySi8xeHJ1SlZVL0VWQ0NTN0g5RUpMdFdwQlJWbENleVptVVM1cSIsImlhdCI6MTY5MDM5ODg0MCwiZXhwIjoxNjkwNDAyNDQwfQ.Pn7h8IfkmZ6SK7UhYokQsGqyCLjXq2zn6WdCjEkkwxg
+###OUPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZDZiZGRmNDAyZjgyOThjMGUiLCJpYXQiOjE2OTA0MDAxMDMsImV4cCI6MTY5Mjk5MjEwM30.XSNbIcnIeQeVScKgcZJ8tAgaAcW6yfytVzp6UmvjEUg"
+}
+###     reset-password trong trường người không còn đăng nhập nên nhập mail để gửi thông tin
+POST  http://localhost:8080/api/v1/reset-password
+Content-Type: application/json
+
+{
+    "email":"letrunghau@gmail.com"
+}
+###OUPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZDZiZGRmNDAyZjgyOThjMGUiLCJpYXQiOjE2OTA0MDAxMDMsImV4cCI6MTY5Mjk5MjEwM30.XSNbIcnIeQeVScKgcZJ8tAgaAcW6yfytVzp6UmvjEUg"
+}
+###     reset-password-verification xác thực mail để lấy mật khẩu mới
+POST  http://localhost:8080/api/v1/reset-password
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZDZiZGRmNDAyZjgyOThjMGUiLCJkVHlwZSI6IiQyYiQxMCQwQVdldTczYWZHVktmS2NySi8xeHJ1SlZVL0VWQ0NTN0g5RUpMdFdwQlJWbENleVptVVM1cSIsImlhdCI6MTY5MDM5ODg0MCwiZXhwIjoxNjkwNDAyNDQwfQ.Pn7h8IfkmZ6SK7UhYokQsGqyCLjXq2zn6WdCjEkkwxg
+
+{
+    "verificationCode":"590649"
+}
+###OUPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZDZiZGRmNDAyZjgyOThjMGUiLCJpYXQiOjE2OTA0MDAxMDMsImV4cCI6MTY5Mjk5MjEwM30.XSNbIcnIeQeVScKgcZJ8tAgaAcW6yfytVzp6UmvjEUg"
+}
+###     new pasword sau khi xác thwucj thành công thì chuyển trang đến trang nhập mật khẩu mới
+POST  http://localhost:8080/api/v1/new-password
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZDZiZGRmNDAyZjgyOThjMGUiLCJkVHlwZSI6IiQyYiQxMCQwQVdldTczYWZHVktmS2NySi8xeHJ1SlZVL0VWQ0NTN0g5RUpMdFdwQlJWbENleVptVVM1cSIsImlhdCI6MTY5MDM5ODg0MCwiZXhwIjoxNjkwNDAyNDQwfQ.Pn7h8IfkmZ6SK7UhYokQsGqyCLjXq2zn6WdCjEkkwxg
+
+{
+    "pasword":"590649"
+} 
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZDZiZGRmNDAyZjgyOThjMGUiLCJpYXQiOjE2OTA0MDAxMDMsImV4cCI6MTY5Mjk5MjEwM30.XSNbIcnIeQeVScKgcZJ8tAgaAcW6yfytVzp6UmvjEUg"
+}
+
+
+
+
+
 
 ### account
 ###     change Password                                             tùy thuộc vào user nào mà đổi mật khẩu của user đó
@@ -47,24 +122,98 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
-    "oldPassword":"gggg",
+    "oldPassword":"hau123",
     "newPassword":"123456"
+}
+###OUTPUT
+{
+  "status": 200,
+  "message": "update done"
 }
 ###     password status                                             tùy thuộc vào user nào mà đổi mật khẩu của user đó
 GET http://localhost:8080/api/v1/password-status
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "modifiedAt": "2023-07-23T17:09:22.000Z"
+  }
+}
+
+
 ###     password status By email
 GET http://localhost:8080/api/v1/password-status/leehaau@gmail.com
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "modifiedAt": "2023-07-23T17:09:22.000Z"
+  }
+}
+
+
+
+
+
+
+
+
 
 ### address ------------------------------------------------------------------------------------------
 ###     getAddress | get address main in user id
 GET http://localhost:8080/api/v1/address
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
-
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "userId": "43fec0ef558c1ad0bb",
+    "district": "tên huyện",
+    "commune": "tên xã",
+    "phone": "123456789",
+    "province": "Đồng Tháp",
+    "status": "main",
+    "detail": "số nhà số đường",
+    "addressId": "53834bfdbb5978cb71",
+    "user_id": "43fec0ef558c1ad0bb"
+  }
+}
 ###     getListAddress | get list address in user id
 GET http://localhost:8080/api/v1/addresses
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
-
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": [
+    {
+      "userId": "43fec0ef558c1ad0bb",
+      "district": "nnnn",
+      "commune": "hnhjhh",
+      "phone": "0123456789",
+      "province": "hhh",
+      "status": "main",
+      "detail": "jjjj",
+      "addressId": "6e812dd35bc4bdd02f",
+      "user_id": "43fec0ef558c1ad0bb"
+    },
+    {
+      "userId": "43fec0ef558c1ad0bb",
+      "district": "GHZmmmjjbbb",
+      "commune": "bc A",
+      "phone": "1234587014",
+      "province": "Đồng Tháp",
+      "status": "main",
+      "detail": "số xxx",
+      "addressId": "dd2000f516ac03d4f9",
+      "user_id": "43fec0ef558c1ad0bb"
+    }
+  ]
+}
 ###     addAddress      
 POST  http://localhost:8080/api/v1/address
 Content-Type: application/json
@@ -72,11 +221,26 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlY
 
 {
     "province":"Đồng Tháp",
-    "district": "Cao Lãnh",
-    "commune":"Mỹ Xương",
-    "detail":"số nhà 100",
-    "phone": "0367016872",
+    "district": "GHZmmmjjbbb",
+    "commune":"bc A",
+    "detail":"số xxx",
+    "phone": "1234587014",
     "status":"main"
+}
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "province": "Đồng Tháp",
+    "district": "GHZmmmjjbbb",
+    "commune": "bc A",
+    "detail": "số xxx",
+    "phone": "1234587014",
+    "status": "main",
+    "userId": "43fec0ef558c1ad0bb",
+    "addressId": "dd2000f516ac03d4f9"
+  }
 }
 
 ###     editAddress
@@ -85,7 +249,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
-    "addressId":"dca6efce3181da8742",
+    "addressId":"6e812dd35bc4bdd02f",
     "province":"hhh",
     "district": "nnnn",
     "commune":"hnhjhh",
@@ -93,18 +257,48 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlY
     "phone": "0123456789",
     "status":"main"
 }
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "userId": "43fec0ef558c1ad0bb",
+    "district": "nnnn",
+    "commune": "hnhjhh",
+    "phone": "0123456789",
+    "province": "hhh",
+    "status": "main",
+    "detail": "jjjj",
+    "addressId": "6e812dd35bc4bdd02f",
+    "user_id": "43fec0ef558c1ad0bb"
+  }
+}
 ###     deleteAddress
-DELETE  http://localhost:8080/api/v1/address/dca6efce3181da8742
+DELETE  http://localhost:8080/api/v1/address/53834bfdbb5978cb71
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+###OUTPUT
+{
+  "status": 200,
+  "message": "done"
+}
+
+
+
 
 
 ### bill ------------------------------------------------------------------------------------------
 ###     getListBill
 ###     getListBillByUserId
 ###     getBillByOrderId
+
+
+
+
+
+
 ### blog ------------------------------------------------------------------------------------------
 ###     getBlog
-GET http://localhost:8080/api/v1/blog/66966a48b1b7aba63f
+GET http://localhost:8080/api/v1/blog/518882e6ac49621e0d
 ###     getAllBlog
 GET http://localhost:8080/api/v1/blogs
 ###     getListBlogBycategoryId

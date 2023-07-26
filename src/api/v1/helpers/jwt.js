@@ -18,12 +18,12 @@ const generateAccessToken = async (userId) => {
 
     })
 }
-const generateVerificationToken = async(userId, dType, cType) =>{
+const generateVerificationToken = async(userId, dType) =>{
     return new Promise((resolve, reject) => {
         const payload = {
             userId,
             dType,  //biến chứa mã veryfile code (đặt tên hại não xíu để có giải mã cũng không biết là gì)
-            cType,
+            
         }
         const secret = process.env.ACCESS_TOKEN_SECRET;
         const option = {
