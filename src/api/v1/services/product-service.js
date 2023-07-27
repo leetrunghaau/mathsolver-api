@@ -21,6 +21,7 @@ class ProductService{
         productData.productId = generateId();
         productData.createdAt = new Date();
         productData.modifiedAt = new Date();
+        productData.quantity = 0;
         const product = await ProductRepository.createProduct(productData);
         if(!product){
             return null;

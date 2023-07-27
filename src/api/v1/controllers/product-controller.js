@@ -100,8 +100,7 @@ class ProductController {
         }
         return res.status(200).json({
             status: 200,
-            message: 'done',
-            data: product
+            message: 'done'
         })
 
     }

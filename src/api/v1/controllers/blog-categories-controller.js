@@ -47,14 +47,14 @@ class BlogCategoriesController {
             if (error) {
                 return next(createError.BadRequest(error.details[0].message));
             }
-            const {blogCategoryId, ...blogCategoryData} = value
+            const { blogCategoryId, ...blogCategoryData } = value
             const blogCategory = await BlogCategoriesService.updateBlogCategoryById(blogCategoryId, blogCategoryData);
-            if(!blogCategory){
+            if (!blogCategory) {
                 return next(createError.InternalServerError());
             }
             return res.status(200).json({
-                status:200,
-                message:'done',
+                status: 200,
+                message: 'done',
                 data: blogCategory
             })
         } catch {
@@ -68,12 +68,12 @@ class BlogCategoriesController {
                 return next(createError.BadRequest(error.details[0].message));
             }
             const blogCategory = await BlogCategoriesService.createBlogCategory(value);
-            if(!blogCategory){
+            if (!blogCategory) {
                 return null;
             }
             return res.status(200).json({
-                status:200,
-                message:'done',
+                status: 200,
+                message: 'done',
                 data: blogCategory
             })
         } catch {
@@ -88,15 +88,15 @@ class BlogCategoriesController {
 
             }
             const blogCategory = await BlogCategoriesService.deleteBlogCategoryById(value.blogCategoryId);
-            if(!blogCategory){
+            if (!blogCategory) {
                 return next(createError.NotFound('blog category not found'));
             }
             return res.status(200).json({
-                status:200,
-                message:'done',
+                status: 200,
+                message: 'done',
             })
-        } catch {
-
+        } catch (error) {
+            console.log(error.name)
         }
     }
 }

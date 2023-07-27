@@ -18,7 +18,7 @@ const updateCategoryValidate =  data =>{
     const categoryData = joi.object({
         categoryId: joi.string().max(20).required(),
         name: joi.string().required(),
-        parent: joi.string().required(),
+        parent: joi.string().max(20).allow(null).required(),
         image: joi.string().required()
     })
     return categoryData.validate(data);

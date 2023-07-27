@@ -48,8 +48,7 @@ class NotificationController {
             if (error) {
                 return next(createError.BadRequest(error.details[0].message));
             }
-            console.log(value);
-
+            value.userId = req.userId;
             const notification = await NotificationService.createNotification(value);
             if (!notification) {
                 return next(createError.InternalServerError());
@@ -69,6 +68,7 @@ class NotificationController {
             if (error) {
                 return next(createError.BadRequest(error.details[0].message));
             }
+            value.userId = req.userId;
             const { notificationId, ...updatedValue } = value;
             const notification = await NotificationService.updateNotificationById(notificationId, updatedValue);
             if(!notification){
@@ -89,7 +89,6 @@ class NotificationController {
             if (error) {
                 return next(createError.BadRequest(error.details[0].message));
             }
-            console.log(value)
             const notification = await NotificationService.deleteNotificationById(value.notificationId);
             if(!notification){
                 return next(createError.InternalServerError())

@@ -10,7 +10,7 @@ class ProductDetailService {
         return productDetail;
     }
     static async getProductDetailByProductId(productId){
-        const productDetail = await ProductDetailRepository.getProductDetailById(productId);
+        const productDetail = await ProductDetailRepository.getProductDetailByProductId(productId);
         if (!productDetail) {
             return null;
         }

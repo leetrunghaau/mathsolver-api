@@ -628,36 +628,151 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlY
 ### categories ------------------------------------------------------------------------------------------
 ###     get
 GET  http://localhost:8080/api/v1/category/1335921e1ce62b7d65
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "name": "máy hàn",
+    "parent": null,
+    "image": "jhgjhghghjgjhg",
+    "categoryId": "1335921e1ce62b7d65"
+  }
+}
 ###     getAll
 GET  http://localhost:8080/api/v1/categories
-###     add
+###OUTPUT
+
+{
+  "status": 200,
+  "message": "done",
+  "data": [
+    {
+      "name": "máy hàn",
+      "parent": "null",
+      "image": "jhgjhghghjgjhg",
+      "categoryId": "1335921e1ce62b7d65"
+    },
+    {
+      "name": "máy hàn 997",
+      "parent": "categoryId",
+      "image": "jhgjhghghjgjhg",
+      "categoryId": "4c582c4eda0544bf6a"
+    }
+  ]
+}
+###     add   admin role
 POST   http://localhost:8080/api/v1/category
 Content-Type: application/json  
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
-    "name": "máy hàn",
-    "parent": "null",
+    "name": "máy hàn45",
+    "parent": "caoriry id",
     "image":"jhgjhghghjgjhg"
 
 }
-###     edit
+### OTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "name": "máy hàn45",
+    "parent": "caoriry id",
+    "image": "jhgjhghghjgjhg",
+    "categoryId": "4c582c4eda0544bf6a"
+  }
+}
+###     edit  admin role
 PUT http://localhost:8080/api/v1/category
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
-    "categoryId": "b860cdae43a7fa35f5",
-    "name": "máy hàn1",
-    "parent": "null",
+    "categoryId": "4c582c4eda0544bf6a",
+    "name": "máy hàn 997",
+    "parent": "categoryId",
     "image":"jhgjhghghjgjhg"
 }
-###     delete
-DELETE http://localhost:8080/api/v1/category/b860cdae43a7fa
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "name": "máy hàn 997",
+    "parent": "categoryId",
+    "image": "jhgjhghghjgjhg",
+    "categoryId": "4c582c4eda0544bf6a"
+  }
+}
+###     delete    admin role
+DELETE http://localhost:8080/api/v1/category/4c582c4eda0544bf6a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+
+###OUPUT
+{
+  "status": 200,
+  "message": "done"
+}
+
+
+
+
+
 ### discount ------------------------------------------------------------------------------------------
-###     get
-GET http://localhost:8080/api/v1/discount/id
-###     getAll
+###     get     
+GET http://localhost:8080/api/v1/discount/8ef0c57e2305c805ea
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "discountId": "8ef0c57e2305c805ea",
+    "createdAt": "2023-07-17T21:25:46.000Z",
+    "modifiedAt": "2023-07-23T06:42:57.000Z",
+    "enableAt": "2023-07-17T21:09:59.000Z",
+    "disableAt": "2026-07-17T21:09:59.000Z",
+    "type": "cc",
+    "value": 176.8645,
+    "quantity": 15,
+    "code": "nhap code"
+  }
+}
+
+###     getAll  admin role
 GET http://localhost:8080/api/v1/discounts
-###     add
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": [
+    {
+      "discountId": "8ef0c57e2305c805ea",
+      "createdAt": "2023-07-17T21:25:46.000Z",
+      "modifiedAt": "2023-07-23T06:42:57.000Z",
+      "enableAt": "2023-07-17T21:09:59.000Z",
+      "disableAt": "2026-07-17T21:09:59.000Z",
+      "type": "cc",
+      "value": 176.8645,
+      "quantity": 15,
+      "code": "nhap code"
+    },
+    {
+      "discountId": "9284fc741e51391bc6",
+      "createdAt": "2023-07-23T06:43:22.000Z",
+      "modifiedAt": "2023-07-23T06:43:23.000Z",
+      "enableAt": "2023-07-17T21:09:59.000Z",
+      "disableAt": "2024-07-17T21:09:59.000Z",
+      "type": "cc",
+      "value": 50,
+      "quantity": 15,
+      "code": "nhap code"
+    }
+  ]
+}
+###     add  | Trường type tương lai sẽ chỉ cho nhập 2 giá trị: 'percent' hoặc 'value'
 POST  http://localhost:8080/api/v1/discount
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YWM5NWNjNjgxOTk5ZWQ1NWEiLCJyb2xlIjoidXNlciIsImlhdCI6MTY4OTAyMDQwNiwiZXhwIjoxNjkxNjEyNDA2fQ.VnPyBNl5q6S9hQMXucrZv_mcNaab4g4bY2myHr3-KTU
@@ -665,29 +780,66 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YWM5N
 {
     "enableAt":"2023-07-17T21:09:59.000Z",
     "disableAt":"2024-07-17T21:09:59.000Z",
-    "type":"cc",
+    "type":"phantrawm",
     "value":50.000,
     "quantity":15,
     "code":"nhap code"
 }
-
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "enableAt": "2023-07-17T21:09:59.000Z",
+    "disableAt": "2024-07-17T21:09:59.000Z",
+    "type": "phantrawm",
+    "value": 50,
+    "quantity": 15,
+    "code": "nhap code",
+    "discountId": "9fe7f614cbbacc2959",
+    "createdAt": "2023-07-27T19:59:36.528Z",
+    "modifiedAt": "2023-07-27T19:59:36.528Z"
+  }
+}
 ###     edit
 PUT  http://localhost:8080/api/v1/discount
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YWM5NWNjNjgxOTk5ZWQ1NWEiLCJyb2xlIjoidXNlciIsImlhdCI6MTY4OTAyMDQwNiwiZXhwIjoxNjkxNjEyNDA2fQ.VnPyBNl5q6S9hQMXucrZv_mcNaab4g4bY2myHr3-KTU
 
 {
-    "discountId": "8ef0c57e2305c805ea",
+    "discountId": "9fe7f614cbbacc2959",
     "enableAt":"2023-07-17T21:09:59.000Z",
     "disableAt":"2026-07-17T21:09:59.000Z",
     "type":"cc",
-    "value":176.8645,
-    "quantity":15,
+    "value":200.8645,
+    "quantity":10,
     "code":"nhap code"
 }
-
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "discountId": "9fe7f614cbbacc2959",
+    "createdAt": "2023-07-27T19:59:36.000Z",
+    "modifiedAt": "2023-07-27T20:00:22.000Z",
+    "enableAt": "2023-07-17T21:09:59.000Z",
+    "disableAt": "2026-07-17T21:09:59.000Z",
+    "type": "cc",
+    "value": 200.8645,
+    "quantity": 10,
+    "code": "nhap code"
+  }
+}
 ###     delete  
-DELETE http://localhost:8080/api/v1/discount/3cf69d60fb01b9c337
+DELETE http://localhost:8080/api/v1/discount/8ef0c57e2305c805ea
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+###OUTPUT
+{
+  "status": 200,
+  "message": "done"
+}
+
 
 ### distributor ------------------------------------------------------------------------------------------
 ###     getAll
@@ -699,15 +851,61 @@ DELETE http://localhost:8080/api/v1/discount/3cf69d60fb01b9c337
 ###     add
 ###     edit
 ###     delete 
+
+
+
+
 ### notification ------------------------------------------------------------------------------------------
+###     get trả về thông báo mà hiện tại đang có hiệu lực
+GET  http://localhost:8080/api/v1/current-notifications
 ###     get
-GET  http://localhost:8080/api/v1/notification/7aba53c611627dbf27
+GET  http://localhost:8080/api/v1/notification/94ff7147ca4c9f7c4b
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "notificationId": "94ff7147ca4c9f7c4b",
+    "name": "hello",
+    "enableAt": "2023-07-17T09:30:54.000Z",
+    "disableAt": "2023-08-17T09:30:54.000Z",
+    "userId": "43fec0ef558c1ad0bb",
+    "content": "motoj hangf daif lee thee",
+    "user_id": "43fec0ef558c1ad0bb"
+  }
+}
 ###     getAll
 GET  http://localhost:8080/api/v1/notifications
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": [
+    {
+      "notificationId": "3b732ea9de1a4bb84e",
+      "name": "hello",
+      "enableAt": "2023-07-17T09:30:54.000Z",
+      "disableAt": "2023-08-17T09:30:54.000Z",
+      "userId": null,
+      "content": "motoj hangf daif lee thee",
+      "user_id": null
+    },
+    {
+      "notificationId": "7aba53c611627dbf27",
+      "name": "hhhh",
+      "enableAt": "2023-07-17T09:30:54.000Z",
+      "disableAt": "2023-08-17T09:30:54.000Z",
+      "userId": null,
+      "content": "một ngày dài lê thê",
+      "user_id": null
+    }
+  ]
+}
 ###     add
 POST  http://localhost:8080/api/v1/notification
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
     "name":"hello",
@@ -715,19 +913,57 @@ Content-Type: application/json
     "disableAt":"2023-08-17T09:30:54.000Z",
     "content":"motoj hangf daif lee thee"
 }
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "name": "hello",
+    "enableAt": "2023-07-17T09:30:54.000Z",
+    "disableAt": "2023-08-17T09:30:54.000Z",
+    "content": "motoj hangf daif lee thee",
+    "userId": "43fec0ef558c1ad0bb",
+    "notificationId": "e61601a8fe65dbd096"
+  }
+}
 ###     edit
 PUT   http://localhost:8080/api/v1/notification
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
-    "notificationId": "7aba53c611627dbf27",
-    "name":"hhhh",
+    "notificationId": "2f752cae91a9f8a1f8",
+    "name":"ghtz",
     "enableAt":"2023-07-17T09:30:54.000Z",
     "disableAt":"2023-08-17T09:30:54.000Z",
     "content":"một ngày dài lê thê"
 }
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "notificationId": "2f752cae91a9f8a1f8",
+    "name": "ghtz",
+    "enableAt": "2023-07-17T09:30:54.000Z",
+    "disableAt": "2023-08-17T09:30:54.000Z",
+    "userId": "43fec0ef558c1ad0bb",
+    "content": "một ngày dài lê thê",
+    "user_id": "43fec0ef558c1ad0bb"
+  }
+}
 ###     delete
-DELETE    http://localhost:8080/api/v1/notification/6471e91f90e55ba531
+DELETE    http://localhost:8080/api/v1/notification/2f752cae91a9f8a1f8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+###OUTPUT
+{
+  "status": 200,
+  "message": "done"
+}
+
+
+
+
 ### order ------------------------------------------------------------------------------------------
 ###     getAllByStatus
 ###     getListByUserId
@@ -738,54 +974,213 @@ DELETE    http://localhost:8080/api/v1/notification/6471e91f90e55ba531
 ###     add all
 ###     edit
 ###     delete 
+
+
+
+
+
+
 ### product ------------------------------------------------------------------------------------------
 ###     get
 GET http://localhost:8080/api/v1/product/1e48622b6f61216f82
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "productId": "1e48622b6f61216f82",
+    "name": "dasas",
+    "categoryId": "1335921e1ce62b7d65",
+    "quantity": 9,
+    "brandId": "c0f56594fa0a87a3c8",
+    "information": "hjgfhj",
+    "price": 79843,
+    "status": "disable",
+    "createdAt": "2023-07-17T09:20:10.000Z",
+    "modifiedAt": "2023-07-17T09:20:10.000Z",
+    "brand_id": "c0f56594fa0a87a3c8",
+    "category_id": "1335921e1ce62b7d65"
+  }
+}
 ###     getAll
 GET http://localhost:8080/api/v1/products
-###     add
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": [
+    {
+      "productId": "10e32bc189f5959a39",
+      "name": "dasas",
+      "categoryId": "1335921e1ce62b7d65",
+      "quantity": 9,
+      "brandId": null,
+      "information": "hjgfhj",
+      "price": 79843,
+      "status": "disable",
+      "createdAt": "2023-07-17T09:30:54.000Z",
+      "modifiedAt": "2023-07-17T09:30:54.000Z",
+      "brand_id": null,
+      "category_id": "1335921e1ce62b7d65"
+    },
+    {
+      "productId": "1e48622b6f61216f82",
+      "name": "dasas",
+      "categoryId": "1335921e1ce62b7d65",
+      "quantity": 9,
+      "brandId": "c0f56594fa0a87a3c8",
+      "information": "hjgfhj",
+      "price": 79843,
+      "status": "disable",
+      "createdAt": "2023-07-17T09:20:10.000Z",
+      "modifiedAt": "2023-07-17T09:20:10.000Z",
+      "brand_id": "c0f56594fa0a87a3c8",
+      "category_id": "1335921e1ce62b7d65"
+    }
+  ]
+}
+###     add |admin role | không có trường quantity, trường này phải vào import product mà thêm
 POST  http://localhost:8080/api/v1/product
 Content-Type: application/json
 
 {
     "name": "dasas",
     "categoryId": "1335921e1ce62b7d65",
-    "quantity": 9,
     "brandId": null,
     "information": "hjgfhj",
     "price": 79843,
     "status": "disable"
 }
-
+###OUPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "name": "dasas",
+    "categoryId": "1335921e1ce62b7d65",
+    "quantity": 0,
+    "brandId": null,
+    "information": "hjgfhj",
+    "price": 79843,
+    "status": "disable",
+    "productId": "975e1e6aee63ed996a",
+    "createdAt": "2023-07-27T20:03:41.896Z",
+    "modifiedAt": "2023-07-27T20:03:41.896Z"
+  }
+}
 ###     edit
 PUT  http://localhost:8080/api/v1/product
 Content-Type: application/json 
 
 {
-    "productId": "d5ebdefa5242e132e7",
+    "productId": "26da307e352dc63dd2",
       "name": "jhg",
       "categoryId": "1335921e1ce62b7d65",
-      "quantity": 9,
       "brandId": "c0f56594fa0a87a3c8",
-      "information": "hjgfhj",
+      "information": "sssss",
       "price": 79843,
       "status": "enable",
       "brandId": "c0f56594fa0a87a3c8",
       "categoryId": "1335921e1ce62b7d65"
 }
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "productId": "26da307e352dc63dd2",
+    "name": "jhg",
+    "categoryId": "1335921e1ce62b7d65",
+    "quantity": 0,
+    "brandId": "c0f56594fa0a87a3c8",
+    "information": "sssss",
+    "price": 79843,
+    "status": "enable",
+    "createdAt": "2023-07-27T20:08:24.000Z",
+    "modifiedAt": "2023-07-27T20:09:32.000Z",
+    "brand_id": "c0f56594fa0a87a3c8",
+    "category_id": "1335921e1ce62b7d65"
+  }
+}
 ###     delete
-DELETE http://localhost:8080/api/v1/product/d5ebdefa5242e132e7
+DELETE http://localhost:8080/api/v1/product/26da307e352dc63dd2
+
+###OUTPUT
+{
+  "status": 200,
+  "message": "done"
+}
+
+
+
+
 ### product detail ------------------------------------------------------------------------------------------
 ###     get
-GET http://localhost:8080/api/v1/product-detail/5de015082f5d7d5ff7
-###     get all
+GET http://localhost:8080/api/v1/product-detail/fc04640964cfb8f125
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "productDetailId": "fc04640964cfb8f125",
+    "specifications": "hello",
+    "productId": null,
+    "description": "đây là sản phẩm không bán",
+    "content": "my content",
+    "location": "my location",
+    "product_id": null
+  }
+}
+###     get all | admin role | 
 GET http://localhost:8080/api/v1/products-detail
-###     get by product id
-GET http://localhost:8080/api/v1/product-detail-product-id/hhhh
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
-###     add
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": [
+    {
+      "productDetailId": "fc04640964cfb8f125",
+      "specifications": "hello",
+      "productId": null,
+      "description": "đây là sản phẩm không bán",
+      "content": "my content",
+      "location": "my location",
+      "product_id": null
+    },
+    {
+      "productDetailId": "fcfd7859c15dea8494",
+      "specifications": "hello",
+      "productId": null,
+      "description": "đây là sản phẩm không bán",
+      "content": "my content",
+      "location": "my location",
+      "product_id": null
+    }
+  ]
+}
+###     get by product id 
+GET http://localhost:8080/api/v1/product-detail-product-id/10e32bc189f5959a39
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "productDetailId": "fcfd7859c15dea8494",
+    "specifications": "abc",
+    "productId": "10e32bc189f5959a39",
+    "description": "đây là sản phẩm không bán",
+    "content": "my content",
+    "location": "my location",
+    "product_id": "10e32bc189f5959a39"
+  }
+}
+
+###     add | admin role | product not null, this exemple is test 
 POST  http://localhost:8080/api/v1/product-detail
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
     "specifications":"hello",
@@ -794,38 +1189,145 @@ Content-Type: application/json
     "content":"my content",
     "location":"my location"
 }
-###     edit
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "specifications": "hello",
+    "productId": null,
+    "description": "đây là sản phẩm không bán",
+    "content": "my content",
+    "location": "my location",
+    "productDetailId": "25d087b21eac2b6bef"
+  }
+}
+###     edit | admin role | product not null, this exemple is test 
 PUT  http://localhost:8080/api/v1/product-detail
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
-    "productDetailId":"5de015082f5d7d5ff7",
-    "specifications":"1111",
+    "productDetailId":"fcfd7859c15dea8494",
+    "specifications":"abc",
     "productId":"10e32bc189f5959a39",
     "description":"đây là sản phẩm không bán",
     "content":"my content",
     "location":"my location"
 }
-
+###OUPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "productDetailId": "25d087b21eac2b6bef",
+    "specifications": "abc",
+    "productId": "10e32bc189f5959a39",
+    "description": "đây là sản phẩm không bán",
+    "content": "my content",
+    "location": "my location",
+    "product_id": "10e32bc189f5959a39"
+  }
+}
 ###     delete
-DELETE  http://localhost:8080/api/v1/product-detail/5de015082f5d7d5ff7
+DELETE  http://localhost:8080/api/v1/product-detail/25d087b21eac2b6bef
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+
+###OUTPUT
+{
+  "status": 200,
+  "message": "done"
+}
+
+
+
 
 ### product image ------------------------------------------------------------------------------------------
-###     get
-GET http://localhost:8080/api/v1/product-image/9820a227e5b3b95a96
-
-###     get
-GET http://localhost:8080/api/v1/product-image-main-product-id/id
-
-###     get
-GET http://localhost:8080/api/v1/product-images-product-id/5687
-
-###     get
+###     get | lấy hình ảnh dự theo id
+GET http://localhost:8080/api/v1/product-image/71ecec94d98f92a37e
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "productImageId": "71ecec94d98f92a37e",
+    "productId": "10e32bc189f5959a39",
+    "name": "value test",
+    "main": true,
+    "image": "f88",
+    "product_id": "10e32bc189f5959a39"
+  }
+}
+###     get | lấy hình ảnh chính dự theo product id
+GET http://localhost:8080/api/v1/product-image-main-product-id/10e32bc189f5959a39
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "productImageId": "71ecec94d98f92a37e",
+    "productId": "10e32bc189f5959a39",
+    "name": "value test",
+    "main": true,
+    "image": "f88",
+    "product_id": "10e32bc189f5959a39"
+  }
+}
+###     get | lấy nhiều hình ảnh dựa trên product id (ưu tiên dùng api này rồi sử lý về sau hạn chế gọi nhiều lần api)
+GET http://localhost:8080/api/v1/product-images-product-id/10e32bc189f5959a39
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": [
+    {
+      "productImageId": "71ecec94d98f92a37e",
+      "productId": "10e32bc189f5959a39",
+      "name": "value test",
+      "main": true,
+      "image": "f88",
+      "product_id": "10e32bc189f5959a39"
+    },
+    {
+      "productImageId": "9a2de5307920108882",
+      "productId": "10e32bc189f5959a39",
+      "name": "value test 456",
+      "main": true,
+      "image": "f88",
+      "product_id": "10e32bc189f5959a39"
+    }
+  ]
+}
+###     get | admin role | lấy tất cả hình ảnh
 GET http://localhost:8080/api/v1/product-images
-
-###     add
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": [
+    {
+      "productImageId": "71ecec94d98f92a37e",
+      "productId": "10e32bc189f5959a39",
+      "name": "value test",
+      "main": true,
+      "image": "f88",
+      "product_id": "10e32bc189f5959a39"
+    },
+    {
+      "productImageId": "9a2de5307920108882",
+      "productId": "10e32bc189f5959a39",
+      "name": "value test 456",
+      "main": true,
+      "image": "f88",
+      "product_id": "10e32bc189f5959a39"
+    }
+  ]
+}
+###     add | admin role | tạo hình ảnh
 POST  http://localhost:8080/api/v1/product-image
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
     "productId":"10e32bc189f5959a39",
@@ -833,26 +1335,76 @@ Content-Type: application/json
     "main":true,
     "image":"f88"
 }
-
-###     edit
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "productId": "10e32bc189f5959a39",
+    "name": "value test",
+    "main": true,
+    "image": "f88",
+    "productImageId": "b67b75ef1a7d872086"
+  }
+}
+###     edit | amdin role | chỉnh sửa
 PUT  http://localhost:8080/api/v1/product-image
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
     "productId": "10e32bc189f5959a39",
-    "name": "value test 456",
+    "name": "value test 456111",
     "main": true,
     "image": "f88",
-    "productImageId": "9a2de5307920108882"
+    "productImageId": "b67b75ef1a7d872086"
 }
-###     delete
-DELETE  http://localhost:8080/api/v1/product-image/9820a227e5b3b95a96
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "productImageId": "b67b75ef1a7d872086",
+    "productId": "10e32bc189f5959a39",
+    "name": "value test 456111",
+    "main": true,
+    "image": "f88",
+    "product_id": "10e32bc189f5959a39"
+  }
+}
+###     delete | admin role | xóa hình ảnh
+DELETE  http://localhost:8080/api/v1/product-image/b67b75ef1a7d872086
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+###OUTPUT
+{
+  "status": 200,
+  "message": "done"
+}
+
+
+
 
 ### user ------------------------------------------------------------------------------------------
 ###     get
 GET http://localhost:8080/api/v1/user
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
-
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "userId": "43fec0ef558c1ad0bb",
+    "firstName": "Hậu",
+    "lastName": "Lê Trung",
+    "role": "admin",
+    "email": "leehaau@gmail.com",
+    "birthDate": null,
+    "gender": "nam",
+    "createdAt": "2023-07-23T17:09:22.000Z",
+    "modifiedAt": "2023-07-23T18:08:01.000Z",
+    "verified": null
+  }
+}
 ###     update
 PUT http://localhost:8080/api/v1/user
 Content-Type: application/json
@@ -861,17 +1413,80 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlY
 {
     "firstName": "Hậu",
     "lastName": "Lê Trung",
-    "email": "leehaau@gmail.com",
+    "email": "letruuuuunghau@gmail.com",
     "gender": "nam"
 }
-
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "userId": "43fec0ef558c1ad0bb",
+    "firstName": "Hậu",
+    "lastName": "Lê Trung",
+    "role": "admin",
+    "email": "letruuuuunghau@gmail.com",
+    "birthDate": null,
+    "gender": "nam",
+    "createdAt": "2023-07-23T17:09:22.000Z",
+    "modifiedAt": "2023-07-27T19:30:53.000Z",
+    "verified": null
+  }
+}
 ###     get         role admin
-GET http://localhost:8080/api/v1/user/43fec0ef558c1ad0bb
+GET http://localhost:8080/api/v1/user/ad6bddf402f8298c0e
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
-
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "userId": "ad6bddf402f8298c0e",
+    "firstName": "hau",
+    "lastName": "leung",
+    "role": "user",
+    "email": "letrunghau@gmail.com",
+    "birthDate": null,
+    "gender": "nam",
+    "createdAt": "2023-07-26T19:11:07.000Z",
+    "modifiedAt": "2023-07-26T19:35:03.000Z",
+    "verified": "2023-07-26T19:35:03.000Z"
+  }
+}
 ###     get all     role admin
 GET http://localhost:8080/api/v1/users
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": [
+    {
+      "userId": "43fec0ef558c1ad0bb",
+      "firstName": "Hậu",
+      "lastName": "Lê Trung",
+      "role": "admin",
+      "email": "leehaau@gmail.com",
+      "birthDate": null,
+      "gender": "nam",
+      "createdAt": "2023-07-23T17:09:22.000Z",
+      "modifiedAt": "2023-07-23T18:08:01.000Z",
+      "verified": null
+    },
+    {
+      "userId": "ad6bddf402f8298c0e",
+      "firstName": "hau",
+      "lastName": "leung",
+      "role": "user",
+      "email": "letrunghau@gmail.com",
+      "birthDate": null,
+      "gender": "nam",
+      "createdAt": "2023-07-26T19:11:07.000Z",
+      "modifiedAt": "2023-07-26T19:35:03.000Z",
+      "verified": "2023-07-26T19:35:03.000Z"
+    }
+  ]
+}
 ###     create         role admin
 POST http://localhost:8080/api/v1/user
 Content-Type: application/json
@@ -881,8 +1496,24 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlY
     "firstName": "cv",
     "lastName": "cd",
     "role": "admin",
-    "email": "leehaau@gmail.com",
+    "email": "lee@gmail.com",
     "gender": "nam"
+}
+### OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "firstName": "cv",
+    "lastName": "cd",
+    "role": "admin",
+    "email": "lee@gmail.com",
+    "gender": "nam",
+    "userId": "80f507e628ba210503",
+    "verified": null,
+    "createdAt": "2023-07-27T19:24:58.067Z",
+    "modifiedAt": "2023-07-27T19:24:58.067Z"
+  }
 }
 ###     edit        role admin
 PUT http://localhost:8080/api/v1/admin/user
@@ -890,19 +1521,40 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
-    "userId":"a9f09ac1e8f94968b7",
+    "userId":"80f507e628ba210503",
     "firstName": "c4447v",
     "lastName": "cd",
-    "email": "leehaau@gmail.com",
+    "email": "leehaaau@gmail.com",
     "gender": "nam",
     "role":null,
     "birthDate":"2023-07-23T17:26:12.000Z"
 
 }
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "userId": "80f507e628ba210503",
+    "firstName": "c4447v",
+    "lastName": "cd",
+    "role": null,
+    "email": "leehaaau@gmail.com",
+    "birthDate": "2023-07-24",
+    "gender": "nam",
+    "createdAt": "2023-07-27T19:24:58.000Z",
+    "modifiedAt": "2023-07-27T19:25:56.000Z",
+    "verified": null
+  }
+}
 ###     delete  system role use
-DELETE  http://localhost:8080/api/v1/user/a9f09ac1e8f94968b7
+DELETE  http://localhost:8080/api/v1/user/80f507e628ba210503
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
-
+###OUTPUT
+{
+  "status": 200,
+  "message": "done"
+}
 
 
 

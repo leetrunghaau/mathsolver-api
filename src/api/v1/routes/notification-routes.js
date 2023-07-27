@@ -7,10 +7,10 @@ const router = express.Router();
 
 // Define routes
 router.get('/notification/:notificationId', NotificationController.getNotificationById);
-router.get('/notifications', NotificationController.getAllNotification);
-router.post('/notification', NotificationController.createNotification);
-router.put('/notification', NotificationController.updateNotificationById);
-router.delete('/notification/:notificationId', NotificationController.deleteNotificationById)
+router.get('/notifications',authorization(['user','admin']), NotificationController.getAllNotification);
+router.post('/notification', authorization(['user','admin']), NotificationController.createNotification);
+router.put('/notification', authorization(['user','admin']), NotificationController.updateNotificationById);
+router.delete('/notification/:notificationId',authorization(['user','admin']), NotificationController.deleteNotificationById)
 
 
 
