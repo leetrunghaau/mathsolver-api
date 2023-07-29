@@ -15,6 +15,13 @@ class DiscountService {
         }
         return discounts;
     }
+    static async getDiscountByCode(code){
+        const discount = await DiscountRepository.getDiscountByCode(code);
+        if (!discount) {
+            return null;
+        }
+        return discount;
+    }
     static async createDiscount(discountData){
         discountData.discountId =  generateId();
         discountData.createdAt = new Date();

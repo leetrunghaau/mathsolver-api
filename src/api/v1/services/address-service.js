@@ -2,6 +2,13 @@ const { generateId } = require("../helpers/generate-key");
 const AddressRepository = require("../repositories/address-repository");
 
 class AddressService {
+    static async getAddressById(addressId){
+        const address = await AddressRepository.getAddressById(addressId);
+        if (!address) {
+            return null
+        }
+        return address;
+    }
     static async getAddressByUserId(userId) {
         const address = await AddressRepository.getAddressByUserId(userId);
         if (!address) {

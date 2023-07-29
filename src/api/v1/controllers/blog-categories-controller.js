@@ -9,11 +9,8 @@ const createError = require('http-errors')
 class BlogCategoriesController {
     static async getBlogCategoryById(req, res, next) {
         try {
-            const { error, value } = getBlogCategoryValidate(req.params);
-            if (error) {
-                return next(createError.BadRequest(error.details[0].message));
-            }
-            const blogCategory = await BlogCategoriesService.getBlogCategoryById(value.blogCategoryId);
+
+            const blogCategory = await BlogCategoriesService.getBlogCategoryById(req.validateData.blogCategoryId);
             if (!blogCategory) {
                 return next(createError.NotFound('bog category not found'));
             }
@@ -22,8 +19,9 @@ class BlogCategoriesController {
                 message: 'done',
                 data: blogCategory
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async getAllBlogCategory(req, res, next) {
@@ -37,17 +35,15 @@ class BlogCategoriesController {
                 message: 'done',
                 data: blogCategories
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async updateBlogCategoryById(req, res, next) {
         try {
-            const { error, value } = updateBlogCategoryValidate(req.body);
-            if (error) {
-                return next(createError.BadRequest(error.details[0].message));
-            }
-            const { blogCategoryId, ...blogCategoryData } = value
+
+            const { blogCategoryId, ...blogCategoryData } = req.validateData
             const blogCategory = await BlogCategoriesService.updateBlogCategoryById(blogCategoryId, blogCategoryData);
             if (!blogCategory) {
                 return next(createError.InternalServerError());
@@ -57,17 +53,15 @@ class BlogCategoriesController {
                 message: 'done',
                 data: blogCategory
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async createBlogCategory(req, res, next) {
         try {
-            const { error, value } = createBlogCategoryValidate(req.body);
-            if (error) {
-                return next(createError.BadRequest(error.details[0].message));
-            }
-            const blogCategory = await BlogCategoriesService.createBlogCategory(value);
+
+            const blogCategory = await BlogCategoriesService.createBlogCategory(req.validateData);
             if (!blogCategory) {
                 return null;
             }
@@ -76,17 +70,14 @@ class BlogCategoriesController {
                 message: 'done',
                 data: blogCategory
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async deleteBlogCategoryById(req, res, next) {
         try {
-            const { error, value } = deleteBlogCategoryValidate(req.params);
-            if (error) {
-                return next(createError.BadRequest(error.details[0].message));
-
-            }
+     
             const blogCategory = await BlogCategoriesService.deleteBlogCategoryById(value.blogCategoryId);
             if (!blogCategory) {
                 return next(createError.NotFound('blog category not found'));
@@ -95,8 +86,9 @@ class BlogCategoriesController {
                 status: 200,
                 message: 'done',
             })
-        } catch (error) {
-            console.log(error.name)
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
 }

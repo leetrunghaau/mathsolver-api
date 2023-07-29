@@ -16,8 +16,8 @@ class AddressController {
         data: addressData
       })
     } catch (error) {
-      console.error('Error fetching address:', error);
-      return res.status(500).json({ message: 'Internal server error' });
+      console.log(error);
+      return next(createError.InternalServerError());
     }
   }
   static async getAllAddressByUserId(req, res, next) {
@@ -32,17 +32,14 @@ class AddressController {
         data: addresses
       })
     } catch (error) {
-      console.error('Error fetching address:', error);
-      return res.status(500).json({ message: 'Internal server error' });
+      console.log(error);
+      return next(createError.InternalServerError());
     }
   }
   static async createAddressByUserId(req, res, next) {
     try {
-      const { error, value } = createAddressValidate(req.body);
-      if (error) {
-        return next(createError.BadRequest(error.details[0].message));
-      }
-      const address = await AddressService.createAddressByUserId(req.userId, value);
+
+      const address = await AddressService.createAddressByUserId(req.userId, req.validateData);
       if (!address) {
         return next(createError.InternalServerError());
       }
@@ -52,18 +49,15 @@ class AddressController {
         data: address
       });
     } catch (error) {
-      console.error('Error creating address:', error);
-      return res.status(500).json({ message: 'Internal server error' });
+      console.log(error);
+      return next(createError.InternalServerError());
     }
   }
 
   static async updateAddressById(req, res, next) {
     try {
-      const { error, value } = updateAddressValidate(req.body);
-      if (error) {
-        return next(createError.BadRequest(error.details[0].message));
-      }
-      const { addressId, ...updateData } = value;
+
+      const { addressId, ...updateData } = req.validateData;
       const address = await AddressService.updateMyAddressById(req.userId, addressId, updateData);
       if (!address) {
         return next(createError.NotFound('address not found'));
@@ -75,17 +69,14 @@ class AddressController {
       })
 
     } catch (error) {
-      console.error('Error updating address:', error);
-      return res.status(500).json({ message: 'Internal server error' });
+      console.log(error);
+      return next(createError.InternalServerError());
     }
   }
   static async deleteAddressById(req, res, next) {
     try {
-      const { error, value } = deleteAddressValidate(req.params);
-      if (error) {
-        return next(createError.BadRequest(error.details[0].message));
-      }
-      const address = await AddressService.deleteMyAddressById(req.userId, value.addressId);
+
+      const address = await AddressService.deleteMyAddressById(req.userId, req.validateData.addressId);
       if (!address) {
         return next(createError.NotFound('address not found'))
       }
@@ -94,8 +85,8 @@ class AddressController {
         message: 'done',
       })
     } catch (error) {
-      console.error('Error deleting address:', error);
-      return res.status(500).json({ message: 'Internal server error' });
+      console.log(error);
+      return next(createError.InternalServerError());
     }
   }
 }

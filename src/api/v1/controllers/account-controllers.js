@@ -20,17 +20,14 @@ class AccountControllers {
                     modifiedAt: account.modifiedAt
                 } 
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async getPasswordStatusByEmail(req, res, next) {
         try {
-            const { error, value } = getPasswordStatusByEmailValidate(req.params);
-            if (error) {
-                return next(createError.BadRequest(error.details[0].message));
-            }
-            const user = await UserService.getUserByEmail(value.email);
+            const user = await UserService.getUserByEmail( req.validateData.email);
             console.log(user);
 
             if(!user){
@@ -48,26 +45,24 @@ class AccountControllers {
                     modifiedAt: account.modifiedAt
                 } 
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
 
     static async changePassword(req, res, next) {
         try {
-            const { error, value } = changePasswordValidate(req.body);
-            if (error) {
-                return next(createError.BadRequest(error.details[0].message));
-            }
+
             const acc = await AccountService.getAccountByUserId(req.userId);
             if (!acc) {
                 return next(createError.InternalServerError);
             }
-            const checkValue = await comparePasswords(value.oldPassword, acc.password);
+            const checkValue = await comparePasswords( req.validateData.oldPassword, acc.password);
             if (!checkValue) {
                 return next(createError.InternalServerError('sai mật khẩu cũ'));
             }
-            const passwordEncode = await hashPassword(value.newPassword);
+            const passwordEncode = await hashPassword( req.validateData.newPassword);
             const newAcc = await AccountService.updateAccountByUserId(req.userId, { password: passwordEncode });
             if (!newAcc) {
                 return next(createError.InternalServerError('internal server error !'));
@@ -75,8 +70,9 @@ class AccountControllers {
             return res.status(200).json({
                 message: 'update done'
             })
-        } catch (error) {
-            console.log(error)
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
 

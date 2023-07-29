@@ -20,8 +20,9 @@ class ProductImageController {
                 message: 'done',
                 data: productImage
             })
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async getProductImageMainByProductId(req, res, next) {
@@ -39,8 +40,9 @@ class ProductImageController {
                 message: 'done',
                 data: productImage
             })
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async getAllProductImage(req, res, next) {
@@ -55,8 +57,9 @@ class ProductImageController {
                 message: 'done',
                 data: productImages
             })
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async getAllProductImageByProductId(req, res, next) {
@@ -74,8 +77,9 @@ class ProductImageController {
                 message: 'done',
                 data: productImages
             })
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
 
@@ -95,8 +99,9 @@ class ProductImageController {
                 message: 'done',
                 data: productImage
             })
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async updateProductImageById(req, res, next) {
@@ -115,8 +120,9 @@ class ProductImageController {
                 message:'done',
                 data: productImage
             })
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async deleteProductImageById(req, res, next) {
@@ -134,8 +140,9 @@ class ProductImageController {
                 message: 'done'
             })
 
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
 }

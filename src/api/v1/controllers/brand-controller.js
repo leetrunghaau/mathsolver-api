@@ -23,8 +23,9 @@ class BrandController {
                 message: 'done',
                 data: brand
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async getAllBrand(req, res, next) {
@@ -38,8 +39,9 @@ class BrandController {
                 message: 'done',
                 data: brands
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async createBrand(req, res, next) {
@@ -61,8 +63,9 @@ class BrandController {
                 message: 'done',
                 data: brand
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async updateBrandById(req, res, next) {
@@ -81,8 +84,9 @@ class BrandController {
                 message:'done',
                 data: brand
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async deleteBrandById(req, res, next) {
@@ -101,8 +105,9 @@ class BrandController {
                 message: 'done'
             })
 
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
 }

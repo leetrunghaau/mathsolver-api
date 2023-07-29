@@ -1,13 +1,34 @@
 // cartRepository.js
 
 const Cart = require('../models/cart-model');
+const Product = require('../models/product-model');
 
 class CartRepository {
   static async getCartById(cartId) {
-    return Cart.findByPk(cartId);
+    return Cart.findByPk(
+      cartId,
+      {
+        attributes: {
+          exclude: ['userId', 'productId', 'user_id', 'product_id']
+        },
+        include: [
+          { model: Product, attributes: ['productId', 'name', 'price', 'information', 'price'] }
+        ]
+      }
+      );
   }
   static async getAllCartByUserId(userId) {
-    return Cart.findAll({ where: { userId: userId } })
+    return Cart.findAll({
+      where: {
+        userId: userId
+      },
+      attributes: {
+        exclude: ['userId', 'productId', 'user_id', 'product_id']
+      },
+      include: [
+        { model: Product, attributes: ['productId', 'name', 'price', 'information', 'price','status','quantity'] }
+      ]
+    })
   }
   static async getMyCartByProductId(userId, productId) {
     return Cart.findOne({

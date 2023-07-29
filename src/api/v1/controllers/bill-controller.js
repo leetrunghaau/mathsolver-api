@@ -19,8 +19,9 @@ class BillController {
                 message: 'done',
                 data: bill
             })
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async getAllBillByUser(req, res, next) {
@@ -40,15 +41,17 @@ class BillController {
                 message: 'done',
                 data: bills
             })
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async createBill(req, res, next) { // hàm này sẽ được sử dụng và khi hoàng thành đơn hàng sẽ tự động tạo ra bill
         try {
 
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async updateBill(req, res, next) { // hàm này chỉ cho duy nhất user aystem quản lý
@@ -61,8 +64,9 @@ class BillController {
     static async deleteBill(req, res, next) { // hàm này chỉ cho duy nhất user aystem quản lý
         try {
 
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
 }

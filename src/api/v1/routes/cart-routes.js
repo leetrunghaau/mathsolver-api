@@ -7,10 +7,10 @@ const router = express.Router();
 
 
 // Define routes
-router.get('/cart/:cartId', authorization(['user', 'seller']), CartController.getCart);
-router.get('/cart', authorization(['user', 'seller']), CartController.getAllCart);
-router.put('/cart', authorization(['user', 'seller']), CartController.updateCart);
-router.delete('/cart/:cartId', authorization(['user', 'seller']), CartController.deleteCart)
+router.get('/cart', authorization(['user', 'admin']), CartController.getAllCart);
+router.post('/cart', authorization(['user', 'admin']), CartController.addToCart);
+router.put('/cart', authorization(['user', 'admin']), CartController.updateCart);
+router.delete('/cart/:cartId', authorization(['user', 'admin']), CartController.deleteCart)
 
 
 

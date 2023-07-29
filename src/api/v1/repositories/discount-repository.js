@@ -9,6 +9,9 @@ class DiscountRepository {
   static async getAllDiscount() {
     return Discount.findAll();
   }
+  static async getDiscountByCode(code){
+    return Discount.findOne({where:{code:code}})
+  }
   static async createDiscount(discountData) {
     return Discount.create(discountData);
   }

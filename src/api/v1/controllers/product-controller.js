@@ -24,8 +24,9 @@ class ProductController {
                 message: 'done',
                 data: product
             })
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async getAllProduct(req, res, next) {
@@ -40,7 +41,8 @@ class ProductController {
                 data: products
             })
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async createProduct(req, res, next) {
@@ -69,39 +71,52 @@ class ProductController {
                 message: 'done',
                 data: product
             })
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async updateProductById(req, res, next) {
-        const { error, value } = updateProductValidate(req.body);
-        if (error) {
-            return next(createError.BadRequest(error.details[0].message));
-        }
-        const { productId, ...productData } = value;
-        const product = await ProductService.updateProductById(productId, productData);
-        if (!product) {
+        try {
+            const { error, value } = updateProductValidate(req.body);
+            if (error) {
+                return next(createError.BadRequest(error.details[0].message));
+            }
+            const { productId, ...productData } = value;
+            const product = await ProductService.updateProductById(productId, productData);
+            if (!product) {
+                return next(createError.InternalServerError());
+            }
+            return res.status(200).json({
+                status: 200,
+                message: 'done',
+                data: product
+            })
+        } catch (error) {
+            console.log(error);
             return next(createError.InternalServerError());
         }
-        return res.status(200).json({
-            status: 200,
-            message: 'done',
-            data: product
-        })
+
     }
     static async deleteProductById(req, res, next) {
-        const { error, value } = deleteProductValidate(req.params);
-        if (error) {
-            return next(createError.BadRequest(error.details[0].message));
-        }
-        const product = await ProductService.deleteProductById(value.productId);
-        if (!product) {
+        try {
+            const { error, value } = deleteProductValidate(req.params);
+            if (error) {
+                return next(createError.BadRequest(error.details[0].message));
+            }
+            const product = await ProductService.deleteProductById(value.productId);
+            if (!product) {
+                return next(createError.InternalServerError());
+            }
+            return res.status(200).json({
+                status: 200,
+                message: 'done'
+            })
+        } catch (error) {
+            console.log(error);
             return next(createError.InternalServerError());
         }
-        return res.status(200).json({
-            status: 200,
-            message: 'done'
-        })
+
 
     }
 

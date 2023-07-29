@@ -1,4 +1,5 @@
 const CartService = require("../services/cart-service");
+const ProductService = require("../services/product-service");
 const createError = require('http-errors')
 const { getCartValidate, addToCartValidate, deleteCartValidate, updateCartValidate }  =require('../validations/cart-validate')
 
@@ -18,8 +19,9 @@ class CartController {
                 message: 'done',
                 data: cart
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async getAllCart(req, res, next) {
@@ -33,8 +35,9 @@ class CartController {
                 message: 'done',
                 data: carts
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async addToCart(req, res, next) {
@@ -43,7 +46,7 @@ class CartController {
             if (error) {
                 return next(createError.BadRequest(error.details[0].message));
             }
-            let cart = await CartService.getMyCartByProductId(value.productId);
+            let cart = await CartService.getMyCartByProductId( req.userId, value.productId);
             if (cart) {
                 cart.quantity += 1;
                 cart = await CartService.updateCart(cart.cartId, {quantity: cart.quantity});
@@ -62,8 +65,9 @@ class CartController {
             })
 
 
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async updateCart(req, res, next) {
@@ -81,8 +85,9 @@ class CartController {
                 message: 'done',
                 data: cart
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
 
@@ -100,8 +105,9 @@ class CartController {
                 status: 200,
                 message: 'done',
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
 }

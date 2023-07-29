@@ -23,8 +23,9 @@ class NotificationController {
                 message: 'done',
                 data: notification
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async getAllNotification(req, res, next) {
@@ -38,8 +39,9 @@ class NotificationController {
                 message: 'done',
                 data: notifications
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async createNotification(req, res, next) {
@@ -58,8 +60,9 @@ class NotificationController {
                 message: 'done',
                 data: notification
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async updateNotificationById(req, res, next) {
@@ -79,8 +82,9 @@ class NotificationController {
                 message:'done',
                 data: notification
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async deleteNotificationById(req, res, next) {
@@ -98,8 +102,9 @@ class NotificationController {
                 message: 'done'
             })
 
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
 }

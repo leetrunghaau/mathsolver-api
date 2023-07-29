@@ -11,7 +11,7 @@ class CartService {
     }
     static async getAllCartByUserId(userId) {
         const carts = await CartRepository.getAllCartByUserId(userId);
-        if (!carts) {
+        if (carts.length === 0) {
             return null;
         };
         return carts;

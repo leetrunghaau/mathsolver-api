@@ -17,8 +17,9 @@ class BlogController {
                 message: 'done',
                 data: blog
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async getAllBlog(req, res, next) {
@@ -32,8 +33,9 @@ class BlogController {
                 message: 'done',
                 data: blogs
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async createBlog(req, res, next) {
@@ -52,8 +54,9 @@ class BlogController {
                 message: 'done',
                 data: blog
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async updateBlogById(req, res, next) {
@@ -72,8 +75,9 @@ class BlogController {
                 message: 'done',
                 data: blog
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async deleteBlogById(req, res, next) {
@@ -90,8 +94,9 @@ class BlogController {
                 status: 200,
                 message: 'done'
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
 

@@ -19,9 +19,9 @@ class CategoryController {
                 data: category
             })
 
-        }
-        catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async getAllCategory(req, res, next) {
@@ -36,8 +36,9 @@ class CategoryController {
                 data: categories
             })
 
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async createCategory(req, res, next) {
@@ -55,8 +56,9 @@ class CategoryController {
                 message: 'done',
                 data: category
             })
-        } catch (error) {
-            console.log(error)
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async updateCategoryById(req, res, next) {
@@ -75,8 +77,9 @@ class CategoryController {
                 message: 'done',
                 data: category
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
 
 
@@ -95,8 +98,9 @@ class CategoryController {
                 status: 200,
                 message: 'done'
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
 }

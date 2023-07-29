@@ -19,8 +19,9 @@ class ProductDetailController {
                 message: 'done',
                 data: productDetail
             })
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async getProductDetailByProductId(req, res, next) {
@@ -39,8 +40,9 @@ class ProductDetailController {
                 message: 'done',
                 data: productDetail
             })
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async getAllProductDetail(req, res, next) {
@@ -54,8 +56,9 @@ class ProductDetailController {
                 message: 'done',
                 data: productDetails
             })
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async createProductDetail(req, res, next) {
@@ -76,8 +79,9 @@ class ProductDetailController {
                 message: 'done',
                 data: productDetail
             })
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async updateProductDetailById(req, res, next) {
@@ -98,8 +102,9 @@ class ProductDetailController {
                 message:'done',
                 data: productDetail
             })
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async deleteProductDetailById(req, res, next) {
@@ -119,8 +124,9 @@ class ProductDetailController {
                 message: 'done'
             })
 
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
 }

@@ -616,9 +616,93 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlY
 
 ### cart ------------------------------------------------------------------------------------------
 ###     get cart
-###     add product to cart
-###     edit value product in cart 
+GET http://localhost:8080/api/v1/cart
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": [
+    {
+      "cartId": "422b9bc8085ef90823",
+      "quantity": 40,
+      "Product": {
+        "productId": "10e32bc189f5959a39",
+        "name": "dasas",
+        "price": 79843,
+        "information": "hjgfhj"
+      }
+    },
+    {
+      "cartId": "d2cc77814bc6b279c8",
+      "quantity": 3,
+      "Product": {
+        "productId": "1e48622b6f61216f82",
+        "name": "dasas",
+        "price": 79843,
+        "information": "hjgfhj"
+      }
+    }
+  ]
+}
+###     add to cart
+POST   http://localhost:8080/api/v1/cart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+
+{
+  "productId":"1e48622b6f61216f82"
+}
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "cartId": "d2cc77814bc6b279c8",
+    "quantity": 3,
+    "Product": {
+      "productId": "1e48622b6f61216f82",
+      "name": "dasas",
+      "price": 79843,
+      "information": "hjgfhj"
+    }
+  }
+}
+
+###     edit value product in cart
+PUT    http://localhost:8080/api/v1/cart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+
+{
+  "cartId":"422b9bc8085ef90823",
+  "quantity":2
+}
+###OUTPUT
+{
+  "status": 200,
+  "message": "done",
+  "data": {
+    "cartId": "422b9bc8085ef90823",
+    "quantity": 40,
+    "Product": {
+      "productId": "10e32bc189f5959a39",
+      "name": "dasas",
+      "price": 79843,
+      "information": "hjgfhj"
+    }
+  }
+}
 ###     delete product in cart 
+DELETE    http://localhost:8080/api/v1/cart/f7798ff2d38d826a75
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+###OUTPUT
+{
+  "status": 200,
+  "message": "done"
+}
+
 
 
 
@@ -965,16 +1049,49 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlY
 
 
 ### order ------------------------------------------------------------------------------------------
-###     getAllByStatus
-###     getListByUserId
-###     add
-###     edit
-###     delete 
-### order item ------------------------------------------------------------------------------------------
-###     add all
-###     edit
-###     delete 
+###note: progress có các trạng thái: chờ được sử lý, đơn hàng được chấp nhận, đang sử lý, đang giao, giao thành công | khi đơn hàng đã chấp nhận thì người dùng không được xóa,đơn hàng đang giao thì không thay đổi được địa chỉ, khi đơn hàng giao thành công thì tự động sinh ra bill
+###     checkout
+POST      http://localhost:8080/api/v1/order/checkout
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
+{
+  "addressId": "6e812dd35bc4bdd02f",
+  "discountCode":"abc"
+}
+
+###     get all
+
+###     get by status | user role | lấy danh sách đơn hàng theo từng điều kiện | wait, accept, handle, delivery, done, cancel
+GET     http://localhost:8080/api/v1/orders/wait
+
+###     edit | user role | người dùng đổi thông tin giao hàng trước khi giao hàng
+PUT     http://localhost:8080/api/v1/order/2f752cae91a9f8a1f8
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+
+{
+  "addressId":"ddd"
+}
+
+
+###     delete | user role | người dùng hủy đơn hàng trước khi đơn hàng chấp nhận | đổi thông tin thành cancel chứ không xóa đơn hàng đi 
+DELETE    http://localhost:8080/api/v1/order/2f752cae91a9f8a1f8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+
+
+###     edit | admin role | thay đổi trạng thái đơn hàng
+PUT     http://localhost:8080/api/v1/admin/order/2f752cae91a9f8a1f8
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+
+{
+  "status":"ddd"
+}
+###     get all | admin role | lấy danh sách đơn hàng để sử lý
+GET     http://localhost:8080/api/v1/admin/orders
+###     get all | admin role | lấy danh sách đơn hàng để sử lý
+GET     http://localhost:8080/api/v1/admin/orders
 
 
 

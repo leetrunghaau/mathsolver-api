@@ -37,46 +37,75 @@ class Sig {
             });
 
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     };
     static async register(req, res, next) {
-        //check validate
-        const { error, value } = registerValidate(req.body);
-        if (error) {
-            return next(createError.BadRequest(error.details[0].message));
-        }
-        const userData = await UserService.getUserByEmail(value.email);
-        if (userData) {
-            if (userData.verified) {
-                //tài khoản đã tồn tại
-                return next(createError.InternalServerError('đã có tải khoảng'));
+        try {
+            //check validate
+            const { error, value } = registerValidate(req.body);
+            if (error) {
+                return next(createError.BadRequest(error.details[0].message));
+            }
+            const userData = await UserService.getUserByEmail(value.email);
+            if (userData) {
+                if (userData.verified) {
+                    //tài khoản đã tồn tại
+                    return next(createError.InternalServerError('đã có tải khoảng'));
+                } else {
+                    //tài khoản tồn tại nhưng chưa xác thực mail nên chưa có tài khoản (cụ thể mất link hoặc hết thòi gian token)
+                    //update user
+                    const user = await UserService.getUserByEmail(value.email);
+                    if (!user) {
+                        return next(createError.InternalServerError());
+                    }
+                    user.firstName = value.firstName;
+                    user.lastName = value.lastName;
+                    user.gender = value.gender;
+                    user.verified = new Date();
+                    const { userId, ...updateData } = user
+                    const newUser = await UserService.updateUserById(userId, updateData);
+                    console.log(user);
+                    console.log(newUser);
+                    if (!newUser) {
+                        return next(createError.InternalServerError());
+                    }
+                    const newAccount = await AccountService.updateAccountByUserId(newUser.userId, { password: await hashPassword(value.password) })
+                    if (!newAccount) {
+                        return next(createError.InternalServerError());
+                    }
+                    const verificationCode = generateCode();
+                    console.log("verificationCode:  ");
+                    console.log(verificationCode);
+                    const token = await generateVerificationToken(newUser.userId, await hashPassword(verificationCode));
+                    return res.status(200).json({
+                        status: 200,
+                        message: "done",
+                        data: {
+                            token: token
+                        }
+                    });
+                }
             } else {
-                //tài khoản tồn tại nhưng chưa xác thực mail nên chưa có tài khoản (cụ thể mất link hoặc hết thòi gian token)
-                //update user
-                const user = await UserService.getUserByEmail(value.email);
+                //create user
+                value.role = 'user';
+                const user = await UserService.createUser(value);
                 if (!user) {
                     return next(createError.InternalServerError());
                 }
-                user.firstName = value.firstName;
-                user.lastName = value.lastName;
-                user.gender = value.gender;
-                user.verified = new Date();
-                const { userId, ...updateData } = user
-                const newUser = await UserService.updateUserById(userId, updateData);
-                console.log(user);
-                console.log(newUser);
-                if (!newUser) {
-                    return next(createError.InternalServerError());
+                const accountData = {
+                    userId: user.userId,
+                    password: await hashPassword(value.password),
                 }
-                const newAccount = await AccountService.updateAccountByUserId(newUser.userId, { password: await hashPassword(value.password) })
-                if (!newAccount) {
+                const account = await AccountService.createAccount(accountData);
+                if (!account) {
                     return next(createError.InternalServerError());
                 }
                 const verificationCode = generateCode();
                 console.log("verificationCode:  ");
                 console.log(verificationCode);
-                const token = await generateVerificationToken(newUser.userId, await hashPassword(verificationCode));
+                const token = await generateVerificationToken(user.userId, await hashPassword(verificationCode));
                 return res.status(200).json({
                     status: 200,
                     message: "done",
@@ -85,33 +114,11 @@ class Sig {
                     }
                 });
             }
-        } else {
-            //create user
-            value.role = 'user';
-            const user = await UserService.createUser(value);
-            if (!user) {
-                return next(createError.InternalServerError());
-            }
-            const accountData = {
-                userId: user.userId,
-                password: await hashPassword(value.password),
-            }
-            const account = await AccountService.createAccount(accountData);
-            if (!account) {
-                return next(createError.InternalServerError());
-            }
-            const verificationCode = generateCode();
-            console.log("verificationCode:  ");
-            console.log(verificationCode);
-            const token = await generateVerificationToken(user.userId, await hashPassword(verificationCode));
-            return res.status(200).json({
-                status: 200,
-                message: "done",
-                data: {
-                    token: token
-                }
-            });
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
+
 
     }
     static async registerVerification(req, res, next) {
@@ -135,11 +142,12 @@ class Sig {
             return res.status(200).json({
                 status: 200,
                 message: 'done',
-                data:token
+                data: token
             })
 
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
 
     }
@@ -156,8 +164,9 @@ class Sig {
                     token: token
                 }
             });
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async resetPasswordByEmail(req, res, next) {
@@ -181,8 +190,9 @@ class Sig {
                     token: token
                 }
             });
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async resetPasswordVerification(req, res, next) {
@@ -204,8 +214,9 @@ class Sig {
                 message: 'done'
             })
 
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
 
     }
@@ -227,21 +238,22 @@ class Sig {
                 password: await hashPassword(value.password)
             }
             const account = await AccountService.updateAccountByUserId(user.userId, accountData);
-            if(!account){
+            if (!account) {
                 return next(createError.InternalServerError());
             }
             const token = await generateAccessToken(user.userId);
             return res.status(200).json({
                 status: 200,
                 message: 'done',
-                data:{
+                data: {
                     role: user.role,
-                    token:token
+                    token: token
                 }
             })
 
-        } catch {
-
+        } catch (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
 
     }
