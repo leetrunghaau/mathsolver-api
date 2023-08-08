@@ -3,24 +3,29 @@
 const ImportProduct = require('../models/import-product-model');
 
 class ImportProductRepository {
-  static async getImportProductById(importId) {
-    return ImportProduct.findByPk(importId);
+  static async getImportProductById(importProductId) {
+    return ImportProduct.findByPk(importProductId);
+  }
+  static async getAllImportProduct(){
+    return ImportProduct.findAll();
+  }
+  static async getAllImportProductByProductId(productId){
+    return ImportProduct.findAll({where:{productId: productId}})
+  }
+  static async createImportProduct(importProductData) {
+    return ImportProduct.create(importProductData);
   }
 
-  static async createImportProduct(importData) {
-    return ImportProduct.create(importData);
-  }
-
-  static async updateImportProduct(importId, importData) {
-    await ImportProduct.update(importData, {
-      where: { import_product_id: importId },
+  static async updateImportProduct(importProductId, importProductData) {
+    await ImportProduct.update(importProductData, {
+      where: { importProductId: importProductId },
     });
-    return this.getImportProductById(importId);
+    return this.getImportProductById(importProductId);
   }
 
-  static async deleteImportProduct(importId) {
+  static async deleteImportProduct(importProductId) {
     return ImportProduct.destroy({
-      where: { import_product_id: importId },
+      where: { importProductId: importProductId },
     });
   }
 }

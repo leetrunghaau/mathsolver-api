@@ -6,25 +6,25 @@ class CategoryRepository {
   static async getCategoryById(categoryId) {
     return Categories.findByPk(categoryId);
   }
-static async getAllCategory(){
-  return Categories.findAll();
-}
+  static async getAllCategory() {
+    return Categories.findAll();
+  }
   static async createCategory(categoryData) {
     return Categories.create(categoryData);
   }
 
   static async updateCategoryById(categoryId, categoryData) {
     await Categories.update(categoryData, {
-      where: { category_id: categoryId },
+      where: { categoryId: categoryId },
     });
     return this.getCategoryById(categoryId);
   }
 
   static async deleteCategoryById(categoryId) {
     return Categories.destroy({
-      where: { category_id: categoryId },
+      where: { categoryId: categoryId },
     });
   }
 }
 
-module.exports =  CategoryRepository;
+module.exports = CategoryRepository;

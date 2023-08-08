@@ -6,7 +6,9 @@ class DistributorRepository {
   static async getDistributorById(distributorId) {
     return Distributor.findByPk(distributorId);
   }
-
+  static async getAllDistributor() {
+    return Distributor.findAll();
+  }
   static async createDistributor(distributorData) {
     return Distributor.create(distributorData);
   }
@@ -25,4 +27,4 @@ class DistributorRepository {
   }
 }
 
-module.exports =  DistributorRepository;
+module.exports = DistributorRepository;

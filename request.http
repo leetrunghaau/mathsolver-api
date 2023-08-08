@@ -33,8 +33,8 @@ Content-Type: application/json
 {
     "firstName":"hau",
     "lastName":"leung",
-    "email": "letrunghu@gmail.com",
-    "password":"gggg",
+    "email": "user@gmail.com",
+    "password":"user",
     "gender":"nam"
 }
 ### OUPUT
@@ -48,10 +48,10 @@ Content-Type: application/json
 ###     email verification  Authorization teken riêng dùng để xác thực mà register trả về trước đó
 POST http://localhost:8080/api/v1/register-verification
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZDZiZGRmNDAyZjgyOThjMGUiLCJkVHlwZSI6IiQyYiQxMCQwQVdldTczYWZHVktmS2NySi8xeHJ1SlZVL0VWQ0NTN0g5RUpMdFdwQlJWbENleVptVVM1cSIsImlhdCI6MTY5MDM5ODg0MCwiZXhwIjoxNjkwNDAyNDQwfQ.Pn7h8IfkmZ6SK7UhYokQsGqyCLjXq2zn6WdCjEkkwxg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxOGRmMGEwODEwNzRhNWJkN2EiLCJkVHlwZSI6IiQyYiQxMCRUbEZTZjJ2alE5enVnQ01XTDVPVnR1bmRoczV0SEREZVlwaFRRT3kwNGJlM0VIMkJhWE1xSyIsImlhdCI6MTY5MTM4MjA4MiwiZXhwIjoxNjkxMzg1NjgyfQ.OGK0UTGWju4cViRGnvlwEFFr7yDPuTo3Q5doSd-hJXs
 
 {
-    "verificationCode":"590649"
+    "verificationCode":"819485"
 } 
 ### OUTPUT
 {
@@ -165,7 +165,8 @@ GET http://localhost:8080/api/v1/password-status/leehaau@gmail.com
 ### address ------------------------------------------------------------------------------------------
 ###     getAddress | get address main in user id
 GET http://localhost:8080/api/v1/address
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxOGRmMGEwODEwNzRhNWJkN2EiLCJpYXQiOjE2OTEzODIxMTAsImV4cCI6MTY5Mzk3NDExMH0.stzc6PaBJxR2dFwmSD1ek2lY0fB0Dv6da-vCk98HIts
+ 
 ###OUTPUT
 {
   "status": 200,
@@ -184,7 +185,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlY
 }
 ###     getListAddress | get list address in user id
 GET http://localhost:8080/api/v1/addresses
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxOGRmMGEwODEwNzRhNWJkN2EiLCJpYXQiOjE2OTEzODIxMTAsImV4cCI6MTY5Mzk3NDExMH0.stzc6PaBJxR2dFwmSD1ek2lY0fB0Dv6da-vCk98HIts
+ 
 ###OUTPUT
 {
   "status": 200,
@@ -217,15 +219,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlY
 ###     addAddress      
 POST  http://localhost:8080/api/v1/address
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxOGRmMGEwODEwNzRhNWJkN2EiLCJpYXQiOjE2OTEzODIxMTAsImV4cCI6MTY5Mzk3NDExMH0.stzc6PaBJxR2dFwmSD1ek2lY0fB0Dv6da-vCk98HIts
+ 
 {
     "province":"Đồng Tháp",
     "district": "GHZmmmjjbbb",
     "commune":"bc A",
-    "detail":"số xxx",
+    "detail":"địa chỉ phụ",
     "phone": "1234587014",
-    "status":"main"
+    "status":"sub"
 }
 ###OUTPUT
 {
@@ -617,8 +619,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlY
 ### cart ------------------------------------------------------------------------------------------
 ###     get cart
 GET http://localhost:8080/api/v1/cart
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzBiYjQ0YmFkOWNhNTk0ZTMiLCJpYXQiOjE2OTEzODA4ODMsImV4cCI6MTY5Mzk3Mjg4M30.oP4QPkMaACrOP0ea3ihC7MZsLLL7SrMlYizKg4Bz21k
 ###OUTPUT
 {
   "status": 200,
@@ -649,10 +650,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlY
 ###     add to cart
 POST   http://localhost:8080/api/v1/cart
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxOGRmMGEwODEwNzRhNWJkN2EiLCJpYXQiOjE2OTEzODIxMTAsImV4cCI6MTY5Mzk3NDExMH0.stzc6PaBJxR2dFwmSD1ek2lY0fB0Dv6da-vCk98HIts
+ 
 {
-  "productId":"1e48622b6f61216f82"
+  "productId":"cf8f1f502b81a04016"
 }
 ###OUTPUT
 {
@@ -695,7 +696,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlY
   }
 }
 ###     delete product in cart 
-DELETE    http://localhost:8080/api/v1/cart/f7798ff2d38d826a75
+DELETE    http://localhost:8080/api/v1/cart/422b9bc8085ef90823
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 ###OUTPUT
 {
@@ -752,7 +753,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlY
 
 {
     "name": "máy hàn45",
-    "parent": "caoriry id",
+    "parent": null,
     "image":"jhgjhghghjgjhg"
 
 }
@@ -926,15 +927,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlY
 
 
 ### distributor ------------------------------------------------------------------------------------------
+###     get
 ###     getAll
 ###     add
 ###     edit
 ###     delete  
 ### importduct ------------------------------------------------------------------------------------------
-###     getAll
-###     add
+###     import product
 ###     edit
-###     delete 
+###     get history by product
 
 
 
@@ -1053,47 +1054,55 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlY
 ###     checkout
 POST      http://localhost:8080/api/v1/order/checkout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxOGRmMGEwODEwNzRhNWJkN2EiLCJpYXQiOjE2OTEzODIxMTAsImV4cCI6MTY5Mzk3NDExMH0.stzc6PaBJxR2dFwmSD1ek2lY0fB0Dv6da-vCk98HIts
+ 
 {
-  "addressId": "6e812dd35bc4bdd02f",
+  "addressId": "2435ebf2caeea75a01",
   "discountCode":"abc"
 }
 
 ###     get all
-
+GET  http://localhost:8080/api/v1/orders
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxOGRmMGEwODEwNzRhNWJkN2EiLCJpYXQiOjE2OTEzODIxMTAsImV4cCI6MTY5Mzk3NDExMH0.stzc6PaBJxR2dFwmSD1ek2lY0fB0Dv6da-vCk98HIts
+ 
 ###     get by status | user role | lấy danh sách đơn hàng theo từng điều kiện | wait, accept, handle, delivery, done, cancel
 GET     http://localhost:8080/api/v1/orders/wait
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxOGRmMGEwODEwNzRhNWJkN2EiLCJpYXQiOjE2OTEzODIxMTAsImV4cCI6MTY5Mzk3NDExMH0.stzc6PaBJxR2dFwmSD1ek2lY0fB0Dv6da-vCk98HIts
+ 
 ###     edit | user role | người dùng đổi thông tin giao hàng trước khi giao hàng
-PUT     http://localhost:8080/api/v1/order/2f752cae91a9f8a1f8
+PUT     http://localhost:8080/api/v1/order
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxOGRmMGEwODEwNzRhNWJkN2EiLCJpYXQiOjE2OTEzODIxMTAsImV4cCI6MTY5Mzk3NDExMH0.stzc6PaBJxR2dFwmSD1ek2lY0fB0Dv6da-vCk98HIts
 
 {
-  "addressId":"ddd"
+  "orderId":"208691d7d42b6eace6",
+  "addressId":"7ad0edf86c66d7a0f4"
 }
 
 
 ###     delete | user role | người dùng hủy đơn hàng trước khi đơn hàng chấp nhận | đổi thông tin thành cancel chứ không xóa đơn hàng đi 
-DELETE    http://localhost:8080/api/v1/order/2f752cae91a9f8a1f8
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
+DELETE    http://localhost:8080/api/v1/order/208691d7d42b6eace6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxOGRmMGEwODEwNzRhNWJkN2EiLCJpYXQiOjE2OTEzODIxMTAsImV4cCI6MTY5Mzk3NDExMH0.stzc6PaBJxR2dFwmSD1ek2lY0fB0Dv6da-vCk98HIts
 
 
-###     edit | admin role | thay đổi trạng thái đơn hàng
-PUT     http://localhost:8080/api/v1/admin/order/2f752cae91a9f8a1f8
+
+###     get all | admin role | lấy danh sách đơn hàng để sử lý
+GET     http://localhost:8080/api/v1/admin/orders
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzBiYjQ0YmFkOWNhNTk0ZTMiLCJpYXQiOjE2OTEzODA4ODMsImV4cCI6MTY5Mzk3Mjg4M30.oP4QPkMaACrOP0ea3ihC7MZsLLL7SrMlYizKg4Bz21k
+ 
+###     get all | admin role | lấy danh sách đơn hàng theo trạng thái để sử lý
+GET     http://localhost:8080/api/v1/admin/orders/ddd
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzBiYjQ0YmFkOWNhNTk0ZTMiLCJpYXQiOjE2OTEzODA4ODMsImV4cCI6MTY5Mzk3Mjg4M30.oP4QPkMaACrOP0ea3ihC7MZsLLL7SrMlYizKg4Bz21k
+
+###     edit | admin role | thay đổi trạng thái đơn hàng | đơn hàng ở trạng thái hủy (cancel thì không thay đổi được)
+PUT     http://localhost:8080/api/v1/admin/order
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
-  "status":"ddd"
+  "orderId":"1242e4aa77ca967ec9",
+  "status":"done"
 }
-###     get all | admin role | lấy danh sách đơn hàng để sử lý
-GET     http://localhost:8080/api/v1/admin/orders
-###     get all | admin role | lấy danh sách đơn hàng để sử lý
-GET     http://localhost:8080/api/v1/admin/orders
-
-
 
 
 
@@ -1162,7 +1171,7 @@ Content-Type: application/json
 
 {
     "name": "dasas",
-    "categoryId": "1335921e1ce62b7d65",
+    "categoryId": null,
     "brandId": null,
     "information": "hjgfhj",
     "price": 79843,

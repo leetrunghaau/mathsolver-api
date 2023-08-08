@@ -62,7 +62,6 @@ class Sig {
                     }
                     user.firstName = value.firstName;
                     user.lastName = value.lastName;
-                    user.gender = value.gender;
                     user.verified = new Date();
                     const { userId, ...updateData } = user
                     const newUser = await UserService.updateUserById(userId, updateData);

@@ -45,5 +45,12 @@ class CartService {
         }
         return cart;
     }
+    static async deleteCartsByUserId(userId){
+        const carts = await CartRepository.deleteCartsByUserId(userId);
+        if (carts <= 0) {
+            return null;
+        }
+        return carts;
+    }
 }
 module.exports = CartService;

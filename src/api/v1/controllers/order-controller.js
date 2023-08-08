@@ -46,9 +46,9 @@ class OrderController {
                 if (discount.quantity < 1) {
                     return next(createError.BadRequest('hết mã giảm giá'))
                 }
-                // if(discount.applyFor < total ){
-                //     return next(createError.BadRequest('mã giảm giá áp dụng cho đơn hàng từ ' + discount.applyFor))
-                // }
+                if(discount.applyFor >= total ){
+                    return next(createError.BadRequest('mã giảm giá áp dụng cho đơn hàng từ ' + discount.applyFor))
+                }
             }
 
 
@@ -56,12 +56,14 @@ class OrderController {
             if (!address) {
                 return next(createError.NotFound('Địa chỉ không tìm thấy'))
             }
-
+            if(address.userId != req.userId){
+                return next(createError[401]('Không phải địa chỉ của bạn'))
+            }
             async function processCarts(carts, req, address, discount) {
                 let orderData = {
                     userId: req.userId,
                     addressId: address.addressId,
-                    progress: 'wait',
+                    status: 'wait',
                 };
 
                 if (discount) {
@@ -88,7 +90,11 @@ class OrderController {
                     })
                 );
                 //delete all cart by user id
-            }
+                const cartsDelete = await CartService.deleteCartsByUserId(req.userId);
+                if (!cartsDelete){
+                    return next(createError.InternalServerError())
+                }
+            }   
 
             await processCarts(carts, req, address, discount);
 
@@ -112,7 +118,9 @@ class OrderController {
             }
             return res.status(200).json({
                 status: 200,
-                message: 'done'
+                message: 'done',
+                data: orders
+
             })
 
         } catch  (error) {
@@ -129,7 +137,8 @@ class OrderController {
             }
             return res.status(200).json({
                 status: 200,
-                message: 'done'
+                message: 'done',
+                data: orders
             })
 
         } catch  (error) {
@@ -141,7 +150,7 @@ class OrderController {
         try {
             const order = await OrderService.getOrderById(req.validateData.orderId)
             if (!order) {
-                return next(createError.NotFound('Địa chỉ không tìm thấy'))
+                return next(createError.NotFound('Không tìn thấy đơn hàng'))
             }
             if (req.userId != order.userId) {
                 return next(createError.BadRequest('Bạn đang đổi thông tin của đơn hàng người khác đó. stop'))
@@ -149,8 +158,14 @@ class OrderController {
             if (!['wait', 'accept', 'handle'].includes(order.status)) {
                 return next(createError.BadRequest('Đơn hàng không thể thay đổi địa chỉ'))
             }
-
-            const newOrder = await OrderService.updateOrder(req.validateData.orderId, { addressId: req.body.addressId });
+            const address = await AddressService.getAddressById(req.validateData.addressId);
+            if(!address){
+                return next(createError.BadRequest('không tìm thấy địa chỉ'))
+            }
+            if(address.userId != req.userId){
+                return next(createError[401]('Địa chỉ không phải của bạn'))
+            }
+            const newOrder = await OrderService.updateOrder(req.validateData.orderId, { addressId: req.validateData.addressId });
             if (!newOrder) {
                 return next(createError.InternalServerError())
             }
@@ -200,7 +215,8 @@ class OrderController {
             }
             return res.status(200).json({
                 status: 200,
-                message: 'done'
+                message: 'done',
+                data: orders
             })
         } catch (error) {
             console.log(error);
@@ -215,7 +231,8 @@ class OrderController {
             }
             return res.status(200).json({
                 status: 200,
-                message: 'done'
+                message: 'done',
+                data: orders
             })
 
         } catch  (error) {
@@ -227,7 +244,7 @@ class OrderController {
         try {
             const order = await OrderService.getOrderById(req.validateData.orderId)
             if (!order) {
-                return next(createError.NotFound('Địa chỉ không tìm thấy'))
+                return next(createError.NotFound('Đơn hàng không tìm thấy'))
             }
 
             if (['cancel'].includes(order.status)) {

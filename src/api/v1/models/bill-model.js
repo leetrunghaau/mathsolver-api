@@ -37,6 +37,6 @@ const Bill = db.define('Bill', {
   timestamps: false
 });
 
-Bill.belongsTo(Order, { foreignKey: 'order_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+Bill.belongsTo(Order, { foreignKey: 'orderId', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 module.exports = Bill;

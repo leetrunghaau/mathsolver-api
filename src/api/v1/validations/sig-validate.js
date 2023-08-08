@@ -5,7 +5,6 @@ const registerValidate = data => {
         firstName: joi.string().max(20).required(),
         lastName: joi.string().max(20).required(),
         email: joi.string().email().lowercase().required(),
-        gender: joi.string().max(7).required(),
         password: joi.string().min(4).max(32).required()
     });
     return registerData.validate(data);

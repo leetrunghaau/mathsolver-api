@@ -26,7 +26,7 @@ const Order = db.define('Order', {
     type: DataTypes.DATE,
     field:'modified_at'
   },
-  progress: DataTypes.STRING(20),
+  status: DataTypes.STRING(20),
   discountId:{
     type: DataTypes.STRING(20),
     field: 'discount_id'

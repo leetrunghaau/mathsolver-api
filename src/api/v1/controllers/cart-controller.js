@@ -46,6 +46,10 @@ class CartController {
             if (error) {
                 return next(createError.BadRequest(error.details[0].message));
             }
+            const product = await ProductService.getProductById(value.productId);
+            if(!product){
+                return next(createError.NotFound('product not found with id = ' + value.productId))
+            }
             let cart = await CartService.getMyCartByProductId( req.userId, value.productId);
             if (cart) {
                 cart.quantity += 1;
@@ -57,6 +61,7 @@ class CartController {
                     quantity: 1
                 }
                 cart = await CartService.createCart(cartData);
+                cart = await CartService.getCartById(cart.cartId)
             }
             return res.status(200).json({
                 status: 200,

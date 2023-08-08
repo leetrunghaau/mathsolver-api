@@ -8,7 +8,7 @@ const getCategoryValidate = data =>{
 const createCategoryValidate = data =>{
     const categoryData = joi.object({
         name: joi.string().required(),
-        parent: joi.string().required(),
+        parent: joi.string().allow(null).required(),
         image: joi.string().required()
 
     })

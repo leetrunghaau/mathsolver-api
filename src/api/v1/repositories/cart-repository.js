@@ -15,7 +15,7 @@ class CartRepository {
           { model: Product, attributes: ['productId', 'name', 'price', 'information', 'price'] }
         ]
       }
-      );
+    );
   }
   static async getAllCartByUserId(userId) {
     return Cart.findAll({
@@ -26,7 +26,7 @@ class CartRepository {
         exclude: ['userId', 'productId', 'user_id', 'product_id']
       },
       include: [
-        { model: Product, attributes: ['productId', 'name', 'price', 'information', 'price','status','quantity'] }
+        { model: Product, attributes: ['productId', 'name', 'price', 'information', 'price', 'status', 'quantity'] }
       ]
     })
   }
@@ -51,6 +51,11 @@ class CartRepository {
   static async deleteCart(cartId) {
     return Cart.destroy({
       where: { cartId: cartId },
+    });
+  }
+  static async deleteCartsByUserId(userId) {
+    return Cart.destroy({
+      where: { userId: userId },
     });
   }
 }

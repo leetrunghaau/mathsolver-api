@@ -23,6 +23,10 @@ const Discount = db.define('Discount', {
     type: DataTypes.DATE,
     field: 'disable_at'
   },
+  applyFor: {
+    type: DataTypes.DOUBLE,
+    field: 'apply_for'
+  },
   type: DataTypes.STRING(10),
   value: DataTypes.DOUBLE,
   quantity: DataTypes.INTEGER,

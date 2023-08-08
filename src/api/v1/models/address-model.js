@@ -24,5 +24,5 @@ const Address = db.define('Address', {
   tableName: 'address',
   timestamps: false
 });
-Address.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+Address.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE', onUpdate: 'CASCADE' })
 module.exports = Address;

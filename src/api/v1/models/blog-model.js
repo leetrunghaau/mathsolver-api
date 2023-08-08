@@ -36,7 +36,7 @@ const Blog = db.define('Blog', {
     tableName: 'blog',
   timestamps: false
 });
-Blog.belongsTo(User,{foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
-Blog.belongsTo(BlogCategories,{foreignKey:'blog_category_id',onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+Blog.belongsTo(User,{foreignKey: 'userId', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
+Blog.belongsTo(BlogCategories,{foreignKey:'blogCategoryId',onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 module.exports = Blog;

@@ -23,8 +23,9 @@ class DiscountController {
                 message: 'done',
                 data: discount
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async getAllDiscount(req, res, next) {
@@ -38,8 +39,9 @@ class DiscountController {
                 message: 'done',
                 data: discounts
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async createDiscount(req, res, next) {
@@ -61,8 +63,9 @@ class DiscountController {
                 message: 'done',
                 data: discount
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async updateDiscountById(req, res, next) {
@@ -81,8 +84,9 @@ class DiscountController {
                 message:'done',
                 data: discount
             })
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
     static async deleteDiscountById(req, res, next) {
@@ -101,8 +105,9 @@ class DiscountController {
                 message: 'done'
             })
 
-        } catch {
-
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
         }
     }
 }

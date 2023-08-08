@@ -14,5 +14,10 @@ const Categories = db.define('Categories', {
   tableName: 'categories',
   timestamps: false
 });
-
+Categories.belongsTo(Categories,{
+  foreignKey: 'parent', 
+    targetKey: 'categoryId', 
+    onDelete: 'CASCADE', 
+    onUpdate: 'CASCADE' 
+})
 module.exports = Categories;

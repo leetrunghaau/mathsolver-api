@@ -2,6 +2,7 @@ const nodeMailer = require('nodemailer')
 const mailConfig = require('../../config/mail-config')
 
 
+
 module.exports.sendMail = (to, subject, htmlContent) => {
     const transport = nodeMailer.createTransport({
         host: mailConfig.HOST,

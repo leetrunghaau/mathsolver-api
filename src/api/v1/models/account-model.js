@@ -23,6 +23,6 @@ const Account = db.define('Account', {
   timestamps: false
 });
 
-Account.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+Account.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 module.exports = Account;
