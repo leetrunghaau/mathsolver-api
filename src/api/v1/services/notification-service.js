@@ -8,6 +8,13 @@ class NotificationService {
         }
         return notification;
     }
+    static async getCurrentNotification() {
+        const notification = await NotificationRepository.getCurrentNotification()
+        if (!notification) {
+            return null;
+        }
+        return notification;
+    }
     static async getAllNotification(){
         const notifications = await NotificationRepository.getAllNotification();
         if(notifications.length === 0){

@@ -17,6 +17,8 @@ const productDetailRouter = require('./product-detail-router')
 const productImageRouter = require('./product-image-router')
 const cartRouter = require('./cart-routes')
 const orderRouter = require('./order-routes')
+const distributorRouter = require('./distributor-routes')
+const importProductRouter = require('./import-product-routes')
 
 
 router.use(userRoutes);
@@ -33,7 +35,9 @@ router.use(notificationRouter);
 router.use(productDetailRouter);
 router.use(productImageRouter);
 router.use(cartRouter);
-router.use(orderRouter)
+router.use(orderRouter);
+router.use(distributorRouter);
+router.use(importProductRouter);
 
 router.get("/test-value/:myvalue", (req, res, next) => {
     console.log(req);

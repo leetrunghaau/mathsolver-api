@@ -26,7 +26,7 @@ class ImportProductService {
     static async createImportProduct(importProductData){
         importProductData.importProductId = generateId();
         importProductData.createdAt = new Date();
-        importProductData.modified = new Date();
+        importProductData.modifiedAt = new Date();
         const importProduct = await ImportProductRepository.createImportProduct(importProductData);
         if(!importProduct){
             return null;
@@ -34,7 +34,7 @@ class ImportProductService {
         return importProduct
     }
     static async updateImportProduct(importProductId, importProductData){
-        importProductData.modified = new Date();
+        importProductData.modifiedAt = new Date();
         const importProduct = await ImportProductRepository.updateImportProduct(importProductId,importProductData);
         if(!importProduct){
             return null;

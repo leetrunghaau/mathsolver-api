@@ -6,11 +6,11 @@ class DistributorValidate {
     static getDistributorById(req, res, next) {
         const validationResult = joi.object({
             distributorId: joi.string().max(20).required()
-        }).validate(req.body);
+        }).validate(req.params);
         if (validationResult.error) {
             return next(createError.BadRequest(validationResult.error.details[0].message));
         }
-        req.validateData = req.body;
+        req.validateData = req.params;
         next();
     };
 
