@@ -17,7 +17,7 @@ const { errorMiddleware } = require('./v1/middlewares/error-middleweara');
 app.use('/api/v1', apiRoutes);
 // Error handling middleware
 app.use(errorMiddleware);
-app.get
+
 
 //swager
 
@@ -29,9 +29,10 @@ const specs = swaggerJsdoc({
     }
   },
   apis: [
-    './v1/routes/*.js'
+    './v1/routes/index.js'
   ],
 });
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 // Start the server
