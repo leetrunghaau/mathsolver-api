@@ -3,7 +3,6 @@ const dotenv = require('dotenv');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const app = express();
-require('./v1/controllers/address-controller')
 // Load environment variables from .env file
 dotenv.config();
 
