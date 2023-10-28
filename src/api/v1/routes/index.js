@@ -38,5 +38,22 @@ router.use(cartRouter);
 router.use(orderRouter);
 router.use(distributorRouter);
 router.use(importProductRouter);
+<<<<<<< HEAD
+=======
+
+router.get("/test-value/:myvalue", (req, res, next) => {
+    console.log(req);
+    console.log(req.myvalue);
+    console.log(req.body);
+    console.log(req.params);
+    console.log('jjjjjjjjjjjjjjj')
+})
+router.post("/test-mail", (req, res) => {
+    sendMail.sendMail("ketui1369@gmail.com","tiêu đề của mail", "req.body\n.content")
+    return res.status(200).json({
+mess:"done"
+    })
+})
+>>>>>>> adfa2105277c5598a3b99f0edf59bf0862cc479c
 
 module.exports = router;
