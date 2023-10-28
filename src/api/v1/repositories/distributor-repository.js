@@ -13,16 +13,16 @@ class DistributorRepository {
     return Distributor.create(distributorData);
   }
 
-  static async updateDistributor(distributorId, distributorData) {
+  static async updateDistributorById(distributorId, distributorData) {
     await Distributor.update(distributorData, {
-      where: { distributor_id: distributorId },
+      where: { distributorId: distributorId },
     });
     return this.getDistributorById(distributorId);
   }
 
-  static async deleteDistributor(distributorId) {
+  static async deleteDistributorById(distributorId) {
     return Distributor.destroy({
-      where: { distributor_id: distributorId },
+      where: { distributorId: distributorId },
     });
   }
 }

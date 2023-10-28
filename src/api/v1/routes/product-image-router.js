@@ -1,4 +1,5 @@
 const express = require('express');
+const { authorization } = require('../middlewares/auth-middleware');
 const router = express.Router();
 const ProductImageController = require('../controllers/product-image-controller');
 
@@ -6,9 +7,9 @@ const ProductImageController = require('../controllers/product-image-controller'
 router.get('/product-image/:productImageId', ProductImageController.getProductImageById);
 router.get('/product-image-main-product-id/:productId', ProductImageController.getProductImageMainByProductId);
 router.get('/product-images-product-id/:productId', ProductImageController.getAllProductImageByProductId);
-router.get('/product-images', ProductImageController.getAllProductImage);
-router.post('/product-image', ProductImageController.createProductImage);
-router.put('/product-image', ProductImageController.updateProductImageById);
-router.delete('/product-image/:productImageId', ProductImageController.deleteProductImageById);
+router.get('/product-images', authorization(['admin']), ProductImageController.getAllProductImage);
+router.post('/product-image', authorization(['admin']), ProductImageController.createProductImage);
+router.put('/product-image', authorization(['admin']), ProductImageController.updateProductImageById);
+router.delete('/product-image/:productImageId', authorization(['admin']), ProductImageController.deleteProductImageById);
 
 module.exports = router;

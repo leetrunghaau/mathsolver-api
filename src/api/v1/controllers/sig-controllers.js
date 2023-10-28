@@ -5,7 +5,8 @@ const { hashPassword, comparePasswords } = require("../helpers/password-crypt");
 const AccountService = require("../services/account-service");
 const UserService = require("../services/user-service");
 const { loginEmailPasswordValidate, registerValidate, registerVerificationValidate } = require("../validations/sig-validate");
-const createError = require('http-errors')
+const createError = require('http-errors');
+const { sendCodeForRegister } = require("../helpers/mailer");
 
 class Sig {
     static async loginEmailPassword(req, res, next) {
@@ -77,6 +78,7 @@ class Sig {
                     const verificationCode = generateCode();
                     console.log("verificationCode:  ");
                     console.log(verificationCode);
+                    sendCodeForRegister(user.email, verificationCode);
                     const token = await generateVerificationToken(newUser.userId, await hashPassword(verificationCode));
                     return res.status(200).json({
                         status: 200,
@@ -104,6 +106,7 @@ class Sig {
                 const verificationCode = generateCode();
                 console.log("verificationCode:  ");
                 console.log(verificationCode);
+                sendCodeForRegister(user.email, verificationCode);
                 const token = await generateVerificationToken(user.userId, await hashPassword(verificationCode));
                 return res.status(200).json({
                     status: 200,
@@ -155,6 +158,11 @@ class Sig {
             const verificationCode = generateCode();
             console.log("verificationCode:  ");
             console.log(verificationCode);
+            const user = await UserService.getUserById(req.userId);
+            if(!user){
+                return next(createError[401]('user id not match'));
+            }
+            sendCodeForResetPassword(user.email, verificationCode);
             const token = await generateVerificationToken(req.userId, await hashPassword(verificationCode));
             return res.status(200).json({
                 status: 200,
@@ -181,6 +189,7 @@ class Sig {
             const verificationCode = generateCode();
             console.log("verificationCode:  ");
             console.log(verificationCode);
+            sendCodeForResetPassword(user.email, verificationCode);
             const token = await generateVerificationToken(user.userId, await hashPassword(verificationCode));
             return res.status(200).json({
                 status: 200,
@@ -204,13 +213,14 @@ class Sig {
             if (!checkValue) {
                 return next(createError.BadRequest('sai mã code vui lòng nhập lại'))
             }
-            const verificationCode = generateCode();
-            console.log("verificationCode:  ");
-            console.log(verificationCode);
+
             const token = await generateVerificationToken(req.userId, await hashPassword("newPassword"));
             return res.status(200).json({
                 status: 200,
-                message: 'done'
+                message: 'done',
+                data: {
+                    token: token
+                }
             })
 
         } catch (error) {

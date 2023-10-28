@@ -1,7 +1,9 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 const app = express();
-
+require('./v1/controllers/address-controller')
 // Load environment variables from .env file
 dotenv.config();
 
@@ -12,15 +14,25 @@ app.use(express.json());
 // Routes
 const apiRoutes = require('./v1/routes/index');
 const { errorMiddleware } = require('./v1/middlewares/error-middleweara');
-
 app.use('/api/v1', apiRoutes);
 // Error handling middleware
 app.use(errorMiddleware);
-// app.use((err, req, res, next) => {
-//   console.error(err.stack);
-//   res.status(500).json({ message: 'Internal server error' });
-//   // res.status(500).json({ message: err.stack });
-// });
+app.get
+
+//swager
+
+const specs = swaggerJsdoc({
+  swaggerDefinition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Mathsolver API',
+    }
+  },
+  apis: [
+    './v1/routes/*.js'
+  ],
+});
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 // Start the server
 const port = process.env.PORT || 3000;

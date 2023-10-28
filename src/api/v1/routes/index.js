@@ -17,6 +17,8 @@ const productDetailRouter = require('./product-detail-router')
 const productImageRouter = require('./product-image-router')
 const cartRouter = require('./cart-routes')
 const orderRouter = require('./order-routes')
+const distributorRouter = require('./distributor-routes')
+const importProductRouter = require('./import-product-routes')
 
 
 router.use(userRoutes);
@@ -33,20 +35,8 @@ router.use(notificationRouter);
 router.use(productDetailRouter);
 router.use(productImageRouter);
 router.use(cartRouter);
-router.use(orderRouter)
-
-router.get("/test-value/:myvalue", (req, res, next) => {
-    console.log(req);
-    console.log(req.myvalue);
-    console.log(req.body);
-    console.log(req.params);
-    console.log('jjjjjjjjjjjjjjj')
-})
-router.post("/test-mail", (req, res) => {
-    sendMail.sendMail("ketui1369@gmail.com","tiêu đề của mail", "req.body\n.content")
-    return res.status(200).json({
-mess:"done"
-    })
-})
+router.use(orderRouter);
+router.use(distributorRouter);
+router.use(importProductRouter);
 
 module.exports = router;

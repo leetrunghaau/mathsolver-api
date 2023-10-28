@@ -7,10 +7,10 @@ const router = express.Router();
 
 // Define routes
 router.get('/discount/:discountId', DiscountController.getDiscountById);
-router.get('/discounts', DiscountController.getAllDiscount);
-router.post('/discount', DiscountController.createDiscount);
-router.put('/discount', DiscountController.updateDiscountById);
-router.delete('/discount/:discountId', DiscountController.deleteDiscountById)
+router.get('/discounts', authorization(['admin']),DiscountController.getAllDiscount);
+router.post('/discount', authorization(['admin']),DiscountController.createDiscount);
+router.put('/discount', authorization(['admin']),DiscountController.updateDiscountById);
+router.delete('/discount/:discountId', authorization(['admin']),DiscountController.deleteDiscountById)
 
 
 

@@ -28,6 +28,22 @@ class NotificationController {
             return next(createError.InternalServerError());
         }
     }
+    static async getCurrentNotification(req, res, next) {
+        try {
+            const notification = await NotificationService.getCurrentNotification();
+            if (!notification) {
+                return next(createError.NotFound('Notification not found'));
+            }
+            return res.status(200).json({
+                status: 200,
+                message: 'done',
+                data: notification
+            })
+        } catch  (error) {
+            console.log(error);
+            return next(createError.InternalServerError());
+        }
+    }
     static async getAllNotification(req, res, next) {
         try {
             const notifications = await NotificationService.getAllNotification();

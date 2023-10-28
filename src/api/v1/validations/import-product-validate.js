@@ -5,7 +5,7 @@ class ImportProductValidate {
 
     static getHistoryByProductId(req, res, next) {
         const validationResult = joi.object({
-            importProductId: joi.string().max(20).required(),
+            productId: joi.string().max(20).required(),
         }).validate(req.params);
         if (validationResult.error) {
             return next(createError.BadRequest(validationResult.error.details[0].message));

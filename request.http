@@ -33,9 +33,8 @@ Content-Type: application/json
 {
     "firstName":"hau",
     "lastName":"leung",
-    "email": "user@gmail.com",
-    "password":"user",
-    "gender":"nam"
+    "email": "ketui1369@gmail.com",
+    "password":"user"
 }
 ### OUPUT
 {
@@ -774,7 +773,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlYzBlZjU1OGMxYWQwYmIiLCJpYXQiOjE2OTAxMzIxNjUsImV4cCI6MTY5MjcyNDE2NX0.rzBhDIL7JRNZQL7DplT-K5D7jvubz5PHrgLb9F9UM0A
 
 {
-    "categoryId": "4c582c4eda0544bf6a",
+    "categoryId": "e7ce2576d77d10f6cb",
     "name": "máy hàn 997",
     "parent": "categoryId",
     "image":"jhgjhghghjgjhg"
@@ -928,16 +927,66 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0M2ZlY
 
 ### distributor ------------------------------------------------------------------------------------------
 ###     get
+GET http://localhost:8080/api/v1/distributor/bc6bcd46e778bb3411
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzBiYjQ0YmFkOWNhNTk0ZTMiLCJpYXQiOjE2OTEzODA4ODMsImV4cCI6MTY5Mzk3Mjg4M30.oP4QPkMaACrOP0ea3ihC7MZsLLL7SrMlYizKg4Bz21k
+
 ###     getAll
+GET http://localhost:8080/api/v1/distributors
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzBiYjQ0YmFkOWNhNTk0ZTMiLCJpYXQiOjE2OTEzODA4ODMsImV4cCI6MTY5Mzk3Mjg4M30.oP4QPkMaACrOP0ea3ihC7MZsLLL7SrMlYizKg4Bz21k
+
 ###     add
+POST http://localhost:8080/api/v1/distributor
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzBiYjQ0YmFkOWNhNTk0ZTMiLCJpYXQiOjE2OTEzODA4ODMsImV4cCI6MTY5Mzk3Mjg4M30.oP4QPkMaACrOP0ea3ihC7MZsLLL7SrMlYizKg4Bz21k
+Content-Type: application/json
+
+{
+  "name":"cửa hàng đò chơi số 3",
+  "address":"Mỹ Xương",
+  "phone":"1234567890"
+}
 ###     edit
+PUT  http://localhost:8080/api/v1/distributor
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzBiYjQ0YmFkOWNhNTk0ZTMiLCJpYXQiOjE2OTEzODA4ODMsImV4cCI6MTY5Mzk3Mjg4M30.oP4QPkMaACrOP0ea3ihC7MZsLLL7SrMlYizKg4Bz21k
+Content-Type: application/json
+
+{
+  "distributorId": "bc6bcd46e778bb3411",
+  "name":"cửa hàng đò chơi số 10",
+  "address":"Mỹ Xương",
+  "phone":"1234567890"
+}
 ###     delete  
+DELETE  http://localhost:8080/api/v1/distributor/b032794ec5d8b8483e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzBiYjQ0YmFkOWNhNTk0ZTMiLCJpYXQiOjE2OTEzODA4ODMsImV4cCI6MTY5Mzk3Mjg4M30.oP4QPkMaACrOP0ea3ihC7MZsLLL7SrMlYizKg4Bz21k
+
 ### importduct ------------------------------------------------------------------------------------------
-###     import product
-###     edit
 ###     get history by product
+GET http://localhost:8080/api/v1/import-product-history/60ad24b1d17ee9cd94
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzBiYjQ0YmFkOWNhNTk0ZTMiLCJpYXQiOjE2OTEzODA4ODMsImV4cCI6MTY5Mzk3Mjg4M30.oP4QPkMaACrOP0ea3ihC7MZsLLL7SrMlYizKg4Bz21k
 
+###     import product
+POST  http://localhost:8080/api/v1/import-product
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzBiYjQ0YmFkOWNhNTk0ZTMiLCJpYXQiOjE2OTEzODA4ODMsImV4cCI6MTY5Mzk3Mjg4M30.oP4QPkMaACrOP0ea3ihC7MZsLLL7SrMlYizKg4Bz21k
 
+{
+  "productId":"60ad24b1d17ee9cd94",
+  "distributorId":"264bc890a66e0fec04",
+  "quantity":50,
+  "description":"hello anh em"
+}
+###     edit
+PUT  http://localhost:8080/api/v1/import-product
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzBiYjQ0YmFkOWNhNTk0ZTMiLCJpYXQiOjE2OTEzODA4ODMsImV4cCI6MTY5Mzk3Mjg4M30.oP4QPkMaACrOP0ea3ihC7MZsLLL7SrMlYizKg4Bz21k
+
+{
+   "importProductId": "43fabed658e39632b9",
+  "productId":"60ad24b1d17ee9cd94",
+  "distributorId":"264bc890a66e0fec04",
+  "quantity":500,
+  "description":"hello anh em"
+}
 
 
 ### notification ------------------------------------------------------------------------------------------

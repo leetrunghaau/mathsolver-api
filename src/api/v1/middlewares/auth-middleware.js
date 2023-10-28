@@ -50,7 +50,10 @@ const authorization = permission => {
         const authHeader = req.headers['authorization'];
         const bearerToken = authHeader.split(' ');
         const token = bearerToken[1];
-        // console.log(token);
+        console.log(bearerToken[0]);
+        if (bearerToken[0] != 'Bearer') {
+            return next(createError[401]('you dont have permission'));
+        }
 
         try {
             const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
