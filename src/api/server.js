@@ -17,7 +17,7 @@ const { errorMiddleware } = require('./v1/middlewares/error-middleweara');
 app.use('/api/v1', apiRoutes);
 // Error handling middleware
 app.use(errorMiddleware);
-app.get
+
 
 //swager
 
