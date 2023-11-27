@@ -5,7 +5,7 @@ const { authorization } = require('../middlewares/auth-middleware');
 const BlogCategoryValidate = require('../validations/blog-category-validate');
 
 // Define routes
-router.get("/blog-category/:blogCategoryId", BlogCategoriesController.getBlogCategoryById);
+router.get("/blog-category/:blogCategoryId", BlogCategoryValidate.getBlogCategory, BlogCategoriesController.getBlogCategoryById);
 router.get("/blog-categories", BlogCategoriesController.getAllBlogCategory);
 router.post(
     "/blog-category",

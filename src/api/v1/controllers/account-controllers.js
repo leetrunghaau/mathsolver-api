@@ -6,46 +6,47 @@ const createError = require('http-errors');
 
 class AccountControllers {
 
+
     static async getPasswordStatusByUserId(req, res, next) {
         try {
             const account = await AccountService.getAccountByUserId(req.userId);
             if (!account) {
                 return next(createError.NotFound('password not found'));
             }
-            
+
             return res.status(200).json({
                 status: 200,
                 message: 'done',
-                data:{
+                data: {
                     modifiedAt: account.modifiedAt
-                } 
+                }
             })
-        } catch  (error) {
+        } catch (error) {
             console.log(error);
             return next(createError.InternalServerError());
         }
     }
     static async getPasswordStatusByEmail(req, res, next) {
         try {
-            const user = await UserService.getUserByEmail( req.validateData.email);
+            const user = await UserService.getUserByEmail(req.validateData.email);
             console.log(user);
 
-            if(!user){
+            if (!user) {
                 return next(createError.BadRequest('email chưa được đăng ký'));
             }
             const account = await AccountService.getAccountByUserId(user.userId);
             if (!account) {
                 return next(createError.NotFound('password not found'));
             }
-            
+
             return res.status(200).json({
                 status: 200,
                 message: 'done',
-                data:{
+                data: {
                     modifiedAt: account.modifiedAt
-                } 
+                }
             })
-        } catch  (error) {
+        } catch (error) {
             console.log(error);
             return next(createError.InternalServerError());
         }
@@ -58,11 +59,11 @@ class AccountControllers {
             if (!acc) {
                 return next(createError.InternalServerError);
             }
-            const checkValue = await comparePasswords( req.validateData.oldPassword, acc.password);
+            const checkValue = await comparePasswords(req.validateData.oldPassword, acc.password);
             if (!checkValue) {
                 return next(createError.InternalServerError('sai mật khẩu cũ'));
             }
-            const passwordEncode = await hashPassword( req.validateData.newPassword);
+            const passwordEncode = await hashPassword(req.validateData.newPassword);
             const newAcc = await AccountService.updateAccountByUserId(req.userId, { password: passwordEncode });
             if (!newAcc) {
                 return next(createError.InternalServerError('internal server error !'));
@@ -70,13 +71,13 @@ class AccountControllers {
             return res.status(200).json({
                 message: 'update done'
             })
-        } catch  (error) {
+        } catch (error) {
             console.log(error);
             return next(createError.InternalServerError());
         }
     }
 
-    
+
 
 }
 module.exports = AccountControllers;

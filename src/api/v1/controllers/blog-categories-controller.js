@@ -44,6 +44,7 @@ class BlogCategoriesController {
         try {
 
             const { blogCategoryId, ...blogCategoryData } = req.validateData
+
             const blogCategory = await BlogCategoriesService.updateBlogCategoryById(blogCategoryId, blogCategoryData);
             if (!blogCategory) {
                 return next(createError.InternalServerError());
@@ -78,7 +79,7 @@ class BlogCategoriesController {
     static async deleteBlogCategoryById(req, res, next) {
         try {
      
-            const blogCategory = await BlogCategoriesService.deleteBlogCategoryById(value.blogCategoryId);
+            const blogCategory = await BlogCategoriesService.deleteBlogCategoryById(req.validateData.blogCategoryId);
             if (!blogCategory) {
                 return next(createError.NotFound('blog category not found'));
             }

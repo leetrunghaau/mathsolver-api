@@ -6,7 +6,7 @@ const AccountService = require("../services/account-service");
 const UserService = require("../services/user-service");
 const { loginEmailPasswordValidate, registerValidate, registerVerificationValidate } = require("../validations/sig-validate");
 const createError = require('http-errors');
-const { sendCodeForRegister } = require("../helpers/mailer");
+const { sendCodeForRegister,sendCodeForResetPassword } = require("../helpers/mailer");
 
 class Sig {
     static async loginEmailPassword(req, res, next) {
@@ -85,7 +85,8 @@ class Sig {
                         message: "done",
                         data: {
                             token: token
-                        }
+                        },
+                        verificationCode: verificationCode
                     });
                 }
             } else {
@@ -113,7 +114,9 @@ class Sig {
                     message: "done",
                     data: {
                         token: token
-                    }
+                    },
+                    verificationCode: verificationCode
+                    
                 });
             }
         } catch (error) {
@@ -169,7 +172,8 @@ class Sig {
                 message: "done",
                 data: {
                     token: token
-                }
+                },
+                verificationCode: verificationCode
             });
         } catch (error) {
             console.log(error);
@@ -196,7 +200,8 @@ class Sig {
                 message: "done",
                 data: {
                     token: token
-                }
+                },
+                verificationCode: verificationCode
             });
         } catch (error) {
             console.log(error);
